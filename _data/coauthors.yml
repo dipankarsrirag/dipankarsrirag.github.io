@@ -32,3 +32,7 @@
 "planck":
   - firstname: ["Max"]
     url: https://en.wikipedia.org/wiki/Max_Planck
+
+"joshi":
+  - firstname: ["Aditya Joshi", "Aditya", "A."]
+    url: https://scholar.google.com/citations?user=SbYRrvgAAAAJ
