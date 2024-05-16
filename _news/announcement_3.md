@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper &lsquo;<i>Evaluating Dialect Robustness of Language Models via Conversation Understanding</i>&rsquo; is on arXiv. 🎉
+Our paper &lsquo;<u>Evaluating Dialect Robustness of Language Models via Conversation Understanding</u>&rsquo; is on arXiv. 🎉
