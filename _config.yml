@@ -7,14 +7,13 @@ first_name: Dipankar
 middle_name:
 last_name: Srirag
 email: d.srirag@student.unsw.edu.au
-description: > Research assistant, Casual Academic, and Master of Information Technology graduate student at the University of New South Wales with strong background in Natural Language Processing (NLP), Large Language Models (LLMs), Machine Learning and Data Science. My Master’s thesis involves evaluating and adapting LLMs to be dialect-robust.
+description: Research assistant, Casual Academic, and Master of Information Technology graduate student at the University of New South Wales with strong background in Natural Language Processing (NLP), Large Language Models (LLMs), Machine Learning and Data Science. My Master’s thesis involves evaluating and adapting LLMs to be dialect-robust.
 #the ">" symbol means to ignore newlines until "footer_text:"
   
-footer_text: >
-  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+footer_text: Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
 keywords: dipankar-srirag, casual-academic, research-assistant, dialect-nlp, dialect-robust, large-language-models # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: favicon.ico # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: 🧪 #favicon.ico # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://dipankarsrirag.github.io # the base hostname & protocol for your site
 baseurl:  # the subpath of your site, e.g. /blog/. Leave blank for root
