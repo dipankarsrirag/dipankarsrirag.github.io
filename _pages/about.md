@@ -10,7 +10,8 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Room 217,</p>
-    <p>CSE Building (K-17), UNSW,</p>
+    <p>CSE Building (K-17),</p>
+    <p>University of NSW,</p>
     <p>Sydney, NSW 2052</p>
 
 news: true # includes a list of news items
