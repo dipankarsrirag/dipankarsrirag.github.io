@@ -7,8 +7,9 @@ first_name: Dipankar
 middle_name:
 last_name: Srirag
 email: d.srirag@student.unsw.edu.au
-description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Repo for my website based on [*folio](https://github.com/bogoli/-folio) design.
+description: > Research assistant, Casual Academic, and Master of Information Technology graduate student at the University of New South Wales with strong background in Natural Language Processing (NLP), Large Language Models (LLMs), Machine Learning and Data Science. My Master’s thesis involves evaluating and adapting LLMs to be dialect-robust.
+#the ">" symbol means to ignore newlines until "footer_text:"
+  
 footer_text: >
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
 keywords: dipankar-srirag, casual-academic, research-assistant, dialect-nlp, dialect-robust, large-language-models # add your own keywords or leave empty
