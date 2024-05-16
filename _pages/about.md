@@ -18,8 +18,8 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I am a *Master of Information Technology* graduate student at the [**University of New South Wales (UNSW), Sydney**](https://www.unsw.edu.au), focusing on Natural Language Processing (**NLP**), Large Language Models (**LLMs**), Machine Learning and Data Analytics.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+At **UNSW**, I work as a **Research Assistant** on a project funded by <span style="color:red">Google Research Scholar</span> grant that aims to build a benchmark for sentiment and sarcasm classification for dialects of English, more specifically the Australian and Indian dialects. The project is headed by my thesis supervisor, [Dr. Aditya Joshi](https://www.unsw.edu.au/staff/aditya-joshi).
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+I am also a part of a teaching team for a graduate level course, **COMP9444: Neural Networks and Deep Learning**. My responsibilities here include tutoring students through the course material, marking assignments and mentoring groups for their deep learning projects.
