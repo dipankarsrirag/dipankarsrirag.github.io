@@ -32,3 +32,15 @@
 "planck":
   - firstname: ["Max"]
     url: https://en.wikipedia.org/wiki/Max_Planck
+
+"eisenstein":
+  - firstname: ["Jacob", "J."]
+    url: https://jacobeisenstein.github.io
+
+"joshi":
+  -firstname: ["Aditya", "A."]
+    url: https://scholar.google.com/citations?user=SbYRrvgAAAAJ&hl=en
+
+"sajoo":
+  -firstname: ["Nihar", "Nihar Ranjan", "N. R."]
+    url: https://sahoonihar.github.io
