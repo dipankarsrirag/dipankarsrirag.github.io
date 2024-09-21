@@ -2,12 +2,12 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>UNSW, Sydney</a>.
+subtitle: <a href='https://www.unsw.edu.au'>UNSW, Sydney</a>
 
 profile:
-  align: right
+  align: centre
   image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   more_info: >
     <p>Room 217</p>
     <p>K-17, UNSW</p>
