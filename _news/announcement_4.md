@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I start my role as Research Assistant at UNSW for the project: A benchmark for sentiment and sarcasm classification for dialects of English, headed by Dr. Aditya Joshi.
+I start my role as <b>Research Assistant</b> at UNSW for the project: <u>A benchmark for sentiment and sarcasm classification for dialects of English</u>, headed by Dr. Aditya Joshi.

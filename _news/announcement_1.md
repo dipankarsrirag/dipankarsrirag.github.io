@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I start my Master of Information Technology degree at UNSW.
+I start my <b>Master of Information Technology</b> degree at UNSW.

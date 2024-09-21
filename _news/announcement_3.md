@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I join the Dept. of Computer Science and Engineering as a Casual Academic at UNSW, tutoring COMP9444: Neural Networks and Deep Learning taught by Dr. Alan Blair and Dr. Sonit Singh.
+I join the Dept. of Computer Science and Engineering as a <b>Casual Academic</b> at UNSW, tutoring <b>COMP9444: Neural Networks and Deep Learning</b> taught by Dr. Alan Blair and Dr. Sonit Singh.
