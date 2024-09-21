@@ -5,12 +5,12 @@ permalink: /
 subtitle: <a href='https://www.unsw.edu.au'>UNSW, Sydney</a>
 
 profile:
-  align: centre
+  align: center
   image: prof_pic.jpg
-  image_circular: true # crops the image to make it circular
+  image_circular: false # crops the image to make it circular
   more_info: >
     <p>Room 217</p>
-    <p>K-17, UNSW</p>
+    <p>K-17, UNSW </p>
     <p>Kensington, Australia 2052</p>
 
 news: true # includes a list of news items
