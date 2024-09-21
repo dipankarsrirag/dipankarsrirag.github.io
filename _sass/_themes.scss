@@ -3,14 +3,14 @@
  ******************************************************************************/
 
 :root {
-  --global-bg-color: #{$white-color};
-  --global-code-bg-color: #{$code-bg-color-light};
+  --global-bg-color: #{$grey-color};
+  --global-code-bg-color: #{$grey-color};
   --global-text-color: #{$black-color};
-  --global-text-color-light: #{$grey-color};
+  --global-text-color-light: #{$black-color};
   --global-theme-color: #{$yellow-color};
   --global-hover-color: #{$yellow-color};
   --global-hover-text-color: #{$yellow-color};
-  --global-footer-bg-color: #{$white-color};
+  --global-footer-bg-color: #{$grey-color};
   --global-footer-text-color: #{$black-color};
   --global-footer-link-color: #{$yellow-color};
   --global-distill-app-color: #{$grey-color};
@@ -18,8 +18,8 @@
   --global-card-bg-color: #{$white-color};
   --global-highlight-color: #{$red-color-dark};
   --global-back-to-top-bg-color: rgba(#{red($black-color)}, #{green($black-color)}, #{blue($black-color)}, 0.4);
-  --global-back-to-top-text-color: #{$white-color};
-  --global-newsletter-bg-color: #{$white-color};
+  --global-back-to-top-text-color: #{$grey-color};
+  --global-newsletter-bg-color: #{$grey-color};
   --global-newsletter-text-color: #{$black-color};
 
   --global-tip-block: #42b983;

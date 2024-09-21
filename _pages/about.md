@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: <a href='https://www.unsw.edu.au'>UNSW, Sydney</a>
+subtitle: <a href='https://www.unsw.edu.au'>University of New South Wales, Sydney</a>
 
 profile:
   align: left
