@@ -5,7 +5,7 @@ permalink: /
 subtitle: <a href='https://www.unsw.edu.au'>UNSW, Sydney</a>
 
 profile:
-  align: center
+  align: left
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
@@ -18,8 +18,8 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+A graduate of Master of Information Technology from UNSW, with a strong background in NLP and Deep Learning. My master's thesis involved adapting Large Language Models (LLMs) to other dialects of English.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+As a research assistant, I work with <a href='#'>Dr. Aditya Joshi</a>, on building a benchmark for sentiment and sarcasm classification for dialects of English. This project is funded by the <a href='#'>Google Research Scholar grant</a>.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+As a casual academic, I tutor 50+ students for the course-<b>COMP9444: Deep Learning and Neural Networks</b>, achieving exceptional satisfactory remarks.
