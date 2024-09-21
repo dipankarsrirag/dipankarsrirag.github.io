@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2016-01-15 07:59:00-0400
+date: 2024-05-12 09:00:00+1000
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement with Markdown emoji! :sparkles: :smile:
+I join the Dept. of Computer Science and Engineering as a Casual Academic at UNSW, tutoring COMP9444: Neural Networks and Deep Learning taught by Dr. Alan Blair and Dr. Sonit Singh.
