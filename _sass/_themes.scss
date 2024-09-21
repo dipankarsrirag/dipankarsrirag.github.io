@@ -3,23 +3,23 @@
  ******************************************************************************/
 
 :root {
-  --global-bg-color: #{$grey-color};
-  --global-code-bg-color: #{$grey-color};
+  --global-bg-color: #{$white-color};
+  --global-code-bg-color: #{$white-color};
   --global-text-color: #{$black-color};
   --global-text-color-light: #{$black-color};
   --global-theme-color: #{$theme-color};
   --global-hover-color: #{$theme-color};
   --global-hover-text-color: #{$theme-color};
-  --global-footer-bg-color: #{$grey-color};
+  --global-footer-bg-color: #{$white-color};
   --global-footer-text-color: #{$black-color};
   --global-footer-link-color: #{$theme-color};
-  --global-distill-app-color: #{$grey-color};
+  --global-distill-app-color: #{$white-color};
   --global-divider-color: rgba(0, 0, 0, 0.1);
   --global-card-bg-color: #{$white-color};
   --global-highlight-color: #{$red-color-dark};
   --global-back-to-top-bg-color: rgba(#{red($black-color)}, #{green($black-color)}, #{blue($black-color)}, 0.4);
-  --global-back-to-top-text-color: #{$grey-color};
-  --global-newsletter-bg-color: #{$grey-color};
+  --global-back-to-top-text-color: #{$white-color};
+  --global-newsletter-bg-color: #{$white-color};
   --global-newsletter-text-color: #{$black-color};
 
   --global-tip-block: #42b983;
