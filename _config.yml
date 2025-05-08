@@ -9,7 +9,7 @@ last_name: Srirag
 contact_note: >
   Reach me here: <a href="https://twitter.com/dipankarsrirag" title="X"><i class="fa-brands fa-x-twitter"></i></a>.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+  Dipankar Srirag's website. Dipankar is currently a researcher at UNSW Sydney. He works on NLP for varieties/dialects of English.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
