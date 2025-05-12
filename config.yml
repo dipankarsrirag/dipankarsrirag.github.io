@@ -12,21 +12,21 @@ taxonomies:
 
 menu:
     main:
-        - name: Books
-          url: books/
-          weight: 5 
+        - name: About Me
+          url: about/
+          weight: 1
         - name: Papers
           url: papers/
           weight: 2
-        - name: Courses
+        - name: Teaching
           url: courses/
           weight: 3
         - name: Data
           url: data/
           weight: 4 
-        - name: Blog
-          url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
-          weight: 6
+        - name: CV
+          url: cv.pdf
+          weight: 5
 
 params:
     description: "Welcome to Dipankar's website. Dipankar is an NLP researcher working at UNSW Sydney."
@@ -44,7 +44,7 @@ params:
     ShowBreadCrumbs: false
     ShowCodeCopyButtons: true
     ShowAllPagesInArchive: false
-    MainSections: ["books","courses","papers","data"]
+    MainSections: ["papers","courses","data"]
     ShowToc: false
     disableScrollToTop: true
     TocOpen: true
@@ -55,49 +55,49 @@ params:
     profileMode:
           enabled: true
           title: Dipankar Srirag
-          subtitle: "Hello! I am Dipankar, an NLP researcher working at the University of New South Wales. My research interest broadly lies in socio-culturally inclusive AI. My masters thesis, supervised by Dr. Aditya Joshi, involved evaluating and improving dialect robustness for decoder models using adapter-based methods."
+          subtitle: "Researcher at UNSW Sydney | Master of I.T. with Excellence (2024)"
           imageUrl: "profile.png"
-          imageWidth: 160
-          imageHeight: 160
+          imageWidth: 240
+          imageHeight: 300
           buttons:
+            - name: About Me
+              url: about/
             - name: Papers
               url: papers/
+            - name: Teaching
+              url: courses/
             - name: Data
               url: data/
-            - name: Books
-              url: books/
-            - name: Courses
-              url: courses/
-            - name: Tags
-              url: tags/
-            - name: Archive
-              url: archive/
-            - name: Blog
-              url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
+            # - name: Tags
+            #   url: tags/
+            # - name: Archive
+            #   url: archive/
+            - name: CV
+              url: cv.pdf
 
     socialIcons:
-        - name: CV
-          url: cv.pdf
+        # - name: CV
+        #   url: cv.pdf
         - name: Email
-          url: mailto:igelfeld@regensburg.edu
-        - name: Zoom
-          url: https://www.zoom.us/my/igelfeld
-        - name: Location
-          url: location/
-        - name: Office Hours
-          url: officehours/
+          url: mailto:d.srirag@unsw.edu.au
+        # - name: Zoom
+        #   url: https://www.zoom.us/my/igelfeld
+        # - name: Location
+        #   url: location/
+        # - name: Office Hours
+        #   url: officehours/
         - name: Google Scholar
-          url: https://scholar.google.com/citations?user=cL23w-4AAAAJ
+          url: https://scholar.google.com/citations?user=8dUrhxwAAAAJ
         - name: GitHub
-          url: https://github.com/pmichaillat
-        - name: Substack
-          url: https://pmichaillat.substack.com
-        - name: YouTube
-          url: https://www.youtube.com/@pmichaillat
+          url: https://github.com/dipankarsrirag
+        # - name: Substack
+        #   url: https://pmichaillat.substack.com
+        # - name: YouTube
+        #   url: https://www.youtube.com/@pmichaillat
         - name: Twitter
-          url: https://x.com/pmichaillat
+          url: https://x.com/dipankarsrirag
         - name: Bluesky
-          url: https://bsky.app/profile/pmichaillat.bsky.social
+          url: https://bsky.app/profile/dipankarsrirag.bsky.social
 
     assets:
         disableScrollBarStyle: true
@@ -105,9 +105,9 @@ params:
         hiddenInList: false
         hiddenInSingle: true
     label:
-      text: "Moritz-Maria von Igelfeld"
+      text: "Dipankar Srirag"
       icon: favicon.ico
-      iconHeight: 18
+      iconHeight: 24
 
 markup:
     goldmark:
