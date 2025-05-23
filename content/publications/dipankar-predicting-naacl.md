@@ -10,7 +10,6 @@ authors:
 
 underlineAuthors:
     - "Dipankar Srirag"
-    - "Aditya Joshi"
 links:
     paper: https://aclanthology.org/2025.naacl-short.2.pdf
     code: https://github.com/dipankar/lordd

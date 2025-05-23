@@ -8,9 +8,7 @@ authors:
     - "Aditya Joshi"
 
 underlineAuthors:
-    - "Ishmanbir Singh*"
     - "Dipankar Srirag*"
-    - "Aditya Joshi"
 arxivID: "2505.15095"
 links:
     paper: "https://arxiv.org/pdf/2505.15095"

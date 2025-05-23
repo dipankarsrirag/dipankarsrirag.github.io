@@ -10,7 +10,6 @@ authors:
 
 underlineAuthors:
     - "Dipankar Srirag"
-    - "Aditya Joshi"
 links:
     paper: https://aclanthology.org/2025.sumeval-2.3.pdf
 # project:   "https://yourlab.org/project"

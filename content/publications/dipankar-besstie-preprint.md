@@ -10,7 +10,6 @@ authors:
 
 underlineAuthors:
     - "Dipankar Srirag"
-    - "Aditya Joshi"
 arxivID: "2412.04726"
 links:
     paper: "https://arxiv.org/pdf/2505.15095"
