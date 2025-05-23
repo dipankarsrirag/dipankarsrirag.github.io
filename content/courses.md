@@ -1,7 +1,7 @@
 ---
 title: "My Teaching Experience"
 hidemeta: true
-description: "Courses I taught"
+description: "Courses I tutored"
 ---
 My teaching experience comes from serving as a tutor in the course team at UNSW Sydney. 
 
