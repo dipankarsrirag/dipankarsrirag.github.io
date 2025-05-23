@@ -12,9 +12,9 @@ taxonomies:
 
 menu:
     main:
-        # - name: About Me
-        #   url: about/
-        #   weight: 1
+        - name: Home
+          url: /
+          weight: 1
         - name: Papers
           url: papers/
           weight: 2
@@ -63,29 +63,30 @@ params:
             <p>I graduated with a Master of Information Technology with Excellence from UNSW Sydney. My masters thesis, supervised by <b><a href="https://www.unsw.edu.au/staff/aditya-joshi/">Dr. Aditya Joshi</a></b>, involved evaluating and improving dialect robustness for decoder models using adapter-based methods.</p>
             <br>
             <p>Don't hesitate to reach out if you're interested in connecting, collaborating or discussing research... and beyond! I am easier to find on Twitter/X. </p>
+            <br>
 
           imageUrl: "profile.png"
           imageWidth: 240
           imageHeight: 300
           buttons:
             # - name: About Me
-            #   url: about/
-            - name: Papers
-              url: papers/
-            - name: Teaching
-              url: courses/
-            - name: Data
-              url: data/
+            #   url: /
+            # - name: Papers
+            #   url: papers/
+            # - name: Resources
+            #   url: courses/
+            # - name: Data
+            #   url: data/
             # - name: Tags
             #   url: tags/
             # - name: Archive
             #   url: archive/
-            - name: CV
-              url: cv.pdf
+            # - name: CV
+            #   url: cv.pdf
 
     socialIcons:
-        # - name: CV
-        #   url: cv.pdf
+        - name: CV
+          url: cv.pdf
         - name: Email
           url: mailto:d.srirag@unsw.edu.au
         # - name: Zoom
