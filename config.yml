@@ -12,9 +12,9 @@ taxonomies:
 
 menu:
     main:
-        - name: About Me
-          url: about/
-          weight: 1
+        # - name: About Me
+        #   url: about/
+        #   weight: 1
         - name: Papers
           url: papers/
           weight: 2
@@ -55,13 +55,21 @@ params:
     profileMode:
           enabled: true
           title: Dipankar Srirag
-          subtitle: "Researcher at UNSW Sydney | Master of I.T. with Excellence (2024)"
+          subtitle: |
+            <p>Hello, this is Dipankar! 🦘</p>
+            <br>
+            <p>I am a researcher at the <b><a href="https://unswnlp.github.io/">UNSW-NLP group</a></b> at <b><a href="https://www.unsw.edu.au/">University of New South Wales</a></b>. My research interests broadly lie in socio-culturally inclusive language technologies. </p>
+            <br>
+            <p>I graduated with a Master of Information Technology with Excellence from UNSW Sydney. My masters thesis, supervised by <b><a href="https://www.unsw.edu.au/staff/aditya-joshi/">Dr. Aditya Joshi</a></b>, involved evaluating and improving dialect robustness for decoder models using adapter-based methods.</p>
+            <br>
+            <p>Don't hesitate to reach out if you're interested in connecting, collaborating or discussing research... and beyond! I am easier to find on Twitter/X. </p>
+
           imageUrl: "profile.png"
           imageWidth: 240
           imageHeight: 300
           buttons:
-            - name: About Me
-              url: about/
+            # - name: About Me
+            #   url: about/
             - name: Papers
               url: papers/
             - name: Teaching
