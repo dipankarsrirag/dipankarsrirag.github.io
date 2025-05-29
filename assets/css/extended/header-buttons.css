@@ -12,6 +12,14 @@
   font-weight: 500;
 }
 
-.a:hover{
+/* .a:hover{
   color: var(--darkcolor);
+} */
+
+.link {
+  color: var(--darkcolor);
+  font-style: bold;
+}
+.link:hover {
+  text-decoration: underline;
 }
