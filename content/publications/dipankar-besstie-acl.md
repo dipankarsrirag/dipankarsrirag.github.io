@@ -16,4 +16,5 @@ links:
     # code: "https://github.com/cruiseresearchgroup/spectraformer"
 # project:   "https://yourlab.org/project"
 # journal: "ACL 2024"      # optional—whatever metadata you like
+venue: "Findings of ACL: ACL 2025"
 ---
