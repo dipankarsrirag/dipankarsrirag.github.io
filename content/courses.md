@@ -7,7 +7,7 @@ My teaching experience comes from serving as a tutor in the course team at UNSW 
 
 ## 2025
 ### COMP9444: Neural Networks and Deep Learning
-- Teaching it in 24T2.
+- Teaching it in 25T2.
 
 ## 2024
 ### COMP9444: Neural Networks and Deep Learning
