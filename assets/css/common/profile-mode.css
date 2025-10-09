@@ -5,7 +5,6 @@
 }
 .main .profile {
     align-items: center;
-    min-height: calc(100vh - var(--footer-height) - (var(--gap) * 2));
     font-size: var(--homesize);
     line-height: var(--lineheight);
     padding: var(--gap);
@@ -24,8 +23,6 @@
 
 .profile img {
     border-radius: 5%;
-    max-width: 200px;
-    max-height: 300px;
     border: 1px solid var(--tertiary);
 }
 

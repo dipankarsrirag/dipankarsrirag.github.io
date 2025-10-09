@@ -69,7 +69,7 @@ params:
             <br>
 
           imageUrl: "profile.png"
-          imageWidth: 240
+          imageWidth: 200
           imageHeight: 300
           buttons:
             # - name: About Me
