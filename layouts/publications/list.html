@@ -20,10 +20,10 @@
                 {{ if lt (add $i 1) (len $authors) }}, {{ end }}
               {{ end }}<br>
           arXiv:{{ .Params.arxivID }}
-          {{ with .Params.links.paper }}[<a href="{{ . }}" class="link"><b>Paper</b></a>]{{ end }}
-          {{ with .Params.links.code }}[<a href="{{ . }}" class="link"><b>Code</b></a>]{{ end }}
-          {{ with .Params.links.dataset }}[<a href="{{ . }}" class="link"><b>Dataset</b></a>]{{ end }}
-          {{ with .Params.links.project }}[<a href="{{ . }}" class="link"><b>Project Page</b></a>]{{ end }}
+          {{ with .Params.links.paper }}[<a href="{{ . }}" class="join-link">Paper</a>]{{ end }}
+          {{ with .Params.links.code }}[<a href="{{ . }}" class="join-link">Code</a>]{{ end }}
+          {{ with .Params.links.dataset }}[<a href="{{ . }}" class="join-link">Dataset</a>]{{ end }}
+          {{ with .Params.links.project }}[<a href="{{ . }}" class="join-link">Project Page</a>]{{ end }}
         </li><br>
       {{ end }}
     </ul>
@@ -55,15 +55,16 @@
                 {{ end }}
                 {{ if lt (add $i 1) (len $authors) }}, {{ end }}
               {{ end }}<br>
-            <em>{{ .Params.venue }}</em>
-            {{ with .Params.links.paper }}[<a href="{{ . }}" class="link"><b>Paper</b></a>]{{ end }}
-            {{ with .Params.links.code }}[<a href="{{ . }}" class="link"><b>Code</b></a>]{{ end }}
-            {{ with .Params.links.dataset }}[<a href="{{ . }}" class="link"><b>Dataset</b></a>]{{ end }}
-            {{ with .Params.links.project }}[<a href="{{ . }}" class="link"><b>Project Page</b></a>]{{ end }}
+            <em>{{ .Params.venue }}</em> 
+
+            {{ with .Params.links.paper }}[<a href="{{ . }}" class="join-link">Paper</a>]{{ end }}
+            {{ with .Params.links.code }}[<a href="{{ . }}" class="join-link">Code</a>]{{ end }}
+            {{ with .Params.links.dataset }}[<a href="{{ . }}" class="join-link">Dataset</a>]{{ end }}
+            {{ with .Params.links.project }}[<a href="{{ . }}" class="join-link">Project Page</a>]{{ end }}
+            {{ with .Params.note }}<strong style="color:#614a8f;">{{ . }}</strong>{{ end }}
           </li><br>
         {{ end }}
       </ul>
     {{ end }}
   {{ end }}
-
 {{ end }}
