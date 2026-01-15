@@ -57,10 +57,10 @@
               {{ end }}<br>
             <em>{{ .Params.venue }}</em> 
 
-            {{ with .Params.links.paper }}<a href="{{ . }}" class="join-link" style="color:#853a3a">Paper</a>{{ end }}
-            {{ with .Params.links.code }}| <a href="{{ . }}" class="join-link" style="color:#853a3a">Code</a>{{ end }}
-            {{ with .Params.links.dataset }}| <a href="{{ . }}" class="join-link" style="color:#853a3a">Dataset</a>{{ end }}
-            {{ with .Params.links.project }}| <a href="{{ . }}" class="join-link" style="color:#853a3a">Project Page</a>{{ end }}
+            {{ with .Params.links.paper }}| <a href="{{ . }}" class="join-link" style="color:#853a3a"><strong>Paper</strong></a>{{ end }}
+            {{ with .Params.links.code }}| <a href="{{ . }}" class="join-link" style="color:#853a3a"><strong>Code</strong></a>{{ end }}
+            {{ with .Params.links.dataset }}| <a href="{{ . }}" class="join-link" style="color:#853a3a"><strong>Dataset</strong></a>{{ end }}
+            {{ with .Params.links.project }}| <a href="{{ . }}" class="join-link" style="color:#853a3a"><strong>Project Page</strong></a>{{ end }}
             {{ with .Params.note }}| <strong style="color:#853a3a;">{{ . }}</strong>{{ end }}
           </li><br>
         {{ end }}
