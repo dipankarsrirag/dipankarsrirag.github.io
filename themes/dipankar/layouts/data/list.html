@@ -1,0 +1,30 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
+</div>
+
+<div class="data-list">
+  {{ range .Pages.ByDate.Reverse }}
+  <div class="data-entry">
+    <div class="data-title">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </div>
+    {{ with .Description }}
+    <div class="data-desc">{{ . }}</div>
+    {{ end }}
+    {{ with .Params.tags }}
+    <div class="data-tags">
+      {{ range . }}<span class="data-tag">{{ . }}</span>{{ end }}
+    </div>
+    {{ end }}
+    {{ with .Params.editPost }}
+    <div class="pub-links">
+      <a href="{{ .URL }}" class="pub-link" target="_blank" rel="noopener">{{ .Text | default "View Dataset" }}</a>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+
+{{ end }}

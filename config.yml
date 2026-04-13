@@ -1,6 +1,6 @@
-baseURL: "https://dipankarsrirag.github.io/" 
+baseURL: "https://dipankarsrirag.github.io/"
 title: Dipankar Srirag
-theme: PaperMod
+theme: dipankar
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
@@ -8,127 +8,49 @@ pagination:
   pagerSize: 20
 
 taxonomies:
-    tag: tags
+  tag: tags
 
 menu:
-    main:
-        - name: Home
-          url: /
-          weight: 1
-        - name: Research
-          url: publications/
-          weight: 2
-        - name: Teaching
-          url: courses/
-          weight: 3
-        - name: Data
-          url: data/
-          weight: 4 
-        - name: CV
-          url: cv.pdf
-          weight: 5
+  main:
+    - name: Research
+      url: /publications/
+      weight: 1
+    - name: Teaching
+      url: /courses/
+      weight: 2
+    - name: Hobbies
+      url: /hobbies/
+      weight: 3
+    - name: CV
+      url: /cv.pdf
+      weight: 4
 
 params:
-    description: "Welcome to Dipankar's website. Dipankar is an NLP researcher working at UNSW Sydney."
-    author: Dipankar Srirag
-    # googleAnalyticsID: "G-XXXXX"
-    DateFormat: "January 2006"
-    defaultTheme: light
-    hideFooter: false
-    disableThemeToggle: true
-    ShowShareButtons: false
-    ShowReadingTime: false
-    disableSpecial1stPost: true
-    disableAnchoredHeadings: true
-    ShowPostNavLinks: false
-    ShowBreadCrumbs: false
-    ShowCodeCopyButtons: true
-    ShowAllPagesInArchive: false
-    MainSections: ["papers","courses","data"]
-    ShowToc: false
-    disableScrollToTop: true
-    TocOpen: true
-    ShowWordCount: false
-    UseHugoToc: true
-    comments: false
-    math: true
-    profileMode:
-          enabled: true
-          title: Dipankar Srirag
-          subtitle: |
-            <p>Hello, I am Dipankar! 🦘</p>
-            <br>
-            <p>I am a Ph.D. candidate at the <b><a href="https://unswnlp.github.io/" class="link">UNSW-NLP group</a></b> at <b><a href="https://www.unsw.edu.au/" class="link">University of New South Wales</a></b>. I am advised by <b><a href="https://www.unsw.edu.au/staff/aditya-joshi/" class="link">Dr. Aditya Joshi</a></b>, <b><a href="https://www.unsw.edu.au/staff/padmanesan-narasimhan" class="link">Dr. Padmanesan Narasimhan</a></b> and <b><a href="https://www.unsw.edu.au/staff/salil-kanhere" class="link">Dr. Salil Kanhere</a></b>.
-            My research interests broadly lie in socio-culturally inclusive language technologies, and my projects involve developing multicultural and multilingual dialogue agents for emergency triage. My Ph.D. project is funded by the <a href="https://www.nhmrc.gov.au/funding/find-funding/ideas-grants" class="link"><b>NHMRC Ideas grant</b></a> awarded to Dr. Narasimhan.</p>
-            <br>
-            <p>I graduated with a Master of Information Technology with Excellence from UNSW Sydney. My masters thesis, supervised by Dr. Joshi, involved evaluating and improving dialect robustness for decoder models using adapter-based methods.</p>
-            <br>
-            <p> I have worked as a Research Assistant on a project funded by the Google Research Scholar grant, to build a benchmark for sentiment and sarcasm classification for varieties of English.</p>
-            <br>
-            <p>I also have experience in mentoring undergrad students in their NLP projects (from ideation to publication). Please reach out if you're interested in connecting, collaborating or discussing research... and beyond! I am easier to find on Twitter/X. </p>
-            <br>
-
-          imageUrl: "profile.jpg"
-          imageWidth: 200
-          imageHeight: 300
-          buttons:
-            # - name: About Me
-            #   url: /
-            # - name: Papers
-            #   url: papers/
-            # - name: Resources
-            #   url: courses/
-            # - name: Data
-            #   url: data/
-            # - name: Tags
-            #   url: tags/
-            # - name: Archive
-            #   url: archive/
-            # - name: CV
-            #   url: cv.pdf
-
-    socialIcons:
-        - name: CV
-          url: cv.pdf
-        - name: Email
-          url: mailto:d.srirag@unsw.edu.au
-        # - name: Zoom
-        #   url: https://www.zoom.us/my/igelfeld
-        # - name: Location
-        #   url: location/
-        # - name: Office Hours
-        #   url: officehours/
-        - name: Google Scholar
-          url: https://scholar.google.com/citations?user=8dUrhxwAAAAJ
-        - name: GitHub
-          url: https://github.com/dipankarsrirag
-        # - name: Substack
-        #   url: https://pmichaillat.substack.com
-        # - name: YouTube
-        #   url: https://www.youtube.com/@pmichaillat
-        - name: Twitter
-          url: https://x.com/dipankarsrirag
-        - name: Bluesky
-          url: https://bsky.app/profile/dipankarsrirag.bsky.social
-
-    assets:
-        disableScrollBarStyle: true
-    cover:
-        hiddenInList: false
-        hiddenInSingle: true
-    label:
-      text: "Dipankar Srirag"
-      icon: favicon.ico
-      iconHeight: 24
+  description: "Ph.D. candidate at UNSW Sydney working on socio-culturally inclusive NLP — multilingual dialogue systems, dialect robustness, and emergency triage."
+  author: Dipankar Srirag
+  role: "Ph.D. Candidate"
+  affiliation: "UNSW Sydney"
+  photo: "profile.jpg"
+  socialIcons:
+    - name: Email
+      url: mailto:d.srirag@unsw.edu.au
+    - name: Scholar
+      url: https://scholar.google.com/citations?user=8dUrhxwAAAAJ
+    - name: GitHub
+      url: https://github.com/dipankarsrirag
+    - name: Twitter
+      url: https://x.com/dipankarsrirag
+    - name: Bluesky
+      url: https://bsky.app/profile/dipankarsrirag.bsky.social
 
 markup:
-    goldmark:
-        renderer:
-            unsafe: true
-    highlight:
-        guessSyntax: true
-        style: autumn 
-    tableOfContents:
-        endLevel: 2
-        ordered: false
-        startLevel: 2
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    guessSyntax: true
+    style: github
+  tableOfContents:
+    endLevel: 2
+    ordered: false
+    startLevel: 2

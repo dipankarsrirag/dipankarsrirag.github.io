@@ -1,0 +1,91 @@
+{{ define "main" }}
+
+{{/* ── Profile ── */}}
+<div class="profile">
+  <div class="profile-photo">
+    <img src="/{{ .Site.Params.photo }}" alt="{{ .Site.Params.author }}" width="148">
+  </div>
+  <div class="profile-info">
+    <h1>{{ .Site.Params.author }}</h1>
+    <p class="profile-role">{{ .Site.Params.role }} · {{ .Site.Params.affiliation }}</p>
+    <div class="profile-bio">
+      {{ .Content }}
+    </div>
+    <div class="social-links">
+      {{- range $i, $icon := .Site.Params.socialIcons }}
+      {{- if $i }}<span class="social-sep">·</span>{{ end }}
+      <a href="{{ $icon.url }}" class="social-link"
+        {{- if not (hasPrefix $icon.url "mailto") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ $icon.name }}</a>
+      {{- end }}
+    </div>
+  </div>
+</div>
+
+{{/* ── Recent News ── */}}
+{{- $allNews := where .Site.RegularPages "Section" "news" }}
+{{- $news := sort $allNews "Date" "desc" }}
+{{ if $news }}
+<section class="home-section">
+  <p class="section-label">News</p>
+  <ul class="news-list">
+    {{ range first 5 $news }}
+    <li class="news-item">
+      <span class="news-date">{{ .Date.Format "Jan 2006" }}</span>
+      <span class="news-text">{{ .Content | safeHTML }}</span>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{/* ── Selected Publications ── */}}
+{{- $allPubs := where .Site.RegularPages "Section" "publications" }}
+{{- $pubs := where $allPubs "Params.selected" true }}
+{{- $pubs = sort $pubs "Date" "desc" }}
+{{ if $pubs }}
+<section class="home-section">
+  <p class="section-label">Selected Publications</p>
+  <div class="pub-list">
+    {{ range $pubs }}
+    {{- $page := . }}
+    <div class="pub-entry">
+      <div class="pub-title">
+        {{ if .Params.links.paper -}}
+          <a href="{{ .Params.links.paper }}" target="_blank" rel="noopener">{{ .Title }}</a>
+        {{- else -}}
+          {{ .Title }}
+        {{- end }}
+        {{ if .Params.preprint }}<span class="badge badge-preprint">Preprint</span>{{ end }}
+      </div>
+      <div class="pub-authors">
+        {{ range $i, $a := .Params.authors }}{{ if $i }}, {{ end -}}
+        {{ if in $page.Params.underlineAuthors $a }}<span class="self">{{ $a }}</span>{{ else }}{{ $a }}{{ end }}
+        {{- end }}
+      </div>
+      {{ with .Params.venue }}<div class="pub-venue"><span class="venue-name">{{ . }}</span></div>{{ end }}
+      {{ with .Params.note }}<div class="pub-note">{{ . }}</div>{{ end }}
+      <div class="pub-links">
+        {{ with .Params.links.paper }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">PDF</a>{{ end }}
+        {{ with .Params.links.code }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">Code</a>{{ end }}
+        {{ with .Params.links.pip }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">PyPI</a>{{ end }}
+        {{ with .Params.links.dataset }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">Dataset</a>{{ end }}
+        {{ with .Params.links.project }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">Project</a>{{ end }}
+        {{ with .Params.bibtex }}
+        <details class="pub-cite">
+          <summary class="pub-link">BibTeX</summary>
+          <div class="pub-cite-box" title="Click to copy" onclick="navigator.clipboard.writeText(this.querySelector('pre').textContent).then(()=>{var t=this.querySelector('.pub-cite-toast');t.classList.add('pub-cite-toast--show');setTimeout(()=>t.classList.remove('pub-cite-toast--show'),1500)})">
+            <pre class="pub-cite-pre">{{ . }}</pre>
+            <span class="pub-cite-toast">Copied!</span>
+          </div>
+        </details>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  <a href="/publications/" class="see-all">All publications →</a>
+
+</section>
+{{ end }}
+
+{{ end }}

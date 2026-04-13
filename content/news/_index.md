@@ -1,4 +1,4 @@
 ---
 title: "News"
-description: "All our latest announcements."
+description: "Recent updates on publications, talks, and other news."
 ---

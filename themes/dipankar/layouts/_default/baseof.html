@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{- partial "head.html" . -}}
+</head>
+<body>
+  {{- partial "nav.html" . -}}
+  <main>
+    {{- block "main" . }}{{- end }}
+  </main>
+  {{- partial "footer.html" . -}}
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function esc(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    document.querySelectorAll('.pub-cite').forEach(function (det) {
+      det.addEventListener('toggle', function () {
+        if (!det.open) return;
+        var pre = det.querySelector('.pub-cite-pre');
+        if (pre.dataset.hl) return;
+        pre.dataset.hl = '1';
+        var html = pre.textContent.split('\n').map(function (line) {
+          var m;
+          // @type{key,
+          m = line.match(/^(\s*)(@[a-zA-Z]+)\{([^,]+)(,.*)$/);
+          if (m) return esc(m[1]) +
+            '<span class="bib-at">'    + esc(m[2]) + '</span>{' +
+            '<span class="bib-key">'   + esc(m[3]) + '</span>' +
+            esc(m[4]);
+          // field = value
+          m = line.match(/^(\s+)([a-zA-Z_]+)(\s*=\s*)(.*)$/);
+          if (m) {
+            var val = m[4];
+            var cv;
+            var qm = val.match(/^("(?:[^"\\]|\\.)*")(,?\s*)$/);
+            if (qm) {
+              cv = '<span class="bib-val">' + esc(qm[1]) + '</span>' + esc(qm[2]);
+            } else {
+              var nm = val.match(/^(\d+)(,?\s*)$/);
+              cv = nm
+                ? '<span class="bib-num">' + esc(nm[1]) + '</span>' + esc(nm[2])
+                : '<span class="bib-val">' + esc(val)   + '</span>';
+            }
+            return esc(m[1]) +
+              '<span class="bib-field">' + esc(m[2]) + '</span>' +
+              esc(m[3]) + cv;
+          }
+          return esc(line);
+        }).join('\n');
+        pre.innerHTML = html;
+      });
+    });
+  });
+  </script>
+</body>
+</html>

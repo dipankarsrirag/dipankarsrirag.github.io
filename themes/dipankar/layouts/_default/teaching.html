@@ -1,0 +1,32 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
+</div>
+
+<div class="teaching-list">
+  {{ range .Params.courses }}
+  <div class="teaching-year-group">
+    <p class="teaching-year-heading">{{ .year }}</p>
+    <div class="teaching-entries">
+      {{ range .entries }}
+      <div class="teaching-entry">
+        <div class="teaching-code">{{ .code }}</div>
+        <div class="teaching-details">
+          <span class="teaching-name">
+            {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}
+          </span>
+          <span class="teaching-meta">
+            <span class="teaching-role">{{ .role }}</span>
+            {{ with .institution }}<span class="teaching-institution">{{ . }}</span>{{ end }}
+            {{ range .terms }}<span class="teaching-term">{{ . }}</span>{{ end }}
+            {{ with .feedback }}<span class="teaching-feedback"><span class="teaching-feedback-label">Student feedback</span> {{ . }}</span>{{ end }}
+          </span>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}

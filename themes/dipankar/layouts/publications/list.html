@@ -1,0 +1,76 @@
+{{- define "pub-entry" }}
+{{- $page := . }}
+<div class="pub-entry">
+  <div class="pub-title">
+    {{ if .Params.links.paper -}}
+      <a href="{{ .Params.links.paper }}" target="_blank" rel="noopener">{{ .Title }}</a>
+    {{- else -}}
+      {{ .Title }}
+    {{- end }}
+  </div>
+  <div class="pub-authors">
+    {{ range $i, $a := .Params.authors }}{{ if $i }}, {{ end -}}
+    {{ if in $page.Params.underlineAuthors $a }}<span class="self">{{ $a }}</span>{{ else }}{{ $a }}{{ end }}
+    {{- end }}
+  </div>
+  {{ with .Params.venue }}<div class="pub-venue"><span class="venue-name">{{ . }}</span></div>{{ end }}
+  {{ with .Params.note }}<div class="pub-note">{{ . }}</div>{{ end }}
+  <div class="pub-links">
+    {{ with .Params.links.paper }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">PDF</a>{{ end }}
+    {{ with .Params.links.code }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">Code</a>{{ end }}
+    {{ with .Params.links.pip }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">PyPI</a>{{ end }}
+    {{ with .Params.links.dataset }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">Dataset</a>{{ end }}
+    {{ with .Params.links.project }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">Project</a>{{ end }}
+    {{ with .Params.bibtex }}
+    <details class="pub-cite">
+      <summary class="pub-link">BibTeX</summary>
+      <div class="pub-cite-box" title="Click to copy" onclick="navigator.clipboard.writeText(this.querySelector('pre').textContent).then(()=>{var t=this.querySelector('.pub-cite-toast');t.classList.add('pub-cite-toast--show');setTimeout(()=>t.classList.remove('pub-cite-toast--show'),1500)})">
+        <pre class="pub-cite-pre">{{ . }}</pre>
+        <span class="pub-cite-toast">Copied!</span>
+      </div>
+    </details>
+    {{ end }}
+  </div>
+</div>
+{{- end }}
+
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="page-title">Research</h1>
+  <p class="page-description">My work spans dialect robustness, multilingual dialogue systems, and benchmarking NLP models across cultural and linguistic diversity.</p>
+</div>
+
+{{- $preprints := where .Pages "Params.preprint" true }}
+{{- $publications := where .Pages "Params.preprint" "ne" true }}
+
+{{/* ── Preprints ── */}}
+{{ if $preprints }}
+<div class="pub-section-heading">Preprints</div>
+<div class="pub-section--preprint">
+  {{ range $preprints.GroupByDate "2006" }}
+  <div class="pub-year-group">
+    <p class="pub-year-heading">{{ .Key }}</p>
+    <div class="pub-list">
+      {{ range .Pages }}{{ template "pub-entry" . }}{{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{/* ── Publications ── */}}
+{{ if $publications }}
+<div class="pub-section-heading{{ if $preprints }} pub-section-heading--spaced{{ end }}">Publications</div>
+<div class="pub-section--published">
+  {{ range $publications.GroupByDate "2006" }}
+  <div class="pub-year-group">
+    <p class="pub-year-heading">{{ .Key }}</p>
+    <div class="pub-list">
+      {{ range .Pages }}{{ template "pub-entry" . }}{{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ end }}
