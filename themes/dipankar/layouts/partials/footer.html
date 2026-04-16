@@ -1,5 +1,10 @@
 <footer>
   <div class="footer-inner">
     <span>© {{ now.Year }} {{ .Site.Params.author }}</span>
+    <div class="footer-links">
+      {{- range .Site.Params.socialIcons }}
+      <a href="{{ .url }}"{{ if not (hasPrefix .url "mailto") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .name }}</a>
+      {{- end }}
+    </div>
   </div>
 </footer>

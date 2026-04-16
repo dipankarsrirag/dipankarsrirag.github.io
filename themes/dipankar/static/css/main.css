@@ -9,7 +9,7 @@
 }
 
 :root {
-  --bg:           #ffffff;
+  --bg:           #FDFCFB;
   --text:         #18181b;
   --text-muted:   #52525b;
   --accent:       #2E7D7D;
@@ -25,6 +25,12 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(46, 125, 125, 0.15);
+  color: var(--text);
 }
 
 body {
@@ -107,7 +113,7 @@ main {
 /* ─── Navigation ──────────────────────────────── */
 
 nav {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1.5px solid var(--accent);
   position: sticky;
   top: 0;
   background: rgba(255, 255, 255, 0.94);
@@ -156,14 +162,14 @@ nav {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--accent);
-  background: rgba(46, 125, 125, 0.07);
+  background: none;
   text-decoration: none;
 }
 
 /* ─── Footer ──────────────────────────────────── */
 
 footer {
-  border-top: 1px solid var(--border);
+  border-top: 1.5px solid var(--accent);
   padding: 1.25rem 1.5rem;
 }
 
@@ -171,9 +177,27 @@ footer {
   max-width: var(--max-w);
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.82rem;
   color: var(--text-muted);
+  padding: 0 0.25rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  text-decoration: none;
 }
 
 /* ─── Home: Profile ───────────────────────────── */
@@ -219,6 +243,14 @@ footer {
 
 .profile-bio a {
   font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgba(46, 125, 125, 0.35);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.profile-bio a:hover {
+  text-decoration-color: var(--accent);
 }
 
 .social-links {
@@ -231,16 +263,14 @@ footer {
 
 .social-link {
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-muted);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  transition: background 0.15s, color 0.15s;
+  padding: 0.1rem 0;
+  transition: color 0.15s;
   letter-spacing: 0.01em;
 }
 
 .social-link:hover {
-  background: var(--bg-subtle);
   color: var(--accent);
   text-decoration: none;
 }
@@ -668,9 +698,11 @@ footer {
 }
 
 .page-title {
-  font-size: 1.35rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-muted);
   margin-bottom: 0.4rem;
 }
 
@@ -678,8 +710,10 @@ footer {
   font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.6;
-  max-width: 540px;
   margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .page-content {

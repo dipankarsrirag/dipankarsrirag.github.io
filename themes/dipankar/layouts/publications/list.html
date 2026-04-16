@@ -36,6 +36,11 @@
 
 {{ define "main" }}
 
+<div class="page-header">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
+</div>
+
 {{- $preprints    := where .Pages "Params.preprint" true }}
 {{- $publications := where .Pages "Params.preprint" "ne" true }}
 
