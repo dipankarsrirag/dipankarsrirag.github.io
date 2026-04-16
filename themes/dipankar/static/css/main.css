@@ -1059,6 +1059,228 @@ a.link:hover {
   color: var(--accent-hover);
 }
 
+/* ─── Blog ────────────────────────────────────── */
+
+.blog-topics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.blog-topic-card {
+  display: block;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.blog-topic-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(46, 125, 125, 0.08);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.blog-topic-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.blog-topic-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.blog-topic-meta {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ── Breadcrumb ── */
+
+.blog-breadcrumb {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.blog-breadcrumb a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.blog-breadcrumb a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blog-breadcrumb-sep {
+  color: var(--border);
+  font-size: 0.95rem;
+}
+
+/* ── Post list (topic page) ── */
+
+.blog-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.blog-post-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.blog-post-item:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.blog-post-title {
+  font-size: 0.975rem;
+  font-weight: 500;
+}
+
+.blog-post-date {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Single post ── */
+
+.blog-article {
+  max-width: 680px;
+}
+
+.blog-article-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-article-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+
+.blog-article-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blog-article-sep {
+  color: var(--border);
+}
+
+/* ── Prose ── */
+
+.blog-prose {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.blog-prose p {
+  margin-bottom: 1.2em;
+}
+
+.blog-prose h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  color: var(--text);
+}
+
+.blog-prose h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--text);
+}
+
+.blog-prose ul, .blog-prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.2em;
+}
+
+.blog-prose li {
+  margin-bottom: 0.4em;
+}
+
+.blog-prose blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.blog-prose code {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  font-size: 0.875em;
+}
+
+.blog-prose pre {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1.2em;
+}
+
+.blog-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+.blog-prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(46, 125, 125, 0.35);
+  text-underline-offset: 3px;
+}
+
+.blog-prose a:hover {
+  text-decoration-color: var(--accent);
+}
+
 /* ─── Responsive ──────────────────────────────── */
 
 @media (max-width: 620px) {

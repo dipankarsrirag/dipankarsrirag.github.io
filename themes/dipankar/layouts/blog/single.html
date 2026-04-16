@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+<div class="blog-breadcrumb">
+  <a href="{{ .Parent.Parent.RelPermalink }}">Blog</a>
+  <span class="blog-breadcrumb-sep">›</span>
+  <a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a>
+  <span class="blog-breadcrumb-sep">›</span>
+  <span>{{ .Title }}</span>
+</div>
+
+<article class="blog-article">
+  <header class="blog-article-header">
+    <h1 class="blog-article-title">{{ .Title }}</h1>
+    <div class="blog-article-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ with .Params.readingTime }}<span class="blog-article-sep">·</span><span>{{ . }} min read</span>{{ end }}
+    </div>
+  </header>
+
+  <div class="blog-prose">
+    {{ .Content }}
+  </div>
+</article>
+
+{{ end }}
