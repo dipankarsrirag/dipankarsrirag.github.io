@@ -52,6 +52,13 @@
       });
     });
   });
+
+  // Close any open BibTeX dropdown when clicking outside it
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.pub-cite[open]').forEach(function (det) {
+      if (!det.contains(e.target)) det.removeAttribute('open');
+    });
+  });
   </script>
 </body>
 </html>

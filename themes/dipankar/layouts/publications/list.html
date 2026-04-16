@@ -35,42 +35,65 @@
 {{- end }}
 
 {{ define "main" }}
-<div class="page-header">
-  <h1 class="page-title">Research</h1>
-  <p class="page-description">My work spans dialect robustness, multilingual dialogue systems, and benchmarking NLP models across cultural and linguistic diversity.</p>
-</div>
 
-{{- $preprints := where .Pages "Params.preprint" true }}
+{{- $preprints    := where .Pages "Params.preprint" true }}
 {{- $publications := where .Pages "Params.preprint" "ne" true }}
 
 {{/* ── Preprints ── */}}
 {{ if $preprints }}
-<div class="pub-section-heading">Preprints</div>
-<div class="pub-section--preprint">
-  {{ range $preprints.GroupByDate "2006" }}
-  <div class="pub-year-group">
-    <p class="pub-year-heading">{{ .Key }}</p>
-    <div class="pub-list">
-      {{ range .Pages }}{{ template "pub-entry" . }}{{ end }}
+<div class="pub-section pub-section--two-col">
+  <div class="pub-col-label">
+    <button class="pub-toggle-btn" aria-expanded="false" data-target="preprints-body">
+      <span class="pub-section-heading">Preprints</span>
+      <span class="pub-toggle-chevron">&#9656;</span>
+    </button>
+    <span class="pub-expand-hint">click to expand</span>
+  </div>
+  <div class="pub-col-content" id="preprints-body">
+    <div class="pub-section--preprint pub-collapsible">
+      {{ range $preprints.ByDate.Reverse.GroupByDate "2006" }}
+      <div class="pub-year-group">
+        <p class="pub-year-heading">{{ .Key }}</p>
+        <div class="pub-list">
+          {{ range .Pages.ByDate.Reverse }}{{ template "pub-entry" . }}{{ end }}
+        </div>
+      </div>
+      {{ end }}
     </div>
   </div>
-  {{ end }}
 </div>
 {{ end }}
 
-{{/* ── Publications ── */}}
+{{/* ── Published Work ── */}}
 {{ if $publications }}
-<div class="pub-section-heading{{ if $preprints }} pub-section-heading--spaced{{ end }}">Publications</div>
-<div class="pub-section--published">
-  {{ range $publications.GroupByDate "2006" }}
-  <div class="pub-year-group">
-    <p class="pub-year-heading">{{ .Key }}</p>
-    <div class="pub-list">
-      {{ range .Pages }}{{ template "pub-entry" . }}{{ end }}
+<div class="pub-section pub-section--two-col{{ if $preprints }} pub-section--spaced{{ end }}">
+  <div class="pub-col-label">
+    <span class="pub-section-heading">Published</span>
+  </div>
+  <div class="pub-col-content">
+    <div class="pub-section--published">
+      {{ range $publications.ByDate.Reverse.GroupByDate "2006" }}
+      <div class="pub-year-group">
+        <p class="pub-year-heading">{{ .Key }}</p>
+        <div class="pub-list">
+          {{ range .Pages.ByDate.Reverse }}{{ template "pub-entry" . }}{{ end }}
+        </div>
+      </div>
+      {{ end }}
     </div>
   </div>
-  {{ end }}
 </div>
 {{ end }}
+
+<script>
+document.querySelectorAll('.pub-toggle-btn').forEach(function (btn) {
+  var body = document.getElementById(btn.dataset.target);
+  btn.addEventListener('click', function () {
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    body.classList.toggle('is-open', !expanded);
+  });
+});
+</script>
 
 {{ end }}

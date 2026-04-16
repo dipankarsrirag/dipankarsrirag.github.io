@@ -10,14 +10,14 @@
 
 :root {
   --bg:           #ffffff;
-  --text:         #1c1c1e;
-  --text-muted:   #58585e;
-  --accent:       #0057b8;
-  --accent-hover: #003d8f;
-  --border:       #e4e4e8;
-  --bg-subtle:    #f5f5f7;
-  --max-w:        720px;
-  --font:         -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --text:         #18181b;
+  --text-muted:   #52525b;
+  --accent:       #2E7D7D;
+  --accent-hover: #1F5C5C;
+  --border:       #e6e1db;
+  --bg-subtle:    #f9f7f4;
+  --max-w:        860px;
+  --font:         'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono:         "SF Mono", "Fira Code", "Consolas", monospace;
 }
 
@@ -31,10 +31,12 @@ body {
   font-family: var(--font);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.65;
+  line-height: 1.7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-align: left;
 }
 
 /* ─── Typography ──────────────────────────────── */
@@ -108,9 +110,9 @@ nav {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 100;
 }
 
@@ -125,7 +127,7 @@ nav {
 }
 
 .nav-brand {
-  font-size: 0.875rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--text);
   letter-spacing: -0.015em;
@@ -143,7 +145,7 @@ nav {
 }
 
 .nav-links a {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--text-muted);
   font-weight: 400;
   padding: 0.3rem 0.55rem;
@@ -153,8 +155,8 @@ nav {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--text);
-  background: var(--bg-subtle);
+  color: var(--accent);
+  background: rgba(46, 125, 125, 0.07);
   text-decoration: none;
 }
 
@@ -170,7 +172,7 @@ footer {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
 }
 
@@ -178,38 +180,41 @@ footer {
 
 .profile {
   display: grid;
-  grid-template-columns: 148px 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 165px 1fr;
+  gap: 2.75rem;
   align-items: start;
-  padding: 2.75rem 0 3rem;
+  padding: 3.25rem 0 3.25rem;
 }
 
 .profile-photo img {
-  width: 148px;
+  width: 165px;
   aspect-ratio: 3/4;
   object-fit: cover;
   object-position: center top;
-  border-radius: 6px;
+  border-radius: 10px;
   display: block;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
 }
 
 .profile-info h1 {
-  font-size: 1.55rem;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.3rem;
+  line-height: 1.1;
 }
 
 .profile-role {
-  font-size: 0.825rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  margin-bottom: 1.2rem;
-  line-height: 1.5;
+  margin-bottom: 1.35rem;
+  line-height: 1.6;
 }
 
 .profile-bio {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: var(--text);
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
 .profile-bio a {
@@ -225,12 +230,13 @@ footer {
 }
 
 .social-link {
-  font-size: 0.775rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
-  padding: 0.25rem 0.55rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 4px;
   transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.01em;
 }
 
 .social-link:hover {
@@ -249,18 +255,36 @@ footer {
 /* ─── Home: Sections ──────────────────────────── */
 
 .home-section {
-  padding-top: 2rem;
-  margin-bottom: 2rem;
+  padding-top: 2.25rem;
+  margin-bottom: 2.5rem;
   border-top: 1px solid var(--border);
 }
 
 .section-label {
-  font-size: 0.675rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  position: sticky;
+  top: 52px;
+  background: var(--bg);
+  z-index: 10;
+  padding: 0.5rem 0 0.1rem;
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5px;
+  background: var(--accent);
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 /* ─── News ────────────────────────────────────── */
@@ -271,11 +295,11 @@ footer {
 
 .news-item {
   display: grid;
-  grid-template-columns: 76px 1fr;
-  gap: 1.25rem;
-  padding: 0.65rem 0;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  padding: 0.75rem 0;
   border-bottom: 1px solid var(--border);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   align-items: baseline;
 }
 
@@ -290,7 +314,7 @@ footer {
 
 .news-date {
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   white-space: nowrap;
 }
 
@@ -311,7 +335,7 @@ footer {
 }
 
 .pub-entry {
-  padding: 1.25rem 0;
+  padding: 1.4rem 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -324,7 +348,7 @@ footer {
 }
 
 .pub-title {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   margin-bottom: 0.3rem;
@@ -342,7 +366,7 @@ footer {
 }
 
 .pub-authors {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--text-muted);
   margin-bottom: 0.25rem;
   line-height: 1.5;
@@ -357,7 +381,7 @@ footer {
 }
 
 .pub-venue {
-  font-size: 0.775rem;
+  font-size: 1rem;
   color: var(--text-muted);
   margin-bottom: 0.4rem;
 }
@@ -365,10 +389,11 @@ footer {
 .pub-venue .venue-name {
   color: var(--accent);
   font-weight: 500;
+  font-style: italic;
 }
 
 .pub-note {
-  font-size: 0.775rem;
+  font-size: 1rem;
   color: var(--text-muted);
   margin-bottom: 0.4rem;
 }
@@ -378,63 +403,121 @@ footer {
   gap: 0.35rem;
   flex-wrap: wrap;
   margin-top: 0.5rem;
+  align-items: center;
+  position: relative;
 }
 
 .pub-link {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-muted);
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   border: 1px solid var(--border);
-  border-radius: 3px;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  border-radius: 4px;
+  transition: color 0.12s, border-color 0.12s, background 0.12s;
+  letter-spacing: 0.01em;
 }
 
 .pub-link:hover {
   color: var(--accent);
   border-color: var(--accent);
-  background: rgba(0, 87, 184, 0.04);
+  background: rgba(46, 125, 125, 0.04);
   text-decoration: none;
 }
 
-/* Publications page: section headings */
+/* Publications page: two-column layout */
+
+.pub-section { margin-bottom: 0; }
+
+.pub-section--spaced { margin-top: 3.5rem; }
+
+.pub-section--two-col {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 0 3rem;
+  align-items: start;
+}
+
+.pub-col-label {
+  position: sticky;
+  top: 52px;
+  padding-top: 0.15rem;
+}
+
+.pub-col-content { min-width: 0; }
 
 .pub-section-heading {
-  font-size: 1.1rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  padding-top: 0;
-  padding-bottom: 1.25rem;
-  border-bottom: 2px solid var(--text);
-  margin-bottom: 0;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
 }
 
-.pub-section-heading--spaced {
-  margin-top: 3.5rem;
-  padding-top: 0;
+.pub-toggle-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: left;
 }
 
-/* Publications page: year groups */
+.pub-toggle-btn:hover .pub-section-heading { color: var(--accent); }
 
-.pub-year-group + .pub-year-group {
-  margin-top: 0;
+.pub-toggle-chevron {
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  display: inline-block;
+  margin-top: 0.05rem;
 }
+
+.pub-toggle-btn[aria-expanded="true"] .pub-toggle-chevron {
+  transform: rotate(90deg);
+}
+
+.pub-expand-hint {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  opacity: 0.6;
+  display: block;
+  padding-top: 0.3rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.pub-toggle-btn[aria-expanded="true"] ~ .pub-expand-hint { display: none; }
+
+.pub-collapsible { display: none; }
+#preprints-body.is-open .pub-collapsible { display: block; }
+
+/* Year groups */
+
+.pub-year-group + .pub-year-group { margin-top: 0; }
 
 .pub-year-heading {
-  font-size: 0.675rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
-  padding: 1.75rem 0 0;
+  padding: 1.75rem 0 0.6rem;
   border-top: 1px solid var(--border);
   margin-bottom: 0;
+  position: sticky;
+  top: 52px;
+  background: var(--bg);
+  z-index: 10;
 }
 
 .pub-year-group:first-child .pub-year-heading {
   border-top: none;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 /* Publication entry left accents */
@@ -453,6 +536,16 @@ footer {
 .pub-section--preprint .pub-entry:hover,
 .pub-section--published .pub-entry:hover {
   border-left-color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .pub-section--two-col {
+    grid-template-columns: 1fr;
+  }
+  .pub-col-label {
+    position: static;
+    margin-bottom: 0.75rem;
+  }
 }
 
 /* Badges */
@@ -490,26 +583,29 @@ footer {
 }
 
 .pub-cite-box {
-  position: relative;
-  margin-top: 0.75rem;
-  background: var(--bg-subtle);
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem 1.1rem 1.1rem;
-  width: min(540px, 92vw);
+  border-radius: 6px;
+  padding: 1rem 1.1rem 1.25rem;
+  width: max-content;
+  max-width: min(480px, 90vw);
   cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .pub-cite-box:hover {
-  border-color: #c0cfe8;
-  background: #f0f4fb;
-  box-shadow: 0 2px 12px rgba(0, 87, 184, 0.06);
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(46, 125, 125, 0.07);
 }
 
 .pub-cite-pre {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   line-height: 1.75;
   white-space: pre;
   overflow-x: auto;
@@ -531,7 +627,7 @@ footer {
   position: absolute;
   bottom: 0.65rem;
   right: 0.85rem;
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--accent);
@@ -549,11 +645,14 @@ footer {
 /* ─── See All ─────────────────────────────────── */
 
 .see-all {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--accent);
-  display: inline-block;
-  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  letter-spacing: 0.01em;
 }
 
 .see-all:hover {
@@ -576,7 +675,7 @@ footer {
 }
 
 .page-description {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.6;
   max-width: 540px;
@@ -584,7 +683,7 @@ footer {
 }
 
 .page-content {
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.8;
 }
 
@@ -695,14 +794,18 @@ footer {
 }
 
 .teaching-year-heading {
-  font-size: 0.675rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
-  padding: 1.75rem 0 0;
+  padding: 1.75rem 0 0.6rem;
   border-top: 1px solid var(--border);
   margin-bottom: 0;
+  position: sticky;
+  top: 52px;
+  background: var(--bg);
+  z-index: 10;
 }
 
 .teaching-year-group:first-child .teaching-year-heading {
@@ -751,7 +854,7 @@ footer {
 }
 
 .teaching-name {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--text);
   line-height: 1.4;
@@ -765,7 +868,7 @@ footer {
 }
 
 .teaching-role {
-  font-size: 0.775rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
 }
 
@@ -830,6 +933,9 @@ footer {
   overflow: hidden;
   border-radius: 5px;
   background: var(--bg-subtle);
+  display: block;
+  text-decoration: none;
+  cursor: zoom-in;
 }
 
 .gallery-item img {
@@ -933,11 +1039,11 @@ a.link:hover {
   }
 
   .profile-photo img {
-    width: 110px;
+    width: 120px;
   }
 
   .profile-info h1 {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 
   .nav-inner {

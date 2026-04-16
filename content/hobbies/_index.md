@@ -1,8 +1,10 @@
 ---
 title: "Hobbies"
-description: "A collection of photographs and other interests from outside the lab."
+description: ""
 photos:
   - src: "/20251005-DSC_1302.jpg"
+    caption: ""
+  - src: "/car.jpeg"
     caption: ""
 ---
 

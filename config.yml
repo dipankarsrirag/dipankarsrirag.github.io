@@ -12,18 +12,21 @@ taxonomies:
 
 menu:
   main:
+    - name: "👋 me"
+      url: /
+      weight: 1
     - name: Research
       url: /publications/
-      weight: 1
+      weight: 2
     - name: Teaching
       url: /courses/
-      weight: 2
+      weight: 3
     - name: Hobbies
       url: /hobbies/
-      weight: 3
+      weight: 4
     - name: CV
       url: /cv.pdf
-      weight: 4
+      weight: 5
 
 params:
   description: "Ph.D. candidate at UNSW Sydney working on socio-culturally inclusive NLP — multilingual dialogue systems, dialect robustness, and emergency triage."

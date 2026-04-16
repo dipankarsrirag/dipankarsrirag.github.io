@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
+</div>
+
+{{- $news := sort .Pages "Date" "desc" }}
+{{ if $news }}
+<ul class="news-list">
+  {{ range $news }}
+  <li class="news-item">
+    <span class="news-date">{{ .Date.Format "Jan 2006" }}</span>
+    <span class="news-text">{{ .Content | safeHTML }}</span>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}
