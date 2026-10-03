@@ -1,7 +1,7 @@
 ---
 title: "BESSTIE: A Benchmark for Sentiment and Sarcasm Classification for Varieties of English"
 date: 2025-07-24
-preprint: false           # <— set to `true` only for preprints
+preprint: false           # <- set to `true` only for preprints
 authors:
     - "Dipankar Srirag"
     - "Aditya Joshi"
@@ -15,7 +15,7 @@ links:
     dataset: "https://huggingface.co/datasets/unswnlporg/besstie"
     # code: "https://github.com/cruiseresearchgroup/spectraformer"
 # project:   "https://yourlab.org/project"
-# journal: "ACL 2024"      # optional—whatever metadata you like
+# journal: "ACL 2024"      # optional, whatever metadata you like
 venue: "Findings of ACL: ACL 2025"
 selected: true
 bibtex: |

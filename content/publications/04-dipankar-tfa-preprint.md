@@ -1,7 +1,7 @@
 ---
 title: 'A Taxonomy-Driven Case Study of Australian Web Resources Against Technology-Facilitated Abuse'
 date: 2025-11-28
-preprint: true           # <— set to `true` only for preprints
+preprint: true           # <- set to `true` only for preprints
 authors:
     - "Dipankar Srirag"
     - "Xiaolin Cen"
@@ -23,5 +23,5 @@ bibtex: |
   }
 links:
     paper: https://arxiv.org/pdf/2512.04104
-# venue: "NAACL 2025"      # optional—whatever metadata you like
+# venue: "NAACL 2025"      # optional, whatever metadata you like
 ---

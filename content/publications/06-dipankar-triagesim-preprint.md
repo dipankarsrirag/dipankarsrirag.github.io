@@ -1,7 +1,7 @@
 ---
 title: 'TriageSim: A Conversational Emergency Triage Simulation Framework from Structured Electronic Health Records'
 date: 2026-03-02
-preprint: true           # <— set to `true` only for preprints
+preprint: true           # <- set to `true` only for preprints
 authors:
     - "Dipankar Srirag"
     - "Quoc Dung Nguyen"
@@ -28,5 +28,5 @@ links:
     code: https://github.com/dipankarsrirag/triage-sim
     pip:   https://pypi.org/project/triagesim/0.1.1/
     project: https://www.tribot.co/
-# venue: "NAACL 2025"      # optional—whatever metadata you like
+# venue: "NAACL 2025"      # optional, whatever metadata you like
 ---

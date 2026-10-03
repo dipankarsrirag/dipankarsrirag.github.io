@@ -1,7 +1,7 @@
 ---
 title: 'Evaluating Dialect Robustness of Language Models via Conversation Understanding'
 date: 2025-01-28
-preprint: false           # <— set to `true` only for preprints
+preprint: false           # <- set to `true` only for preprints
 authors:
     - "Dipankar Srirag"
     - "Nihar Ranjan Sahoo"

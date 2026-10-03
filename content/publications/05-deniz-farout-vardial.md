@@ -1,7 +1,7 @@
 ---
 title: 'Far Out: Evaluating Language Models on Slang in Australian and Indian English'
 date: 2026-03-02
-preprint: false           # <— set to `true` only for preprints
+preprint: false           # <- set to `true` only for preprints
 authors:
     - "Deniz Kaya Dilsiz"
     - "Dipankar Srirag"

@@ -29,7 +29,7 @@ menu:
       weight: 6
 
 params:
-  description: "Ph.D. candidate at UNSW Sydney working on socio-culturally inclusive NLP — multilingual dialogue systems, dialect robustness, and emergency triage."
+  description: "Ph.D. candidate at UNSW Sydney working on socio-culturally inclusive NLP: multilingual dialogue systems, dialect robustness, and emergency triage."
   author: Dipankar Srirag
   role: "Ph.D. Candidate"
   affiliation: "UNSW Sydney"
