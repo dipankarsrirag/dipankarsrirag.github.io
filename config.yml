@@ -4,11 +4,21 @@ theme: dipankar
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
+
+outputFormats:
+  llms:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
+    notAlternative: true
+
+outputs:
+  home: [HTML, llms]
+  section: [HTML]
 pagination:
   pagerSize: 20
 
-taxonomies:
-  tag: tags
+disableKinds: [taxonomy, term]
 
 menu:
   main:
@@ -29,11 +39,22 @@ menu:
       weight: 6
 
 params:
-  description: "Ph.D. candidate at UNSW Sydney working on socio-culturally inclusive NLP: multilingual dialogue systems, dialect robustness, and emergency triage."
+  description: "Ph.D. candidate at UNSW Sydney working on NLP for linguistically diverse nurse-patient communication and clinical decision support in the emergency department, with a background in dialect robustness."
   author: Dipankar Srirag
   role: "Ph.D. Candidate"
   affiliation: "UNSW Sydney"
   photo: "profile.jpg"
+  # Used for search engines and AI assistants (meta keywords, JSON-LD knowsAbout).
+  knowsAbout:
+    - Natural Language Processing
+    - Clinical NLP
+    - Emergency Department Triage
+    - Large Language Models
+    - Nurse-Patient Communication
+    - Clinical Decision Support
+    - Dialect Robustness
+    - Varieties of English
+    - Speech and Dialogue Systems
   socialIcons:
     - name: Email
       url: mailto:d.srirag@unsw.edu.au

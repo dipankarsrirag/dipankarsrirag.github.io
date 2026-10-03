@@ -1,6 +1,6 @@
 ---
 title: 'TriageSim: A Conversational Emergency Triage Simulation Framework from Structured Electronic Health Records'
-date: 2026-03-02
+date: 2026-10-01
 preprint: false           # <- set to `true` only for preprints
 authors:
     - "Dipankar Srirag"
@@ -28,5 +28,6 @@ links:
     code: https://github.com/dipankarsrirag/triage-sim
     pip:   https://pypi.org/project/triagesim/0.1.1/
     project: https://www.tribot.co/
+    poster: /Interspeech-Poster.pdf
 venue: "Interspeech 2026"
 ---

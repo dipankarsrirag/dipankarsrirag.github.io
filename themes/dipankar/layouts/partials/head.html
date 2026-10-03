@@ -1,10 +1,84 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
-<meta name="description" content="{{ .Description | default .Site.Params.description }}">
-<meta name="author" content="{{ .Site.Params.author }}">
+{{- $site := .Site }}
+{{- $p := $site.Params }}
+{{- $title := cond .IsHome (printf "%s · %s, %s" $site.Title $p.role $p.affiliation) (printf "%s · %s" .Title $site.Title) }}
+{{- $desc := .Description | default $p.description }}
+{{- $image := printf "%s%s" $site.BaseURL $p.photo }}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="author" content="{{ $p.author }}">
+{{- with $p.knowsAbout }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="{{ .Permalink }}">
+<link rel="alternate" type="text/plain" title="llms.txt" href="{{ "llms.txt" | absURL }}">
+{{- with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" title="{{ $site.Title }}" href="{{ .Permalink }}">
+{{- end }}
+
+{{/* Open Graph / social previews */}}
+<meta property="og:type" content="{{ if .IsHome }}profile{{ else }}website{{ end }}">
+<meta property="og:site_name" content="{{ $site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $image }}">
+<meta property="og:image:alt" content="{{ $p.author }}">
+<meta property="og:locale" content="en_AU">
+{{- if .IsHome }}
+<meta property="profile:first_name" content="Dipankar">
+<meta property="profile:last_name" content="Srirag">
+{{- end }}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@dipankarsrirag">
+<meta name="twitter:creator" content="@dipankarsrirag">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $image }}">
+
+{{/* Structured data (JSON-LD) for search engines and AI assistants */}}
+{{- $sameAs := slice }}
+{{- range $p.socialIcons }}{{ if not (hasPrefix .url "mailto") }}{{ $sameAs = $sameAs | append .url }}{{ end }}{{ end }}
+{{- $email := "" }}
+{{- range $p.socialIcons }}{{ if hasPrefix .url "mailto" }}{{ $email = strings.TrimPrefix "mailto:" .url }}{{ end }}{{ end }}
+{{- $unsw := dict "@type" "CollegeOrUniversity" "name" "UNSW Sydney" "alternateName" "University of New South Wales" "url" "https://www.unsw.edu.au/" }}
+{{- $person := dict
+  "@type" "Person"
+  "@id" (printf "%s#person" $site.BaseURL)
+  "name" $p.author
+  "url" $site.BaseURL
+  "image" $image
+  "email" $email
+  "jobTitle" $p.role
+  "description" $p.description
+  "affiliation" (dict "@type" "Organization" "name" "UNSW-NLP group" "url" "https://unswnlp.github.io/" "parentOrganization" $unsw)
+  "alumniOf" $unsw
+  "worksFor" $unsw
+  "knowsAbout" $p.knowsAbout
+  "sameAs" $sameAs
+}}
+{{- $graph := slice $person (dict "@type" "WebSite" "@id" (printf "%s#website" $site.BaseURL) "url" $site.BaseURL "name" $site.Title "description" $p.description "inLanguage" "en" "publisher" (dict "@id" (printf "%s#person" $site.BaseURL))) }}
+{{- if .IsHome }}
+  {{- $graph = $graph | append (dict "@type" "ProfilePage" "url" .Permalink "name" $title "mainEntity" (dict "@id" (printf "%s#person" $site.BaseURL))) }}
+{{- end }}
+{{- if eq .Section "publications" }}{{ if .IsNode }}
+  {{- $items := slice }}
+  {{- range $i, $pub := sort .Pages "Date" "desc" }}
+    {{- $authors := slice }}
+    {{- range $pub.Params.authors }}{{ $authors = $authors | append (dict "@type" "Person" "name" (strings.TrimSuffix "*" .)) }}{{ end }}
+    {{- $article := dict "@type" "ScholarlyArticle" "headline" $pub.Title "name" $pub.Title "author" $authors "datePublished" ($pub.Date.Format "2006-01-02") }}
+    {{- with $pub.Params.links.paper }}{{ $article = merge $article (dict "url" .) }}{{ end }}
+    {{- with $pub.Params.venue }}{{ $article = merge $article (dict "isPartOf" (dict "@type" "CreativeWork" "name" .)) }}{{ end }}
+    {{- if $pub.Params.preprint }}{{ $article = merge $article (dict "creativeWorkStatus" "Preprint") }}{{ end }}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" (add $i 1) "item" $article) }}
+  {{- end }}
+  {{- $graph = $graph | append (dict "@type" "ItemList" "name" (printf "Publications by %s" $p.author) "itemListElement" $items) }}
+{{- end }}{{ end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">

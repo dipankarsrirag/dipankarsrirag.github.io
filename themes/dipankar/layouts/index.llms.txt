@@ -1,0 +1,36 @@
+{{- $p := .Site.Params -}}
+# {{ $p.author }}
+
+> {{ $p.description }}
+
+{{ .RawContent | strings.TrimSpace }}
+
+- Role: {{ $p.role }}, {{ $p.affiliation }}
+- Research interests: {{ delimit $p.knowsAbout ", " }}
+- Website: {{ .Site.BaseURL }}
+- CV: {{ "cv.pdf" | absURL }}
+{{- range $p.socialIcons }}
+- {{ .name }}: {{ strings.TrimPrefix "mailto:" .url }}
+{{- end }}
+
+## Publications
+{{ range sort (where .Site.RegularPages "Section" "publications") "Date" "desc" }}
+- [{{ .Title }}]({{ .Params.links.paper }}): {{ delimit .Params.authors ", " | replaceRE `\*` "" }}. {{ with .Params.venue }}{{ . }}{{ else }}{{ if .Params.preprint }}Preprint{{ end }}, {{ .Date.Year }}{{ end }}{{ if and .Params.venue .Params.preprint }} (preprint){{ end }}.
+{{- end }}
+
+## Teaching
+{{ with .Site.GetPage "/courses" }}{{ range .Params.courses }}
+{{- range .entries }}
+- {{ .code }} {{ .name }} ({{ .institution }}, {{ delimit .terms ", " }}): {{ .role }}{{ with .feedback }}, student feedback {{ . }}{{ end }}
+{{- end }}
+{{- end }}{{ end }}
+
+## Recent news
+{{ range first 10 (sort (where .Site.RegularPages "Section" "news") "Date" "desc") }}
+- {{ .Date.Format "Jan 2006" }}: {{ .Plain | strings.TrimSpace }}
+{{- end }}
+
+## Pages
+- [Research]({{ "publications/" | absURL }}): full publication list with BibTeX
+- [Teaching]({{ "courses/" | absURL }})
+- [News]({{ "news/" | absURL }})
