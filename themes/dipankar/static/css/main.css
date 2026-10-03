@@ -419,7 +419,6 @@ footer {
 .pub-venue .venue-name {
   color: var(--accent);
   font-weight: 500;
-  font-style: italic;
 }
 
 .pub-note {
