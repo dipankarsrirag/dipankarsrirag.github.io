@@ -6,6 +6,26 @@ hidemeta: true
 courses:
   - year: 2026
     entries:
+      - code: COMP9444
+        name: Neural Networks and Deep Learning
+        role: Tutor
+        terms: ["26T3"]
+        institution: UNSW
+        url: "https://handbook.unsw.edu.au/undergraduate/courses/2026/comp9444?year=2026"
+      - code: COMP9444
+        name: Neural Networks and Deep Learning
+        role: Tutor
+        terms: ["26T2"]
+        feedback: "100%"
+        institution: UNSW
+        url: "https://handbook.unsw.edu.au/undergraduate/courses/2026/comp9444?year=2026"
+      - code: COMP9024
+        name: Data Structures and Algorithms
+        role: Tutor
+        terms: ["26T2"]
+        feedback: "100%"
+        institution: UNSW
+        url: "https://handbook.unsw.edu.au/postgraduate/courses/2026/COMP9024"
       - code: COMP6713
         name: Natural Language Processing
         role: Course Admin

@@ -12,8 +12,8 @@
   --bg:           #FDFCFB;
   --text:         #18181b;
   --text-muted:   #52525b;
-  --accent:       #2E7D7D;
-  --accent-hover: #1F5C5C;
+  --accent:       #554882;
+  --accent-hover: #3F3562;
   --border:       #e6e1db;
   --bg-subtle:    #f9f7f4;
   --max-w:        860px;
@@ -29,7 +29,7 @@ html {
 }
 
 ::selection {
-  background: rgba(46, 125, 125, 0.15);
+  background: rgba(85, 72, 130, 0.15);
   color: var(--text);
 }
 
@@ -244,7 +244,7 @@ footer {
 .profile-bio a {
   font-weight: 500;
   text-decoration: underline;
-  text-decoration-color: rgba(46, 125, 125, 0.35);
+  text-decoration-color: rgba(85, 72, 130, 0.35);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
@@ -450,7 +450,7 @@ footer {
 .pub-link:hover {
   color: var(--accent);
   border-color: var(--accent);
-  background: rgba(46, 125, 125, 0.04);
+  background: rgba(85, 72, 130, 0.04);
   text-decoration: none;
 }
 
@@ -629,7 +629,7 @@ footer {
 
 .pub-cite-box:hover {
   border-color: var(--accent);
-  box-shadow: 0 2px 12px rgba(46, 125, 125, 0.07);
+  box-shadow: 0 2px 12px rgba(85, 72, 130, 0.07);
 }
 
 .pub-cite-pre {
@@ -1080,7 +1080,7 @@ a.link:hover {
 
 .blog-topic-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 2px 8px rgba(46, 125, 125, 0.08);
+  box-shadow: 0 2px 8px rgba(85, 72, 130, 0.08);
   text-decoration: none;
   color: var(--text);
 }
@@ -1272,7 +1272,7 @@ a.link:hover {
 .blog-prose a {
   color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: rgba(46, 125, 125, 0.35);
+  text-decoration-color: rgba(85, 72, 130, 0.35);
   text-underline-offset: 3px;
 }
 
