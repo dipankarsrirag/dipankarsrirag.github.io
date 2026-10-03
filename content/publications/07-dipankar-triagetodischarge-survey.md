@@ -22,4 +22,5 @@ bibtex: |
     }
 links:
     paper: https://arxiv.org/abs/2608.23627
+venue: "To appear at EMNLP 2026 (Main)"
 ---
