@@ -1,7 +1,7 @@
 ---
 title: "Retell, Reward, Repeat: Reinforcement Learning for Narrative Theory-Informed Story Retelling"
 date: 2026-06-17
-preprint: true
+preprint: false
 authors:
     - "David Y. Liu"
     - "Xanthe Muston"
@@ -23,4 +23,5 @@ bibtex: |
     }
 links:
     paper: "https://arxiv.org/pdf/2601.17226"
+venue: "INLG 2026"
 ---
