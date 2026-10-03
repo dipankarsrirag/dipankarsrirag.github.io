@@ -15,7 +15,6 @@ links:
     code: https://github.com/dipankarsrirag/lordd
 # project:   "https://yourlab.org/project"
 venue: "NAACL 2025"
-selected: true
 bibtex: |
   @inproceedings{srirag-etal-2025-predicting,
       title = "Predicting the Target Word of Game-playing Conversations using a Low-Rank Dialect Adapter for Decoder Models",

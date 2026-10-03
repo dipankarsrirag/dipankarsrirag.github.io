@@ -10,7 +10,6 @@ authors:
 underlineAuthors:
     - "Dipankar Srirag*"
 # arxivID: "2505.15095"
-selected: true
 links:
     paper: "https://arxiv.org/pdf/2505.15095"
     # code: "https://github.com/cruiseresearchgroup/spectraformer"

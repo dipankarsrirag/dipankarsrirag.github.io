@@ -2,6 +2,7 @@
 title: "From Triage to Discharge: A Survey of NLP Tasks, Methods, and Open Challenges in the Emergency Department"
 date: 2026-04-13
 preprint: true
+selected: true
 authors:
     - "Dipankar Srirag"
     - "Aditya Joshi"
