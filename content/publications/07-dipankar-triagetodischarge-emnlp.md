@@ -1,7 +1,7 @@
 ---
 title: "From Triage to Discharge: A Survey of NLP Tasks, Methods, and Open Challenges in the Emergency Department"
-date: 2026-04-13
-preprint: true
+date: 2026-10-24
+preprint: false
 selected: true
 authors:
     - "Dipankar Srirag"
@@ -23,5 +23,5 @@ bibtex: |
     }
 links:
     paper: https://arxiv.org/abs/2608.23627
-venue: "To appear at EMNLP 2026 (Main)"
+venue: "EMNLP 2026"
 ---

@@ -1,6 +1,6 @@
 ---
 title: 'PAREDA: A Multi-Accent Speech Dataset of Natural Language Processing Research Discussions'
-date: 2026-05-01
+date: 2026-05-11
 preprint: false           # <- set to `true` only for preprints
 authors:
     - "Sicheng Jin"

@@ -1,7 +1,7 @@
 ---
 title: "DiaLLM: An Investigation into the Robustness-Generation Gap in English Dialect Adaptation"
-date: 2026-07-08
-preprint: true
+date: 2026-10-24
+preprint: false
 authors:
     - "Jordan Painter"
     - "Dipankar Srirag"
@@ -24,5 +24,5 @@ bibtex: |
     }
 links:
     paper: https://arxiv.org/abs/2607.07669
-venue: "To appear at EMNLP 2026 (Main)"
+venue: "EMNLP 2026"
 ---

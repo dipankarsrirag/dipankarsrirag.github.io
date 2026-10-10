@@ -1,6 +1,6 @@
 ---
 title: "Retell, Reward, Repeat: Reinforcement Learning for Narrative Theory-Informed Story Retelling"
-date: 2026-06-17
+date: 2026-10-19
 preprint: false
 authors:
     - "David Y. Liu"

@@ -6,7 +6,7 @@
     <img src="/profile-330.jpg" alt="{{ .Site.Params.author }}" width="165" height="220" fetchpriority="high" decoding="async">
   </div>
   <div class="profile-info">
-    <h1>{{ .Site.Params.author }}</h1>
+    <h1>{{ .Site.Params.author }}{{ with .Site.Params.authorNative }} <span class="name-sep" aria-hidden="true">·</span> <span class="name-native" lang="{{ $.Site.Params.authorNativeLang }}">{{ . }}</span>{{ end }}</h1>
     <p class="profile-role">{{ .Site.Params.role }} · {{ .Site.Params.affiliation }}</p>
     <div class="profile-bio">
       {{ .Content }}
@@ -15,7 +15,7 @@
       {{- range $i, $icon := .Site.Params.socialIcons }}
       {{- if $i }}<span class="social-sep">·</span>{{ end }}
       <a href="{{ $icon.url }}" class="social-link"
-        {{- if not (hasPrefix $icon.url "mailto") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ $icon.name }}</a>
+        {{- if not (hasPrefix $icon.url "mailto") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ partial "social-icon.html" $icon.name }}<span>{{ $icon.name }}</span></a>
       {{- end }}
     </div>
   </div>

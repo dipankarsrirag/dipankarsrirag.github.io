@@ -4,6 +4,8 @@ theme: dipankar
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
+# Show papers dated by an upcoming conference (e.g. EMNLP, INLG).
+buildFuture: true
 
 outputFormats:
   llms:
@@ -41,6 +43,8 @@ menu:
 params:
   description: "Ph.D. candidate at UNSW Sydney working on NLP for linguistically diverse nurse-patient communication and clinical decision support in the emergency department, with a background in dialect robustness."
   author: Dipankar Srirag
+  authorNative: "దిపాంకర్ శ్రీరాగ్"
+  authorNativeLang: te
   role: "Ph.D. Candidate"
   affiliation: "UNSW Sydney"
   photo: "profile.jpg"

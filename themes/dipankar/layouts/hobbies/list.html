@@ -1,5 +1,15 @@
 {{ define "main" }}
 
+{{ if ne .RelPermalink "/hobbies/" }}
+<div class="blog-breadcrumb">
+  {{- range .Ancestors.Reverse }}{{ if not .IsHome }}
+  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  <span class="blog-breadcrumb-sep">›</span>
+  {{- end }}{{ end }}
+  <span>{{ .Title }}</span>
+</div>
+{{ end }}
+
 <div class="page-header">
   <h1 class="page-title">{{ .Title }}</h1>
   {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
@@ -9,12 +19,46 @@
 <div class="gallery-intro">{{ . }}</div>
 {{ end }}
 
-{{ with .Params.photos }}
+{{/* ── Albums: each sub-folder of content/hobbies/ ── */}}
+{{ with .Sections }}
+<div class="album-grid">
+  {{ range .ByWeight }}
+  {{- $photos := sort (.Resources.ByType "image") "Name" }}
+  {{- $cover := index $photos 0 }}
+  {{- /* Album with only sub-albums: borrow the first photo found in them */}}
+  {{- range .Sections.ByWeight }}{{ if not $cover }}{{ $cover = index (sort (.Resources.ByType "image") "Name") 0 }}{{ end }}
+    {{- range .Sections.ByWeight }}{{ if not $cover }}{{ $cover = index (sort (.Resources.ByType "image") "Name") 0 }}{{ end }}{{ end }}
+  {{- end }}
+  {{- $nAlbums := len .Sections }}
+  <a href="{{ .RelPermalink }}" class="album-card">
+    {{ with $cover }}
+    {{- $c := .Fill "480x600 webp q78 Smart" }}
+    <img src="{{ $c.RelPermalink }}" width="{{ $c.Width }}" height="{{ $c.Height }}" alt="" loading="lazy" decoding="async">
+    {{ end }}
+    <span class="album-meta">
+      <span class="album-name">{{ .Title }}</span>
+      <span class="album-count">
+        {{- if $nAlbums }}{{ $nAlbums }} {{ if eq $nAlbums 1 }}album{{ else }}albums{{ end }}{{ end }}
+        {{- if and $nAlbums $photos }} · {{ end }}
+        {{- with $photos }}{{ len . }} {{ if eq (len .) 1 }}photo{{ else }}photos{{ end }}{{ end -}}
+      </span>
+    </span>
+  </a>
+  {{ end }}
+</div>
+{{ end }}
+
+{{/* ── Photos: images placed in this album's folder, sorted by file name ── */}}
+{{ $album := .Title }}
+{{ with sort (.Resources.ByType "image") "Name" }}
 <div class="gallery-grid">
   {{ range $i, $p := . }}
-  <a href="{{ $p.src }}" class="gallery-item" data-index="{{ $i }}" data-caption="{{ $p.caption | default "" }}">
-    <img src="{{ $p.src }}" alt="{{ $p.caption | default "" }}" loading="lazy">
-    {{ with $p.caption }}<p class="gallery-caption">{{ . }}</p>{{ end }}
+  {{- $thumb := $p.Fill "480x600 webp q78 Smart" }}
+  {{- $full := $p.Fit "1600x1600 webp q85" }}
+  {{- $alt := $p.Params.caption | default (printf "%s, photo %d" $album (add $i 1)) }}
+  <a href="{{ $full.RelPermalink }}" class="gallery-item" data-index="{{ $i }}" data-caption="{{ $p.Params.caption | default "" }}" data-alt="{{ $alt }}">
+    <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+    {{ with $p.Params.caption }}<p class="gallery-caption">{{ . }}</p>{{ end }}
   </a>
   {{ end }}
 </div>
@@ -160,7 +204,7 @@
     setTimeout(() => {
       const item = items[cur];
       img.src = item.getAttribute('href');
-      img.alt = item.dataset.caption || '';
+      img.alt = item.dataset.alt || '';
       cap.textContent = item.dataset.caption || '';
       img.classList.remove('lb-fade');
     }, 160);
@@ -171,7 +215,7 @@
     cur = n;
     const item = items[cur];
     img.src = item.getAttribute('href');
-    img.alt = item.dataset.caption || '';
+    img.alt = item.dataset.alt || '';
     cap.textContent = item.dataset.caption || '';
     lb.classList.add('lb-open');
     requestAnimationFrame(() => lb.classList.add('lb-visible'));

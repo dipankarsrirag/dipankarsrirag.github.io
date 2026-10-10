@@ -1,6 +1,6 @@
 ---
 title: 'TriageSim: A Conversational Emergency Triage Simulation Framework from Structured Electronic Health Records'
-date: 2026-10-01
+date: 2026-09-28
 preprint: false           # <- set to `true` only for preprints
 authors:
     - "Dipankar Srirag"

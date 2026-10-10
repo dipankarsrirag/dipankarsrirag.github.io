@@ -54,7 +54,7 @@
   "email" $email
   "jobTitle" $p.role
   "description" $p.description
-  "affiliation" (dict "@type" "Organization" "name" "UNSW-NLP group" "url" "https://unswnlp.github.io/" "parentOrganization" $unsw)
+  "affiliation" (dict "@type" "Organization" "name" "UNSW NLP group" "url" "https://unswnlp.github.io/" "parentOrganization" $unsw)
   "alumniOf" $unsw
   "worksFor" $unsw
   "knowsAbout" $p.knowsAbout
@@ -80,6 +80,7 @@
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
 
 <link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css">
+{{- $cssVer := readFile "themes/dipankar/static/css/main.css" | md5 | truncate 8 "" }}
+<link rel="stylesheet" href="/css/main.css?v={{ $cssVer }}">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
