@@ -1051,6 +1051,12 @@ footer {
   gap: 1.25rem;
 }
 
+.album-grid + .gallery-grid {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
 .album-card {
   display: block;
   color: var(--text);
