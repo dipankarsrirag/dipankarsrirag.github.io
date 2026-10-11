@@ -1,0 +1,113 @@
+{{ define "main" }}
+{{- $root := site.GetPage "/journal" }}
+{{- $toc := and (ne .Params.toc false) (gt (len (findRE `<li>` .TableOfContents)) 1) }}
+
+<div class="post-layout{{ if $toc }} has-toc{{ end }}">
+<article class="post">
+  <div class="breadcrumb">
+    {{- range .Ancestors.Reverse }}{{ if and (not .IsHome) (hasPrefix .RelPermalink $root.RelPermalink) }}
+    {{- if ne .RelPermalink $root.RelPermalink }}<span class="breadcrumb-sep">›</span>{{ end }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{- end }}{{ end }}
+  </div>
+
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="post-dek">{{ . }}</p>{{ end }}
+    <p class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ .ReadingTime }} min read</span>
+      {{- if and .Lastmod (gt (.Lastmod.Sub .Date).Hours 24) }}
+      <span aria-hidden="true">·</span>
+      <span>updated {{ .Lastmod.Format "2 Jan 2006" }}</span>
+      {{- end }}
+    </p>
+  </header>
+
+  {{ if $toc }}
+  <details class="post-toc-inline">
+    <summary>On this page</summary>
+    {{ .TableOfContents }}
+  </details>
+  {{ end }}
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+
+  {{- /* Older / newer post in the same folder */}}
+  {{- $siblings := .CurrentSection.RegularPages.ByDate }}
+  {{- $i := 0 }}{{ range $k, $p := $siblings }}{{ if eq $p.RelPermalink $.RelPermalink }}{{ $i = $k }}{{ end }}{{ end }}
+  {{- $older := false }}{{ if gt $i 0 }}{{ $older = index $siblings (sub $i 1) }}{{ end }}
+  {{- $newer := false }}{{ if lt (add $i 1) (len $siblings) }}{{ $newer = index $siblings (add $i 1) }}{{ end }}
+  {{ if or $older $newer }}
+  <div class="post-nav" role="navigation" aria-label="More from this folder">
+    {{- with $older }}<a class="post-nav-prev" href="{{ .RelPermalink }}"><span>Previous</span>{{ .Title }}</a>{{ end }}
+    {{- with $newer }}<a class="post-nav-next" href="{{ .RelPermalink }}"><span>Next</span>{{ .Title }}</a>{{ end }}
+  </div>
+  {{ end }}
+</article>
+
+{{ if $toc }}
+<aside class="post-toc" aria-label="On this page">
+  <p class="post-toc-title">On this page</p>
+  {{ .TableOfContents }}
+</aside>
+{{ end }}
+</div>
+
+{{ if $toc }}
+<script>
+(function () {
+  var toc = document.querySelector('.post-toc');
+  if (!toc) return;
+  var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+  var heads = links.map(function (a) { return document.getElementById(decodeURIComponent(a.hash.slice(1))); }).filter(Boolean);
+  if (!heads.length) return;
+
+  function setActive(id) {
+    links.forEach(function (a) {
+      var on = decodeURIComponent(a.hash.slice(1)) === id;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    // Also mark the parent section of an active subsection
+    toc.querySelectorAll('li').forEach(function (li) { li.classList.remove('active-parent'); });
+    var cur = toc.querySelector('a.active');
+    if (cur) {
+      var li = cur.closest('li'), parent = li && li.parentElement.closest('li');
+      if (parent) parent.classList.add('active-parent');
+    }
+  }
+
+  function onScroll() {
+    var line = window.innerHeight * 0.25, current = heads[0].id;
+    for (var i = 0; i < heads.length; i++) {
+      if (heads[i].getBoundingClientRect().top - line <= 0) current = heads[i].id; else break;
+    }
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 2) current = heads[heads.length - 1].id;
+    setActive(current);
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(function () { onScroll(); ticking = false; }); }
+  }, { passive: true });
+
+  links.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var el = document.getElementById(decodeURIComponent(a.hash.slice(1)));
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', a.hash);
+      setActive(el.id);
+    });
+  });
+
+  onScroll();
+})();
+</script>
+{{ end }}
+{{ end }}

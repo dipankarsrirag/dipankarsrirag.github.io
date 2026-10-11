@@ -1,0 +1,15 @@
+{{- /* Tables scroll sideways on small screens. Add {.compact} or {.striped} under a table to style it. */ -}}
+<div class="table-wrap">
+<table{{ with .Attributes.class }} class="{{ . }}"{{ end }}>
+  <thead>
+    {{- range .THead }}
+    <tr>{{ range . }}<th{{ with .Alignment }} style="text-align:{{ . }}"{{ end }}>{{ .Text }}</th>{{ end }}</tr>
+    {{- end }}
+  </thead>
+  <tbody>
+    {{- range .TBody }}
+    <tr>{{ range . }}<td{{ with .Alignment }} style="text-align:{{ . }}"{{ end }}>{{ .Text }}</td>{{ end }}</tr>
+    {{- end }}
+  </tbody>
+</table>
+</div>

@@ -24,21 +24,29 @@ disableKinds: [taxonomy, term]
 
 menu:
   main:
-    - name: "👋 me"
+    # params.icon: a name from themes/dipankar/layouts/partials/nav-icon.html
+    # params.iconOnly: show just the icon (the name is still read out by screen readers)
+    - name: me
       url: /
       weight: 1
-    - name: Research
+      params: { icon: hand }
+    - name: research
       url: /publications/
       weight: 2
-    - name: Teaching
+    - name: teaching
       url: /courses/
       weight: 3
-    - name: Hobbies
-      url: /hobbies/
-      weight: 4
-    - name: CV
+    - name: resume
       url: /cv.pdf
+      weight: 4
+    - name: journal
+      url: /journal/
+      weight: 5
+      params: { icon: notebook-pen, iconOnly: true }
+    - name: photography
+      url: /photography/
       weight: 6
+      params: { icon: images, iconOnly: true }
 
 params:
   description: "Ph.D. candidate at UNSW Sydney working on NLP for linguistically diverse nurse-patient communication and clinical decision support in the emergency department, with a background in dialect robustness."
@@ -75,10 +83,19 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+    parser:
+      attribute:
+        block: true   # lets you write {.class} under a paragraph or table
+    extensions:
+      passthrough:    # math: $inline$ or \( \), and $$display$$ or \[ \]
+        enable: true
+        delimiters:
+          inline: [["\\(", "\\)"], ["$", "$"]]
+          block: [["\\[", "\\]"], ["$$", "$$"]]
   highlight:
     guessSyntax: true
     style: github
   tableOfContents:
-    endLevel: 2
+    endLevel: 3
     ordered: false
     startLevel: 2

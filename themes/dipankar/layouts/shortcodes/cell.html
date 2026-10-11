@@ -1,0 +1,2 @@
+{{- /* Colors a table cell: | {{< cell green >}}Yes{{< /cell >}} |  ·  green, red, amber, blue, purple, gray */ -}}
+<span class="cell cell-{{ .Get 0 | default "purple" }}">{{ .Inner | .Page.RenderString }}</span>

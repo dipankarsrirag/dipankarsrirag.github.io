@@ -12,7 +12,7 @@
 {{- with $p.knowsAbout }}
 <meta name="keywords" content="{{ delimit . ", " }}">
 {{- end }}
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="robots" content="{{ if .Params.noindex }}noindex, nofollow{{ else }}index, follow, max-image-preview:large, max-snippet:-1{{ end }}">
 <link rel="canonical" href="{{ .Permalink }}">
 <link rel="alternate" type="text/plain" title="llms.txt" href="{{ "llms.txt" | absURL }}">
 {{- with .OutputFormats.Get "rss" }}
@@ -20,7 +20,7 @@
 {{- end }}
 
 {{/* Open Graph / social previews */}}
-<meta property="og:type" content="{{ if .IsHome }}profile{{ else }}website{{ end }}">
+<meta property="og:type" content="{{ if .IsHome }}profile{{ else if and (eq .Section "journal") .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:site_name" content="{{ $site.Title }}">
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
@@ -77,10 +77,19 @@
   {{- end }}
   {{- $graph = $graph | append (dict "@type" "ItemList" "name" (printf "Publications by %s" $p.author) "itemListElement" $items) }}
 {{- end }}{{ end }}
+{{- if and (eq .Section "journal") .IsPage }}
+  {{- $post := dict "@type" "BlogPosting" "headline" .Title "url" .Permalink "datePublished" (.Date.Format "2006-01-02") "dateModified" (.Lastmod.Format "2006-01-02") "author" (dict "@id" (printf "%s#person" $site.BaseURL)) "inLanguage" "en" "wordCount" .WordCount }}
+  {{- with .Description }}{{ $post = merge $post (dict "description" .) }}{{ end }}
+  {{- with .Params.tags }}{{ $post = merge $post (dict "keywords" (delimit . ", ")) }}{{ end }}
+  {{- $graph = $graph | append $post }}
+{{- end }}
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
 
 <link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 {{- $cssVer := readFile "themes/dipankar/static/css/main.css" | md5 | truncate 8 "" }}
 <link rel="stylesheet" href="/css/main.css?v={{ $cssVer }}">
+{{- if and (eq .Section "journal") .IsPage }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
+{{- end }}
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">

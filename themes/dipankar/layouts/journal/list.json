@@ -1,0 +1,16 @@
+{{- /* Search index for the journal: every post, with its full text. */ -}}
+{{- $root := site.GetPage "/journal" -}}
+{{- $out := slice -}}
+{{- range $root.RegularPagesRecursive.ByDate -}}
+  {{- $folder := "" -}}
+  {{- with .Parent }}{{ if ne .RelPermalink $root.RelPermalink }}{{ $folder = .Title }}{{ end }}{{ end -}}
+  {{- $out = $out | append (dict
+      "title" .Title
+      "url" .RelPermalink
+      "date" (.Date.Format "2 Jan 2006")
+      "folder" $folder
+      "summary" (.Description | default "")
+      "body" (.Plain | replaceRE `\s+` " " | strings.TrimSpace)
+  ) -}}
+{{- end -}}
+{{- $out | jsonify -}}

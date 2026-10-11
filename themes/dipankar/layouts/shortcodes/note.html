@@ -1,0 +1,6 @@
+{{- /* {{< note >}}…{{< /note >}}  ·  type: note (default), tip, warning, idea  ·  title: optional */ -}}
+{{- $type := .Get "type" | default (.Get 0) | default "note" }}
+<aside class="callout callout-{{ $type }}">
+  {{- with .Get "title" }}<p class="callout-title">{{ . }}</p>{{ end }}
+  {{ .Inner | .Page.RenderString (dict "display" "block") }}
+</aside>

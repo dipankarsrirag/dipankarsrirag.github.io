@@ -1,0 +1,20 @@
+{{- /*
+  {{< figure src="photo.jpg" caption="Text" align="right" >}}
+  align: full (default) · wide (wider than the text) · left / right (text wraps around it)
+  width: optional, for left/right, e.g. "40%"
+*/ -}}
+{{- $src := .Get "src" }}
+{{- $align := .Get "align" | default "full" }}
+{{- $alt := .Get "alt" | default (.Get "caption" | plainify) }}
+{{- $img := .Page.Resources.Get $src }}
+<figure class="figure figure-{{ $align }}"{{ with .Get "width" }} style="--fig-w: {{ . }}"{{ end }}>
+  {{- with $img }}
+    {{- $max := cond (eq $align "wide") 2000 1400 }}
+    {{- $r := . }}
+    {{- if ne .MediaType.SubType "svg" }}{{ if gt .Width $max }}{{ $r = .Resize (printf "%dx webp q82" $max) }}{{ else }}{{ $r = .Process "webp q82" }}{{ end }}{{ end }}
+    <img src="{{ $r.RelPermalink }}"{{ with $r.Width }} width="{{ . }}" height="{{ $r.Height }}"{{ end }} alt="{{ $alt }}" loading="lazy" decoding="async">
+  {{- else }}
+    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  {{- end }}
+  {{- with .Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

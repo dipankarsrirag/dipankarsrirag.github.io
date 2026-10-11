@@ -1,0 +1,14 @@
+{{- /* ![alt](photo.jpg "Caption") → full-width figure. Images next to the post are resized automatically. */ -}}
+{{- $src := .Destination }}
+{{- $img := "" }}
+{{- if not (urls.Parse $src).Scheme }}{{ $img = .Page.Resources.Get $src }}{{ end }}
+<figure class="figure figure-full">
+  {{- with $img }}
+    {{- $r := . }}
+    {{- if and (ne .MediaType.SubType "svg") (gt .Width 1400) }}{{ $r = .Resize "1400x webp q82" }}{{ else if ne .MediaType.SubType "svg" }}{{ $r = .Process "webp q82" }}{{ end }}
+    <img src="{{ $r.RelPermalink }}"{{ with $r.Width }} width="{{ . }}" height="{{ $r.Height }}"{{ end }} alt="{{ $.PlainText }}" loading="lazy" decoding="async">
+  {{- else }}
+    <img src="{{ $src }}" alt="{{ .PlainText }}" loading="lazy" decoding="async">
+  {{- end }}
+  {{- with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
