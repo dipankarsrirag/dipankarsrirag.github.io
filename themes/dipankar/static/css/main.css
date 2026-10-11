@@ -1294,6 +1294,11 @@ a.link:hover {
   max-width: 520px;
 }
 
+.breadcrumb + .visually-hidden + .journal-search,
+.breadcrumb + .visually-hidden + .journal-intro {
+  margin-top: 1.5rem;
+}
+
 .journal-search-icon {
   position: absolute;
   left: 0.85rem;
@@ -2032,4 +2037,158 @@ td:has(> .cell) {
 .post-nav-next {
   grid-column: 2;
   text-align: right;
+}
+
+/* ─── Journal: citations, references, footnotes ─ */
+
+.cite {
+  color: inherit;
+}
+
+.prose .cite a,
+.cite a {
+  position: relative;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.cite a:hover {
+  text-decoration: underline;
+}
+
+/* Hover card with the full reference */
+.cite a::after {
+  content: attr(data-ref);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translate(-50%, 4px);
+  width: max-content;
+  max-width: min(340px, 80vw);
+  white-space: normal;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 30;
+}
+
+.cite a:hover::after,
+.cite a:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.cite-missing {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+:target {
+  scroll-margin-top: 5rem;
+}
+
+.references li:target,
+.cite a:target {
+  background: rgba(85, 72, 130, 0.12);
+  border-radius: 4px;
+}
+
+.references {
+  clear: both;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.references h2 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.references ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.references li {
+  margin-bottom: 0.6rem;
+  padding: 0.1rem 0.25rem 0.1rem 1.5em;
+  text-indent: -1.5em;
+}
+
+.references a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: rgba(85, 72, 130, 0.35);
+  text-underline-offset: 3px;
+}
+
+.references a:hover {
+  color: var(--accent);
+}
+
+.references li::marker {
+  color: var(--text-muted);
+}
+
+.ref-title {
+  color: var(--text);
+}
+
+.references em {
+  color: var(--text-muted);
+}
+
+/* Footnotes ([^1] in the text) */
+.prose sup a,
+.prose a.footnote-ref {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.prose .footnotes {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.prose .footnotes hr {
+  display: none;
+}
+
+.prose .footnotes ol {
+  padding-left: 1.4em;
+}
+
+.prose .footnote-backref {
+  text-decoration: none;
+  margin-left: 0.2em;
+}
+
+/* Justified text: `justify: true` at the top of a post */
+.prose-justify p,
+.prose-justify li,
+.prose-justify .callout {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }

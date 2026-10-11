@@ -1,5 +1,5 @@
-{{- /* Search index for the journal: every post, with its full text. */ -}}
-{{- $root := site.GetPage "/journal" -}}
+{{- /* Search index for log-it: every post, with its full text. */ -}}
+{{- $root := site.GetPage "/log-it" -}}
 {{- $out := slice -}}
 {{- range $root.RegularPagesRecursive.ByDate -}}
   {{- $folder := "" -}}
@@ -9,8 +9,8 @@
       "url" .RelPermalink
       "date" (.Date.Format "2 Jan 2006")
       "folder" $folder
-      "summary" (.Description | default "")
-      "body" (.Plain | replaceRE `\s+` " " | strings.TrimSpace)
+      "summary" (.Description | default "" | markdownify | plainify)
+      "body" (partial "log-it/natbib.html" (dict "html" .Plain "page" . "plain" true) | replaceRE `\s+` " " | strings.TrimSpace)
   ) -}}
 {{- end -}}
 {{- $out | jsonify -}}

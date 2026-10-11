@@ -1,0 +1,15 @@
+{{- /* Clean a BibTeX value: accents, special letters, braces, escapes, dashes. */ -}}
+{{- $v := . -}}
+{{- range slice (slice "'" 0x301) (slice "`" 0x300) (slice "\\^" 0x302) (slice "\"" 0x308) (slice "~" 0x303) (slice "=" 0x304) (slice "\\." 0x307) (slice "H" 0x30B) (slice "v" 0x30C) (slice "u" 0x306) (slice "c" 0x327) -}}
+  {{- $v = replaceRE (printf `\\%s\s*\{?\\?([A-Za-z])\}?` (index . 0)) (printf "${1}%c" (index . 1)) $v -}}
+{{- end -}}
+{{- range slice (slice "L" "Ł") (slice "l" "ł") (slice "O" "Ø") (slice "o" "ø") (slice "ss" "ß") (slice "AA" "Å") (slice "aa" "å") (slice "AE" "Æ") (slice "ae" "æ") (slice "OE" "Œ") (slice "oe" "œ") (slice "i" "ı") -}}
+  {{- $v = replaceRE (printf `\\%s(\b|\{\}|\s)` (index . 0)) (index . 1) $v -}}
+{{- end -}}
+{{- $v = replaceRE `\\([&%_$#{}])` "$1" $v -}}
+{{- $v = replaceRE `\\[a-zA-Z]+\s*` "" $v -}}
+{{- $v = replaceRE `[{}]` "" $v -}}
+{{- $v = replace $v "---" "—" -}}
+{{- $v = replace $v "--" "–" -}}
+{{- $v = replace $v "~" " " -}}
+{{- return (replaceRE `\s+` " " $v | strings.TrimSpace) -}}

@@ -1,0 +1,21 @@
+{{- /*
+  Orders posts or folders by the number at the start of their folder name:
+  01-intro, 02-backprop, 10-transformers … (numbers compare as numbers, so 2 comes before 10).
+  Anything without a number comes after: posts oldest first, folders by name.
+*/ -}}
+{{- $numbered := slice -}}{{- $rest := slice -}}
+{{- range . -}}
+  {{- $p := . -}}
+  {{- $name := "" -}}{{- with .File }}{{ $name = .ContentBaseName }}{{ end -}}
+  {{- with findRESubmatch `^(\d+)` $name 1 -}}
+    {{- $digits := strings.TrimLeft "0" (index (index . 0) 1) | default "0" -}}
+    {{- $numbered = $numbered | append (dict "n" (int $digits) "name" $name "page" $p) -}}
+  {{- else -}}
+    {{- $rest = $rest | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $out := slice -}}
+{{- range sort (sort $numbered "name") "n" }}{{ $out = $out | append .page }}{{ end -}}
+{{- $by := "Date" }}{{ with $rest }}{{ if eq (index . 0).Kind "section" }}{{ $by = "Title" }}{{ end }}{{ end -}}
+{{- range sort $rest $by }}{{ $out = $out | append . }}{{ end -}}
+{{- return $out -}}

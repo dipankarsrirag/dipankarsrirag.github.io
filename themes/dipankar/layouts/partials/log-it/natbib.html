@@ -1,0 +1,66 @@
+{{- /*
+  Replaces natbib commands in a post's HTML with author–year citations.
+    \citet{k}  \cite{k}   → Vaswani et al. (2017)
+    \citep{k}             → (Vaswani et al., 2017)
+    \citealt{k}           → Vaswani et al. 2017
+    \citealp{k}           → Vaswani et al., 2017
+    \citeauthor{k}        → Vaswani et al.
+    \citeyear{k}          → 2017
+    \citeyearpar{k}       → (2017)
+    \Citet, \Citep        → same, capitalised
+    \nocite{k}            → nothing (adds k to the references)
+  Several keys: \citep{a,b} → (A, 2017; B, 2019). Notes: \citep[see][p.~3]{k} → (see A, 2017, p. 3).
+  Input: dict "html" "page" ["plain" true for text without links]
+*/ -}}
+{{- $html := .html -}}
+{{- $plain := .plain | default false -}}
+{{- $bib := partialCached "log-it/bib.html" .page .page.RelPermalink -}}
+{{- $refs := $bib.refs -}}
+
+{{- /* Leave code untouched: hide backslashes inside <code> */ -}}
+{{- if not $plain -}}
+  {{- range findRE `(?s)<code[^>]*>.*?</code>` $html -}}{{ $html = replace $html . (replace . "\\" "&#92;") }}{{- end -}}
+{{- end -}}
+
+{{- range findRESubmatch `\\([Cc]ite(?:t|p|alt|alp|author|year|yearpar)?|nocite)(\*)?(?:\[([^\]]*)\])?(?:\[([^\]]*)\])?\{([^}]*)\}` $html -1 -}}
+  {{- $all := index . 0 -}}{{- $cmd := index . 1 -}}
+  {{- $o1 := index . 3 -}}{{- $o2 := index . 4 -}}
+  {{- /* one optional arg = postnote; two = prenote, postnote */ -}}
+  {{- $pre := "" -}}{{- $post := "" -}}
+  {{- if ne (index . 0) (replaceRE `\]\[` "" (index . 0)) }}{{ $pre = $o1 }}{{ $post = $o2 }}{{ else }}{{ $post = $o1 }}{{ end -}}
+  {{- $pre = replace $pre "~" " " | strings.TrimSpace -}}{{- $post = replace $post "~" " " | strings.TrimSpace -}}
+  {{- $kind := lower (strings.TrimPrefix "cite" (lower $cmd)) -}}
+  {{- if eq $kind "" }}{{ $kind = "t" }}{{ end -}}
+  {{- $cap := hasPrefix $cmd "C" -}}
+  {{- $parts := slice -}}
+  {{- if ne $cmd "nocite" -}}
+    {{- range $i, $k := split (index . 5) "," -}}
+      {{- $k = trim $k " " -}}
+      {{- with index $refs $k -}}
+        {{- $name := .label -}}{{- if and $cap (eq $i 0) }}{{ $name = printf "%s%s" (upper (substr $name 0 1)) (substr $name 1) }}{{ end -}}
+        {{- $txt := "" -}}
+        {{- if eq $kind "t" }}{{ $txt = printf "%s (%s)" $name .year -}}
+        {{- else if eq $kind "p" }}{{ $txt = printf "%s, %s" $name .year -}}
+        {{- else if eq $kind "alt" }}{{ $txt = printf "%s %s" $name .year -}}
+        {{- else if eq $kind "alp" }}{{ $txt = printf "%s, %s" $name .year -}}
+        {{- else if eq $kind "author" }}{{ $txt = $name -}}
+        {{- else }}{{ $txt = .year }}{{ end -}}
+        {{- if $plain -}}{{ $parts = $parts | append $txt -}}
+        {{- else -}}{{ $parts = $parts | append (printf "<a href=\"#ref-%s\" data-ref=\"%s\">%s</a>" (anchorize $k) (htmlEscape .plain) (htmlEscape $txt)) }}{{- end -}}
+      {{- else -}}
+        {{- if not $plain }}{{ warnf "Unknown citation key %q in %s" $k $.page.Path }}{{ end -}}
+        {{- $parts = $parts | append (cond $plain "?" (printf "<span class=\"cite-missing\" title=\"No reference with key “%s”\">%s?</span>" (htmlEscape $k) (htmlEscape $k))) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $sep := cond (in (slice "author" "year" "yearpar") $kind) ", " "; " -}}
+  {{- $body := delimit $parts $sep -}}
+  {{- with $pre }}{{ $body = printf "%s %s" . $body }}{{ end -}}
+  {{- with $post }}{{ $body = printf "%s, %s" $body . }}{{ end -}}
+  {{- /* \citet with a note puts it inside the year's brackets: Vaswani et al. (2017, p. 3) */ -}}
+  {{- if and (eq $kind "t") $post (eq (len $parts) 1) }}{{ $body = replaceRE `\)(</a>)?, (.*)$` ", $2)$1" $body }}{{ end -}}
+  {{- if in (slice "p" "yearpar") $kind }}{{ $body = printf "(%s)" $body }}{{ end -}}
+  {{- $out := cond (eq $cmd "nocite") "" (cond $plain $body (printf "<span class=\"cite\">%s</span>" $body)) -}}
+  {{- $html = replace $html $all $out -}}
+{{- end -}}
+{{- return $html -}}

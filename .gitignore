@@ -6,3 +6,6 @@ resources/
 # macOS / local tooling
 .DS_Store
 .claude/
+
+# log-it example posts: for local preview only, never published
+content/log-it/examples/

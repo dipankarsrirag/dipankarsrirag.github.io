@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $root := site.GetPage "/journal" }}
+{{- $root := site.GetPage "/log-it" }}
 {{- $toc := and (ne .Params.toc false) (gt (len (findRE `<li>` .TableOfContents)) 1) }}
 
 <div class="post-layout{{ if $toc }} has-toc{{ end }}">
@@ -13,7 +13,7 @@
 
   <header class="post-header">
     <h1 class="post-title">{{ .Title }}</h1>
-    {{ with .Description }}<p class="post-dek">{{ . }}</p>{{ end }}
+    {{ with .Description }}<p class="post-dek">{{ . | markdownify }}</p>{{ end }}
     <p class="post-meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
       <span aria-hidden="true">·</span>
@@ -32,12 +32,24 @@
   </details>
   {{ end }}
 
-  <div class="prose">
-    {{ .Content }}
+  <div class="prose{{ if .Params.justify }} prose-justify{{ end }}">
+    {{ partial "log-it/natbib.html" (dict "html" .Content "page" .) | safeHTML }}
   </div>
 
-  {{- /* Older / newer post in the same folder */}}
-  {{- $siblings := .CurrentSection.RegularPages.ByDate }}
+  {{- /* References: everything cited (or \nocite'd), alphabetical, author–year */}}
+  {{- with (partialCached "log-it/bib.html" . .RelPermalink).cited }}
+  <section class="references" id="references" aria-labelledby="references-title">
+    <h2 id="references-title">References</h2>
+    <ul>
+      {{- range . }}
+      <li id="ref-{{ .key | anchorize }}">{{ .html }}</li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{- /* Previous / next post in the same folder (same order as the folder list) */}}
+  {{- $siblings := partial "log-it/order.html" .CurrentSection.RegularPages }}
   {{- $i := 0 }}{{ range $k, $p := $siblings }}{{ if eq $p.RelPermalink $.RelPermalink }}{{ $i = $k }}{{ end }}{{ end }}
   {{- $older := false }}{{ if gt $i 0 }}{{ $older = index $siblings (sub $i 1) }}{{ end }}
   {{- $newer := false }}{{ if lt (add $i 1) (len $siblings) }}{{ $newer = index $siblings (add $i 1) }}{{ end }}
@@ -56,6 +68,7 @@
 </aside>
 {{ end }}
 </div>
+
 
 {{ if $toc }}
 <script>

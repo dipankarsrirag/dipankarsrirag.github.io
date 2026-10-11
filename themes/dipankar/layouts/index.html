@@ -89,4 +89,28 @@
 </section>
 {{ end }}
 
+{{/* ── Selected blogs: log-it posts with `selected: true` ── */}}
+{{- $journal := site.GetPage "/log-it" }}
+{{- $blogs := where $journal.RegularPagesRecursive "Params.selected" true }}
+{{ with $blogs.ByDate.Reverse }}
+<section class="home-section">
+  <p class="section-label">Blogs</p>
+  <ol class="journal-list">
+    {{ range . }}
+    <li class="journal-item">
+      <a href="{{ .RelPermalink }}" class="journal-link">
+        <span class="journal-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+          {{- with .Parent }}{{ if ne .RelPermalink $journal.RelPermalink }}<span class="journal-cat">{{ .Title }}</span>{{ end }}{{ end }}
+        </span>
+        <span class="journal-title">{{ .Title }}</span>
+        {{ with .Description }}<span class="journal-summary">{{ . | markdownify | plainify }}</span>{{ end }}
+      </a>
+    </li>
+    {{ end }}
+  </ol>
+  <a href="{{ $journal.RelPermalink }}" class="see-all">All posts →</a>
+</section>
+{{ end }}
+
 {{ end }}

@@ -1,0 +1,99 @@
+{{- /*
+  References for a log-it post, natbib author–year style.
+  Sources: every .bib file in the post's folder, plus `references:` in the front matter.
+  Returns dict:
+    refs  → key → dict(label, year, full, html, plain, url)
+    cited → keys cited in the post (\cite… / \nocite), sorted for the reference list
+*/ -}}
+{{- $page := . -}}
+{{- $entries := slice -}}
+
+{{- range $page.Resources.Match "*.bib" -}}
+  {{- range split (printf "\n%s" .Content) "\n@" -}}
+    {{- $e := trim . " \n\r\t" -}}
+    {{- with findRESubmatch `^(\w+)\s*\{\s*([^,\s]+)\s*,` $e 1 -}}
+      {{- $f := dict "key" (index (index . 0) 2) "type" (lower (index (index . 0) 1)) -}}
+      {{- range findRESubmatch `(\w+)\s*=\s*(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}|"[^"]*"|[\w.:/-]+)` $e -1 -}}
+        {{- $v := replaceRE `^[{"]|[}"]$` "" (index . 2) -}}
+        {{- $f = merge $f (dict (lower (index . 1)) (partial "log-it/tex.html" $v)) -}}
+      {{- end -}}
+      {{- $entries = $entries | append $f -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- range $page.Params.references -}}
+  {{- $f := dict -}}
+  {{- range $k, $v := . }}{{ $f = merge $f (dict (lower $k) (partial "log-it/tex.html" (string $v))) }}{{ end -}}
+  {{- $entries = $entries | append $f -}}
+{{- end -}}
+
+{{- /* Which keys does the post cite? */ -}}
+{{- $cited := slice -}}{{- $all := false -}}
+{{- range findRESubmatch `\\(?:[Cc]ite[a-z]*|nocite)\*?(?:\[[^\]]*\]){0,2}\{([^}]*)\}` $page.RawContent -1 -}}
+  {{- range split (index . 1) "," -}}
+    {{- $k := trim . " " -}}
+    {{- if eq $k "*" }}{{ $all = true }}{{ else if and $k (not (in $cited $k)) }}{{ $cited = $cited | append $k }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Build each entry */ -}}
+{{- $refs := dict -}}
+{{- range $entries -}}
+  {{- $key := .key -}}
+  {{- $last := slice -}}{{- $full := slice -}}{{- $etal := false -}}
+  {{- range split (replaceRE `\s+and\s+` "|" (.author | default .editor | default "")) "|" -}}
+    {{- $a := trim . " " -}}
+    {{- if eq (lower $a) "others" -}}{{ $etal = true -}}
+    {{- else if strings.Contains $a "," -}}
+      {{- $p := split $a "," -}}
+      {{- $l := trim (index $p 0) " " -}}{{- $fn := trim (index $p (sub (len $p) 1)) " " -}}
+      {{- $last = $last | append $l }}{{ $full = $full | append (trim (printf "%s %s" $fn $l) " ") -}}
+    {{- else if $a -}}
+      {{- $last = $last | append (index (last 1 (split $a " ")) 0) }}{{ $full = $full | append $a -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $n := len $last -}}
+  {{- $label := $key -}}
+  {{- if and (eq $n 1) (not $etal) }}{{ $label = index $last 0 }}{{ else if and (eq $n 2) (not $etal) }}{{ $label = printf "%s and %s" (index $last 0) (index $last 1) }}{{ else if gt $n 0 }}{{ $label = printf "%s et al." (index $last 0) }}{{ end -}}
+  {{- $names := "" -}}
+  {{- if eq $n 1 }}{{ $names = index $full 0 }}{{ else if eq $n 2 }}{{ $names = printf "%s and %s" (index $full 0) (index $full 1) }}{{ else if gt $n 2 }}{{ $names = printf "%s, and %s" (delimit (first (sub $n 1) $full) ", ") (index $full (sub $n 1)) }}{{ end -}}
+  {{- if $etal }}{{ $names = printf "%s, et al." $names }}{{ end -}}
+  {{- $url := .url | default "" -}}
+  {{- if and (not $url) .doi }}{{ $url = printf "https://doi.org/%s" .doi }}{{ end -}}
+  {{- if and (not $url) .eprint (eq (lower (.archiveprefix | default "arxiv")) "arxiv") }}{{ $url = printf "https://arxiv.org/abs/%s" .eprint }}{{ end -}}
+  {{- $refs = merge $refs (dict $key (dict "key" $key "label" $label "names" $names "first" (lower (index ($last | append $key) 0)) "year" (.year | default "n.d.") "title" (strings.TrimSuffix "." (.title | default "")) "url" $url "entry" .)) -}}
+{{- end -}}
+
+{{- /* Cited entries; same label + year gets a, b, … (ordered by title) */ -}}
+{{- $use := slice -}}
+{{- range $k, $r := $refs }}{{ if or $all (in $cited $k) }}{{ $use = $use | append $r }}{{ end }}{{ end -}}
+{{- $suffix := dict -}}
+{{- range $use -}}
+  {{- $me := . -}}
+  {{- $same := slice -}}{{- range $use }}{{ if and (eq .label $me.label) (eq .year $me.year) }}{{ $same = $same | append . }}{{ end }}{{ end -}}
+  {{- if gt (len $same) 1 -}}
+    {{- range $i, $s := sort $same "title" }}{{ if eq $s.key $me.key }}{{ $suffix = merge $suffix (dict $me.key (substr "abcdefghijklmnopqrstuvwxyz" $i 1)) }}{{ end }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $final := dict -}}{{- $sorted := slice -}}
+{{- range $use -}}
+  {{- $y := printf "%s%s" .year (index $suffix .key | default "") -}}
+  {{- $e := .entry -}}
+  {{- $where := "" -}}
+  {{- with $e.booktitle }}{{ $where = printf "In <em>%s</em>" (htmlEscape .) }}{{ with $e.pages }}{{ $where = printf "%s, pages %s" $where (htmlEscape .) }}{{ end -}}
+  {{- else with $e.journal }}{{ $where = printf "<em>%s</em>" (htmlEscape .) }}{{ with $e.volume }}{{ $where = printf "%s, %s" $where (htmlEscape .) }}{{ end }}{{ with $e.number }}{{ $where = printf "%s(%s)" $where (htmlEscape .) }}{{ end }}{{ with $e.pages }}{{ $where = printf "%s:%s" $where (htmlEscape .) }}{{ end -}}
+  {{- else with $e.venue }}{{ $where = printf "In <em>%s</em>" (htmlEscape .) -}}
+  {{- else with $e.eprint }}{{ $where = printf "<em>arXiv preprint arXiv:%s</em>" (htmlEscape .) -}}
+  {{- else with $e.howpublished }}{{ $where = htmlEscape . }}{{ end -}}
+  {{- with $e.publisher }}{{ $where = cond (eq $where "") (htmlEscape .) (printf "%s. %s" $where (htmlEscape .)) }}{{ end -}}
+  {{- $title := htmlEscape .title -}}
+  {{- with .url }}{{ $title = printf "<a href=\"%s\" target=\"_blank\" rel=\"noopener\">%s</a>" . $title }}{{ end -}}
+  {{- $html := printf "%s. %s. %s." (htmlEscape (.names | default .label)) $y $title -}}
+  {{- with $where }}{{ $html = printf "%s %s." $html . }}{{ end -}}
+  {{- $plain := printf "%s. %s. %s." (.names | default .label) $y .title -}}
+  {{- $r := dict "key" .key "label" .label "year" $y "html" ($html | safeHTML) "plain" $plain "sort" (printf "%s|%s|%s" .first $y (lower .title)) -}}
+  {{- $final = merge $final (dict .key $r) -}}
+  {{- $sorted = $sorted | append $r -}}
+{{- end -}}
+{{- return dict "refs" $final "cited" (sort $sorted "sort") "keys" $cited -}}

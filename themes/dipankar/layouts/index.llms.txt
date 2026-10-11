@@ -30,7 +30,7 @@
 - {{ .Date.Format "Jan 2006" }}: {{ .Plain | strings.TrimSpace }}
 {{- end }}
 
-{{ with (site.GetPage "/journal").RegularPagesRecursive.ByDate }}## Journal
+{{ with (site.GetPage "/log-it").RegularPagesRecursive.ByDate }}## log-it (blog)
 {{ range . }}
 - [{{ .Title }}]({{ .Permalink }}) ({{ .Date.Format "2 Jan 2006" }}){{ with .Description }}: {{ . }}{{ end }}
 {{- end }}
@@ -39,5 +39,5 @@
 - [Research]({{ "publications/" | absURL }}): full publication list with BibTeX
 - [Teaching]({{ "courses/" | absURL }})
 - [News]({{ "news/" | absURL }})
-- [Journal]({{ "journal/" | absURL }}): posts on what I learn, my projects and life
+- [log-it]({{ "log-it/" | absURL }}): my blog, on what I learn, my projects and life
 - [Photography]({{ "photography/" | absURL }})

@@ -22,6 +22,14 @@ pagination:
 
 disableKinds: [taxonomy, term]
 
+# log-it folders and posts get their address from the title (or `slug:`),
+# so the 01-, 02- numbers used for ordering never appear in links.
+permalinks:
+  page:
+    log-it: /log-it/:slug/
+  section:
+    log-it: /log-it/:slug/
+
 menu:
   main:
     # params.icon: a name from themes/dipankar/layouts/partials/nav-icon.html
@@ -39,8 +47,8 @@ menu:
     - name: resume
       url: /cv.pdf
       weight: 4
-    - name: journal
-      url: /journal/
+    - name: log-it
+      url: /log-it/
       weight: 5
       params: { icon: notebook-pen, iconOnly: true }
     - name: photography
