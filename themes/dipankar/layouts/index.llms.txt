@@ -20,9 +20,9 @@
 
 ## Teaching
 {{ with .Site.GetPage "/courses" }}{{ range .Params.courses }}
-{{- range .entries }}
-- {{ .code }} {{ .name }} ({{ .institution }}, {{ delimit .terms ", " }}): {{ .role }}{{ with .feedback }}, student feedback {{ . }}{{ end }}
-{{- end }}
+- {{ .code }} {{ .name }} ({{ .institution }}), {{ .role }}: {{ range $i, $t := .terms }}{{ if $i }}; {{ end }}{{ $t.term }}{{ with $t.feedback }} (student feedback {{ . }}){{ end }}{{ end }}
+{{- end }}{{ range .Params.tutorials }}
+- Tutorial: {{ .title }}, {{ .venue }} ({{ (time .date).Format "2 Jan 2006" }})
 {{- end }}{{ end }}
 
 ## Recent news

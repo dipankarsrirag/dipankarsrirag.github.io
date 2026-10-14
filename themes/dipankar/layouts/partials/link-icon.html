@@ -1,0 +1,11 @@
+{{- /* Small line icons for resource links (slides, materials, …). Lucide icons, ISC licence. */ -}}
+{{- $paths := dict
+  "slides" `<path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>`
+  "materials" `<path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/>`
+  "code" `<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>`
+  "recording" `<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>`
+  "website" `<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>`
+  "link" `<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>`
+-}}
+<svg class="link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">{{ index $paths . | default (index $paths "link") | safeHTML }}</svg>
+{{- /**/ -}}

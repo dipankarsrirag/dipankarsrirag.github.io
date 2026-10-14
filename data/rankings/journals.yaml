@@ -1,0 +1,9 @@
+# Journal quartiles from Scimago (https://www.scimagojr.com), used to order the Research page.
+# Scimago blocks automated downloads, so add journals here by hand when you publish in one.
+# Key: the journal name or abbreviation exactly as you write it in a paper's `venue:`
+# (without the year), in lower case. Quartile: the best quartile Scimago lists for it.
+#
+# Example:
+#   "tacl": { title: "Transactions of the Association for Computational Linguistics", quartile: Q1 }
+#   "computational linguistics": { title: "Computational Linguistics", quartile: Q1 }
+journals: {}

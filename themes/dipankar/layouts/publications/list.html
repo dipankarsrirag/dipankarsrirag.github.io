@@ -37,10 +37,8 @@
 
 {{ define "main" }}
 
-<div class="page-header">
-  <h1 class="page-title">{{ .Title }}</h1>
-  {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
-</div>
+{{/* No visible page heading; the title stays for screen readers */}}
+<h1 class="visually-hidden">{{ .Title }}</h1>
 
 {{- $preprints    := where .Pages "Params.preprint" true }}
 {{- $publications := where .Pages "Params.preprint" "ne" true }}
@@ -82,7 +80,8 @@
       <div class="pub-year-group">
         <p class="pub-year-heading">{{ .Key }}</p>
         <div class="pub-list">
-          {{ range .Pages.ByDate.Reverse }}{{ template "pub-entry" . }}{{ end }}
+          {{- /* Within a year: journals, then conferences by CORE rank, then workshops / unranked */}}
+          {{ range partial "publications/order.html" .Pages }}{{ template "pub-entry" . }}{{ end }}
         </div>
       </div>
       {{ end }}

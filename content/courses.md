@@ -1,66 +1,55 @@
 ---
 title: "Teaching"
-description: "I am a part of teaching team for courses at UNSW Sydney and UTS."
+description: "Courses I have taught at UNSW Sydney and UTS, and tutorials I have given."
 layout: teaching
 hidemeta: true
+
+tutorials:
+  - venue: AJCAI 2026
+    title: "Emergency Department: A Real-World Edge Case for Clinical NLP"
+    date: 2026-11-27
+    url: "https://ajcai26.org/workshopandtutorial.html"   # the title links here
+    # Put files in static/tutorials/ and give just the file name, paste a full link
+    # (Google Drive, GitHub, YouTube, …), or write `soon` for an "under construction" page.
+    links:
+      slides: soon
+      materials: soon
+      code: soon
+      recording: soon
+
+# Courses are shown in this order. Terms: newest first; feedback is averaged for the course.
 courses:
-  - year: 2026
-    entries:
-      - code: COMP9444
-        name: Neural Networks and Deep Learning
-        role: Tutor
-        terms: ["26T3"]
-        institution: UNSW
-        url: "https://handbook.unsw.edu.au/undergraduate/courses/2026/comp9444?year=2026"
-      - code: COMP9444
-        name: Neural Networks and Deep Learning
-        role: Tutor
-        terms: ["26T2"]
-        feedback: "100%"
-        institution: UNSW
-        url: "https://handbook.unsw.edu.au/undergraduate/courses/2026/comp9444?year=2026"
-      - code: COMP9024
-        name: Data Structures and Algorithms
-        role: Tutor
-        terms: ["26T2"]
-        feedback: "100%"
-        institution: UNSW
-        url: "https://handbook.unsw.edu.au/postgraduate/courses/2026/COMP9024"
-      - code: COMP6713
-        name: Natural Language Processing
-        role: Course Admin
-        terms: ["26T1"]
-        institution: UNSW
-        url: "https://www.handbook.unsw.edu.au/undergraduate/courses/2026/comp6713?year=2026"
-      - code: IEP-48230
-        name: Introduction to Engineering Projects
-        role: Tutor
-        terms: ["26S1"]
-        institution: UTS
-        url: "https://coursehandbook.uts.edu.au/subject/2026/48230"
-  - year: 2025
-    entries:
-      - code: COMP9444
-        name: Neural Networks and Deep Learning
-        role: Tutor
-        terms: ["25T2"]
-        feedback: "100%"
-        institution: UNSW
-        url: "https://handbook.unsw.edu.au/undergraduate/courses/2026/comp9444?year=2026"
-      - code: COMP9024
-        name: Data Structures and Algorithms
-        role: Tutor
-        terms: ["25T3"]
-        feedback: "100%"
-        institution: UNSW
-        url: "https://handbook.unsw.edu.au/postgraduate/courses/2026/COMP9024"
-  - year: 2024
-    entries:
-      - code: COMP9444
-        name: Neural Networks and Deep Learning
-        role: Tutor
-        terms: ["24T2", "24T3"]
-        feedback: "97%"
-        institution: UNSW
-        url: "https://handbook.unsw.edu.au/undergraduate/courses/2026/comp9444?year=2026"
+  - code: COMP6713
+    name: Natural Language Processing
+    institution: UNSW
+    role: Course Admin
+    url: "https://www.handbook.unsw.edu.au/undergraduate/courses/2026/comp6713?year=2026"
+    terms:
+      - { term: 26T1, feedback: "97.1%" }
+  - code: COMP9444
+    name: Neural Networks and Deep Learning
+    institution: UNSW
+    role: Tutor
+    url: "https://handbook.unsw.edu.au/undergraduate/courses/2026/comp9444?year=2026"
+    terms:
+      - { term: 26T3 }
+      - { term: 26T2, feedback: "100%" }
+      - { term: 25T2, feedback: "100%" }
+      - { term: 24T3, feedback: "97%" }
+      - { term: 24T2, feedback: "97%" }
+  - code: COMP9024
+    name: Data Structures and Algorithms
+    institution: UNSW
+    role: Tutor
+    url: "https://handbook.unsw.edu.au/postgraduate/courses/2026/COMP9024"
+    terms:
+      - { term: 26T2, feedback: "100%" }
+      - { term: 25T3, feedback: "100%" }
+  - code: IEP-48230
+    name: Introduction to Engineering Projects
+    institution: UTS
+    role: Tutor
+    url: "https://coursehandbook.uts.edu.au/subject/2026/48230"
+    terms:
+      - { term: 26S1, feedback: "100%" }
 ---

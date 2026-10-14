@@ -1,0 +1,34 @@
+{{- /*
+  Where a paper ranks, from its `venue:` (e.g. "EMNLP 2026").
+    group 0  journals, by Scimago quartile (data/rankings/journals.yaml)
+    group 1  conferences, by CORE rank (data/rankings/core.yaml)
+    group 2  everything else: workshops ("X @ Y"), unranked or unknown venues
+  "Findings of X" counts as X.
+  Override in a paper's front matter with `rank: "A*"` (or Q1, B, …).
+*/ -}}
+{{- $venue := .Params.venue | default "" -}}
+{{- $name := replaceRE `\s*\d{4}\s*$` "" $venue | strings.TrimSpace -}}
+{{- $key := lower $name -}}
+{{- $core := hugo.Data.rankings.core.conferences | default dict -}}
+{{- $journals := hugo.Data.rankings.journals.journals | default dict -}}
+{{- $conf := dict "A*" 1 "A" 2 "B" 3 "Australasian A" 3 "Australasian B" 4 "C" 5 "Australasian C" 6 -}}
+{{- $quart := dict "Q1" 1 "Q2" 2 "Q3" 3 "Q4" 4 -}}
+
+{{- $group := 2 -}}{{- $score := 9 -}}{{- $label := "" -}}
+{{- with .Params.rank -}}
+  {{- if index $quart . }}{{ $group = 0 }}{{ $score = index $quart . }}{{ else if index $conf . }}{{ $group = 1 }}{{ $score = index $conf . }}{{ end }}{{ $label = . -}}
+{{- else -}}
+  {{- with index $journals $key -}}
+    {{- with index $quart .quartile }}{{ $group = 0 }}{{ $score = . }}{{ end }}{{ $label = .quartile -}}
+  {{- else -}}
+    {{- /* "Findings of ACL: ACL 2025" takes ACL's rank */ -}}
+    {{- $lookup := $key -}}
+    {{- with findRESubmatch `^findings of (?:the )?([^:\s,]+)` $key 1 }}{{ $lookup = index (index . 0) 1 }}{{ end -}}
+    {{- if not (strings.Contains $venue "@") -}}
+      {{- with index $core $lookup -}}
+        {{- with index $conf .rank }}{{ $group = 1 }}{{ $score = . }}{{ end }}{{ $label = .rank -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return dict "group" $group "score" $score "label" $label "sort" (printf "%d|%d|%s|%s" $group $score $key (lower .Title)) -}}

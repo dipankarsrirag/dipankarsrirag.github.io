@@ -1,0 +1,6 @@
+{{- /* Papers ordered by venue rank (journals, then conferences, then the rest), then alphabetically by venue and title. */ -}}
+{{- $rows := slice -}}
+{{- range . }}{{ $rows = $rows | append (dict "sort" (partial "publications/rank.html" .).sort "page" .) }}{{ end -}}
+{{- $out := slice -}}
+{{- range sort $rows "sort" }}{{ $out = $out | append .page }}{{ end -}}
+{{- return $out -}}
