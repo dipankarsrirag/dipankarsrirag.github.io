@@ -1,5 +1,7 @@
 ---
 title: 'A Taxonomy-Driven Case Study of Australian Web Resources Against Technology-Facilitated Abuse'
+themes: []   # ids from content/log-it/01-my-papers/_index.md
+short: "Technology-Facilitated Abuse"   # name used in the theme graph
 date: 2026-07-06
 preprint: false           # <- set to `true` only for preprints
 authors:

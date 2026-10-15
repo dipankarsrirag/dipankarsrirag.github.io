@@ -1,5 +1,7 @@
 ---
 title: 'Predicting the Target Word of Game-playing Conversations using a Low-Rank Dialect Adapter for Decoder Models'
+themes: [dialects, conversation]   # ids from content/log-it/01-my-papers/_index.md
+short: "Low-Rank Dialect Adapters"   # name used in the theme graph
 date: 2025-04-30
 preprint: false           # <- set to `true` only for preprints
 authors:

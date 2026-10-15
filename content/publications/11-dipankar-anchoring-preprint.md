@@ -1,5 +1,7 @@
 ---
 title: "LLMs Anchor on Chief Complaint and Fail to Integrate Evidence in Sequential Clinical Triage"
+themes: [clinical]   # ids from content/log-it/01-my-papers/_index.md
+short: "Chief Complaint Anchoring"   # name used in the theme graph
 date: 2026-09-19
 preprint: true
 selected: true

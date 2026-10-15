@@ -1,0 +1,21 @@
+{{- /* The paper behind a post: `paper: <file name in content/publications>` in the post's front matter. */ -}}
+{{- $key := .Params.paper -}}
+{{- with site.GetPage (printf "/publications/%s" $key) -}}
+{{- $p := . -}}
+<aside class="paper-card" aria-label="The paper">
+  <p class="paper-card-kicker">
+    {{ partial "section-icon.html" "published" }}
+    {{ if .Params.preprint }}Preprint{{ with .Params.venue }} · {{ . }}{{ end }}{{ else }}{{ .Params.venue | default "Paper" }}{{ end }}
+  </p>
+  <p class="paper-card-title">{{ .Title }}</p>
+  <p class="paper-card-authors">
+    {{- range $i, $a := .Params.authors }}{{ if $i }}, {{ end }}{{ if in $p.Params.underlineAuthors $a }}<strong>{{ $a }}</strong>{{ else }}{{ $a }}{{ end }}{{ end -}}
+  </p>
+  {{- $labels := dict "paper" "PDF" "code" "Code" "pip" "PyPI" "dataset" "Dataset" "project" "Project" "poster" "Poster" }}
+  <div class="pub-links">
+    {{- range $k := slice "paper" "code" "pip" "dataset" "project" "poster" }}{{ with index ($p.Params.links | default dict) $k }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">{{ index $labels $k }}</a>{{ end }}{{ end }}
+  </div>
+</aside>
+{{- else -}}
+{{- warnf "Post %s: no paper %q in content/publications" .Path $key -}}
+{{- end -}}

@@ -43,12 +43,48 @@
 {{- $preprints    := where .Pages "Params.preprint" true }}
 {{- $publications := where .Pages "Params.preprint" "ne" true }}
 
-{{/* ── Preprints ── */}}
-{{ if $preprints }}
+{{/* ── Service: from `service:` in content/publications/_index.md ── */}}
+{{ with .Params.service }}
 <div class="pub-section pub-section--two-col">
   <div class="pub-col-label">
+    <span class="pub-section-heading">{{ partial "section-icon.html" "service" }}Service</span>
+  </div>
+  <div class="pub-col-content">
+    <div class="pub-section--published">
+    {{- $years := slice }}{{ range . }}{{ if not (in $years .year) }}{{ $years = $years | append .year }}{{ end }}{{ end }}
+    {{ range sort $years "value" "desc" }}
+    {{- $y := . }}
+    <div class="pub-year-group">
+      <p class="pub-year-heading">{{ $y }}</p>
+      <div class="pub-list">
+        {{ range where $.Params.service "year" $y }}
+        <div class="pub-entry service-entry">
+          <div class="pub-title">{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .event }}</a>{{ else }}{{ .event }}{{ end }}</div>
+          {{ with .role }}<div class="pub-venue"><span class="venue-name">{{ . }}</span></div>{{ end }}
+          {{- $links := .links | default dict }}
+          {{- if .url }}{{ $links = merge (dict "website" .url) $links }}{{ end }}
+          {{ with $links }}
+          <div class="pub-links">
+            {{- $order := slice "website" }}{{ range $k, $_ := . }}{{ if ne $k "website" }}{{ $order = $order | append $k }}{{ end }}{{ end }}
+            {{- range $label := $order }}{{ with index $links $label }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener">{{ humanize $label }}</a>{{ end }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── Preprints ── */}}
+{{ if $preprints }}
+<div class="pub-section pub-section--two-col{{ if .Params.service }} pub-section--spaced{{ end }}">
+  <div class="pub-col-label">
     <button class="pub-toggle-btn" aria-expanded="false" data-target="preprints-body">
-      <span class="pub-section-heading">Preprints</span>
+      <span class="pub-section-heading">{{ partial "section-icon.html" "preprints" }}Preprints</span>
       <span class="pub-toggle-chevron">&#9656;</span>
     </button>
     <span class="pub-expand-hint">click to expand</span>
@@ -70,9 +106,9 @@
 
 {{/* ── Published Work ── */}}
 {{ if $publications }}
-<div class="pub-section pub-section--two-col{{ if $preprints }} pub-section--spaced{{ end }}">
+<div class="pub-section pub-section--two-col{{ if or $preprints .Params.service }} pub-section--spaced{{ end }}">
   <div class="pub-col-label">
-    <span class="pub-section-heading">Published</span>
+    <span class="pub-section-heading">{{ partial "section-icon.html" "published" }}Published</span>
   </div>
   <div class="pub-col-content">
     <div class="pub-section--published">

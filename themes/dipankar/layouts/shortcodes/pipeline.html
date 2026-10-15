@@ -1,0 +1,18 @@
+{{- /*
+  A method as steps, drawn left to right (top to bottom on phones). One per line:  step | short description
+  {{< pipeline >}}
+  Health records | structured ED data
+  Simulate | nurse and patient agents talk
+  Evaluate | triage accuracy
+  {{< /pipeline >}}
+*/ -}}
+<ol class="ig-pipeline">
+  {{- range $i, $line := split (trim .Inner "\n ") "\n" }}{{ with trim $line " " }}
+  {{- $p := split . "|" }}
+  <li class="ig-step">
+    <span class="ig-step-n">{{ add $i 1 }}</span>
+    <span class="ig-step-title">{{ trim (index $p 0) " " | $.Page.RenderString }}</span>
+    {{ if gt (len $p) 1 }}<span class="ig-step-text">{{ trim (index $p 1) " " | $.Page.RenderString }}</span>{{ end }}
+  </li>
+  {{- end }}{{ end }}
+</ol>

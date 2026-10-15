@@ -1,6 +1,7 @@
 {{ define "main" }}
 {{- $root := site.GetPage "/log-it" }}
 {{- $isRoot := eq .RelPermalink $root.RelPermalink }}
+{{- $graphOnly := and (not $isRoot) .Params.themes }}
 
 {{ if not $isRoot }}
 <div class="breadcrumb">
@@ -16,11 +17,11 @@
 <h1 class="visually-hidden">{{ .Title }}</h1>
 
 {{/* Folder description (links allowed) and any text in its _index.md */}}
-{{ if not $isRoot }}{{ with .Description }}<p class="journal-intro">{{ . | markdownify }}</p>{{ end }}{{ end }}
+{{ if and (not $isRoot) (not $graphOnly) }}{{ with .Description }}<p class="journal-intro">{{ . | markdownify }}</p>{{ end }}{{ end }}
 {{ with .Content }}<div class="journal-intro">{{ . }}</div>{{ end }}
 
 {{/* ── Search (searches every post in log-it) ── */}}
-{{ if $root.RegularPagesRecursive }}
+{{ if and $root.RegularPagesRecursive (not $graphOnly) }}
 <div class="journal-search" role="search">
   <svg class="journal-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
   <input id="journal-q" type="search" placeholder="Search log-it" aria-label="Search log-it" autocomplete="off" spellcheck="false" data-index="{{ ($root.OutputFormats.Get "json").RelPermalink }}">
@@ -30,6 +31,9 @@
 {{ end }}
 
 <div id="journal-browse">
+  {{/* Folders with `themes:` get a graph of papers by theme */}}
+  {{ if and (not $isRoot) .Params.themes }}{{ partial "log-it/theme-graph.html" . }}{{ end }}
+
   {{/* ── Folders ── */}}
   {{ with .Sections }}
   <ul class="journal-folders">
@@ -49,7 +53,8 @@
 
   {{/* ── Posts in this folder, in file-name number order (the main log-it page shows folders only) ── */}}
   {{ with and (not $isRoot) (partial "log-it/order.html" .RegularPages) }}
-  <ol class="journal-list">
+  {{- /* On the graph page the list stays in the page for screen readers and crawlers, but is not shown */}}
+  <ol class="journal-list{{ if $graphOnly }} visually-hidden{{ end }}">
     {{ range . }}
     <li class="journal-item">
       <a href="{{ .RelPermalink }}" class="journal-link">
@@ -62,10 +67,10 @@
   </ol>
   {{ end }}
 
-  {{ if not (or .Sections (and (not $isRoot) .RegularPages)) }}<p class="journal-empty">Nothing here yet.</p>{{ end }}
+  {{ if not (or .Sections (and (not $isRoot) .RegularPages) .Params.themes) }}<p class="journal-empty">Nothing here yet.</p>{{ end }}
 </div>
 
-{{ if $root.RegularPagesRecursive }}
+{{ if and $root.RegularPagesRecursive (not $graphOnly) }}
 <script>
 (function () {
   var input = document.getElementById('journal-q');

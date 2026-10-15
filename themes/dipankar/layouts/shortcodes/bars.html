@@ -1,0 +1,27 @@
+{{- /*
+  A simple bar chart. One per line:  label | value   (start a label with * to highlight it)
+  {{< bars title="Accuracy" unit="%" max="100" >}}
+  Baseline | 71.0
+  *Ours | 78.4
+  {{< /bars >}}
+  title, unit and max are optional (max defaults to the largest value).
+*/ -}}
+{{- $rows := slice }}{{ $top := 0.0 }}
+{{- range split (trim .Inner "\n ") "\n" }}{{ with trim . " " }}
+  {{- $p := split . "|" }}
+  {{- $label := trim (index $p 0) " " }}{{ $hi := hasPrefix $label "*" }}{{ $label = strings.TrimPrefix "*" $label | strings.TrimSpace }}
+  {{- $v := float (trim (index $p 1) " ") }}
+  {{- if gt $v $top }}{{ $top = $v }}{{ end }}
+  {{- $rows = $rows | append (dict "label" $label "value" $v "hi" $hi) }}
+{{- end }}{{ end }}
+{{- $max := float (.Get "max" | default $top) }}{{ if eq $max 0.0 }}{{ $max = 1.0 }}{{ end }}
+<figure class="ig-bars">
+  {{ with .Get "title" }}<figcaption class="ig-bars-title">{{ . | $.Page.RenderString }}</figcaption>{{ end }}
+  {{- range $rows }}
+  <div class="ig-bar{{ if .hi }} is-highlight{{ end }}">
+    <span class="ig-bar-label">{{ .label | $.Page.RenderString }}</span>
+    <span class="ig-bar-track"><span class="ig-bar-fill" style="width: {{ math.Min 100 (mul (div .value $max) 100) }}%"></span></span>
+    <span class="ig-bar-value">{{ .value }}{{ $.Get "unit" }}</span>
+  </div>
+  {{- end }}
+</figure>

@@ -25,8 +25,8 @@
 - Tutorial: {{ .title }}, {{ .venue }} ({{ (time .date).Format "2 Jan 2006" }})
 {{- end }}{{ end }}
 
-## Recent news
-{{ range first 10 (sort (where .Site.RegularPages "Section" "news") "Date" "desc") }}
+## News
+{{ range sort (where .Site.RegularPages "Section" "news") "Date" "desc" }}
 - {{ .Date.Format "Jan 2006" }}: {{ .Plain | strings.TrimSpace }}
 {{- end }}
 

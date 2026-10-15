@@ -1,4 +1,5 @@
 {{ define "main" }}
+<a class="back-link" href="{{ "/" | relURL }}">{{ partial "link-icon.html" "back" }}<span>Back to home</span></a>
 <div class="page-header">
   <h1 class="page-title">{{ .Title }}</h1>
   {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
@@ -9,7 +10,7 @@
 <ul class="news-list">
   {{ range $news }}
   <li class="news-item">
-    <span class="news-date">{{ .Date.Format "Jan 2006" }}</span>
+    <span class="news-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time></span>
     <span class="news-text">{{ .Content | safeHTML }}</span>
   </li>
   {{ end }}

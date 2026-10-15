@@ -1,0 +1,117 @@
+{{- /*
+  Research map for a log-it folder with `themes:` in its _index.md: themes (left) and papers (right),
+  each paper once, joined by curves coloured by theme. Drawn at build time; a few lines of script add the
+  hover highlight. Papers come from content/publications (`themes:` ids, optional `short:` name). A paper
+  links to its log-it post once published, otherwise to the paper. Themes may set their own `color:`.
+*/ -}}
+{{- $folder := . -}}
+{{- $palette := slice "#3e6e8e" "#554882" "#c0673f" "#5e8c61" "#b8892b" "#8e5b8a" "#4f8a8b" "#a24d5a" -}}
+{{- $themeDefs := slice }}{{ range $i, $t := $folder.Params.themes }}{{ $themeDefs = $themeDefs | append (merge $t (dict "i" $i "color" ($t.color | default (index $palette (mod $i (len $palette)))))) }}{{ end -}}
+{{- $tIndex := dict }}{{ range $themeDefs }}{{ $tIndex = merge $tIndex (dict .id .i) }}{{ end -}}
+{{- $posts := (site.GetPage "/log-it").RegularPagesRecursive -}}
+
+{{- $papers := slice -}}
+{{- range (where site.RegularPages "Section" "publications").ByDate -}}
+  {{- $p := . -}}
+  {{- $mine := slice }}{{ $sum := 0 -}}
+  {{- range $themeDefs }}{{ if in ($p.Params.themes | default slice) .id }}{{ $mine = $mine | append .id }}{{ $sum = add $sum .i }}{{ end }}{{ end -}}
+  {{- if $mine -}}
+    {{- $key := path.BaseName $p.File.Path -}}
+    {{- $url := $p.Params.links.paper | default "" }}{{ $external := true -}}
+    {{- with index (where $posts "Params.paper" $key) 0 }}{{ $url = .RelPermalink }}{{ $external = false }}{{ end -}}
+    {{- $venue := $p.Params.venue | default "" | replaceRE `\s*\d{4}\s*$` "" -}}
+    {{- if $p.Params.preprint }}{{ $venue = "Preprint" }}{{ end -}}
+    {{- $papers = $papers | append (dict
+        "key" $key "themes" $mine "label" ($p.Params.short | default (index (split $p.Title ":") 0)) "title" $p.Title
+        "meta" (printf "%s%s%s" $venue (cond (ne $venue "") " · " "") ($p.Date.Format "2006"))
+        "url" $url "external" $external "preprint" ($p.Params.preprint | default false)
+        "sort" (printf "%07.3f|%012d" (div (float $sum) (len $mine)) $p.Date.Unix)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $papers = sort $papers "sort" -}}
+
+{{- if $papers -}}
+{{- $used := slice }}{{ range $themeDefs }}{{ $t := . }}{{ $n := 0 }}{{ range $papers }}{{ if in .themes $t.id }}{{ $n = add $n 1 }}{{ end }}{{ end }}{{ if $n }}{{ $used = $used | append (merge . (dict "n" $n)) }}{{ end }}{{ end -}}
+{{- $color := dict }}{{ range $used }}{{ $color = merge $color (dict .id .color) }}{{ end -}}
+
+{{- $rowH := 44.0 }}{{ $pad := 20.0 -}}
+{{- $tDot := 12.0 }}{{ $tLabel := 34.0 -}}
+{{- /* Edges start just after the longest theme name (≈8.4 px per character at 15 px) */ -}}
+{{- $tLongest := 0 }}{{ range $used }}{{ if gt (len .name) $tLongest }}{{ $tLongest = len .name }}{{ end }}{{ end -}}
+{{- $edgeFrom := add $tLabel (mul $tLongest 8.4) 16 }}{{ $nodeX := add $edgeFrom 200 }}{{ $labelX := add $nodeX 16 -}}
+{{- $H := add (mul (len $papers) $rowH) (mul $pad 2) -}}
+{{- $longest := 0 }}{{ range $papers }}{{ if gt (len .label) $longest }}{{ $longest = len .label }}{{ end }}{{ end -}}
+{{- $W := add $labelX (mul $longest 8.2) 10 -}}
+{{- $py := dict }}{{ range $i, $p := $papers }}{{ $py = merge $py (dict $p.key (add $pad (add (mul $i $rowH) (div $rowH 2)))) }}{{ end -}}
+{{- $tGap := div (sub $H (mul $pad 2)) (len $used) -}}
+{{- $ty := dict }}{{ range $i, $t := $used }}{{ $ty = merge $ty (dict $t.id (add $pad (add (mul $i $tGap) (div $tGap 2)))) }}{{ end -}}
+
+<figure class="pmap">
+  <svg class="pmap-svg" viewBox="0 0 {{ $W }} {{ $H }}" role="img" aria-label="My papers grouped by research theme">
+    <g class="pmap-edges" fill="none">
+      {{- range $papers }}{{ $p := . }}{{ range .themes }}
+      {{- $y1 := index $ty . }}{{ $y2 := index $py $p.key }}{{ $mx := div (add $edgeFrom $nodeX) 2 }}
+      <path class="pmap-edge" data-paper="{{ $p.key }}" data-theme="{{ . }}" stroke="{{ index $color . }}" d="M{{ $edgeFrom }},{{ $y1 }} C{{ $mx }},{{ $y1 }} {{ $mx }},{{ $y2 }} {{ sub $nodeX 6 }},{{ $y2 }}"/>
+      {{- end }}{{ end }}
+    </g>
+    {{- range $used }}{{ $y := index $ty .id }}
+    <g class="pmap-theme" data-theme="{{ .id }}" tabindex="0">
+      <circle cx="{{ $tDot }}" cy="{{ $y }}" r="{{ add 5 (math.Sqrt .n) }}" fill="{{ .color }}"/>
+      <text class="pmap-theme-name" x="{{ $tLabel }}" y="{{ add $y 1 }}">{{ .name }}</text>
+      <text class="pmap-theme-count" x="{{ $tLabel }}" y="{{ add $y 18 }}">{{ .n }} {{ if eq .n 1 }}paper{{ else }}papers{{ end }}</text>
+    </g>
+    {{- end }}
+    {{- range $papers }}{{ $y := index $py .key }}
+    <a class="pmap-paper{{ if .preprint }} is-preprint{{ end }}" href="{{ .url }}" data-paper="{{ .key }}" data-themes="{{ delimit .themes " " }}"{{ if .external }} target="_blank" rel="noopener"{{ end }}>
+      <title>{{ .title }}</title>
+      <circle cx="{{ $nodeX }}" cy="{{ $y }}" r="4"/>
+      <text class="pmap-paper-name" x="{{ $labelX }}" y="{{ sub $y 1 }}">{{ .label }}</text>
+      <text class="pmap-paper-meta" x="{{ $labelX }}" y="{{ add $y 15 }}">{{ .meta }}</text>
+    </a>
+    {{- end }}
+  </svg>
+
+  {{/* Phones: grouped list */}}
+  <div class="pmap-list">
+    {{- range $used }}{{ $t := . }}
+    <section>
+      <p class="pmap-list-theme"><span class="pmap-swatch" style="background: {{ .color }}"></span>{{ .name }} <span class="pmap-list-count">{{ .n }}</span></p>
+      <ul style="border-color: {{ .color }}">
+        {{- range $papers }}{{ if in .themes $t.id }}<li><a href="{{ .url }}"{{ if .external }} target="_blank" rel="noopener"{{ end }}>{{ .label }}</a><span>{{ .meta }}</span></li>{{ end }}{{ end }}
+      </ul>
+    </section>
+    {{- end }}
+  </div>
+
+  {{- $anyPre := false }}{{ range $papers }}{{ if .preprint }}{{ $anyPre = true }}{{ end }}{{ end }}
+  <figcaption class="pmap-caption">Hover a theme or a paper to trace its connections{{ if $anyPre }} · hollow dots are preprints{{ end }}</figcaption>
+</figure>
+
+<script>
+(function () {
+  var svg = document.querySelector('.pmap-svg');
+  if (!svg) return;
+  var edges = svg.querySelectorAll('.pmap-edge'), papers = svg.querySelectorAll('.pmap-paper'), themes = svg.querySelectorAll('.pmap-theme');
+  function focus(paper, theme) {
+    svg.classList.add('is-focus');
+    var onThemes = {}, onPapers = {};
+    edges.forEach(function (e) {
+      var hit = (paper && e.dataset.paper === paper) || (theme && e.dataset.theme === theme);
+      e.classList.toggle('is-on', hit);
+      if (hit) { onThemes[e.dataset.theme] = 1; onPapers[e.dataset.paper] = 1; }
+    });
+    papers.forEach(function (p) { p.classList.toggle('is-on', !!onPapers[p.dataset.paper]); });
+    themes.forEach(function (t) { t.classList.toggle('is-on', !!onThemes[t.dataset.theme]); });
+  }
+  function clear() { svg.classList.remove('is-focus'); svg.querySelectorAll('.is-on').forEach(function (e) { e.classList.remove('is-on'); }); }
+  papers.forEach(function (p) {
+    ['mouseenter', 'focus'].forEach(function (ev) { p.addEventListener(ev, function () { focus(p.dataset.paper, null); }); });
+    ['mouseleave', 'blur'].forEach(function (ev) { p.addEventListener(ev, clear); });
+  });
+  themes.forEach(function (t) {
+    ['mouseenter', 'focus'].forEach(function (ev) { t.addEventListener(ev, function () { focus(null, t.dataset.theme); }); });
+    ['mouseleave', 'blur'].forEach(function (ev) { t.addEventListener(ev, clear); });
+  });
+})();
+</script>
+{{- end -}}

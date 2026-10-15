@@ -1,5 +1,6 @@
 ---
 title: 'TriageSim: A Conversational Emergency Triage Simulation Framework from Structured Electronic Health Records'
+themes: [clinical, conversation, speech, generation]   # ids from content/log-it/01-my-papers/_index.md
 date: 2026-09-28
 preprint: false           # <- set to `true` only for preprints
 authors:

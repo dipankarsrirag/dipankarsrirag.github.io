@@ -1,0 +1,16 @@
+{{- /*
+  Numbered key findings, as cards. One per line:  headline | one-sentence explanation
+  {{< takeaways >}}
+  Models anchor | They over-rely on the chief complaint.
+  {{< /takeaways >}}
+*/ -}}
+<ol class="ig-takeaways">
+  {{- range $i, $line := split (trim .Inner "\n ") "\n" }}{{ with trim $line " " }}
+  {{- $p := split . "|" }}
+  <li class="ig-takeaway">
+    <span class="ig-takeaway-n">{{ printf "%02d" (add $i 1) }}</span>
+    <span class="ig-takeaway-title">{{ trim (index $p 0) " " | $.Page.RenderString }}</span>
+    {{ if gt (len $p) 1 }}<span class="ig-takeaway-text">{{ trim (index $p 1) " " | $.Page.RenderString }}</span>{{ end }}
+  </li>
+  {{- end }}{{ end }}
+</ol>

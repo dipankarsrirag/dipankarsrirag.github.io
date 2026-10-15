@@ -1,5 +1,6 @@
 ---
 title: "Retell, Reward, Repeat: Reinforcement Learning for Narrative Theory-Informed Story Retelling"
+themes: [generation]   # ids from content/log-it/01-my-papers/_index.md
 date: 2026-10-19
 preprint: false
 authors:

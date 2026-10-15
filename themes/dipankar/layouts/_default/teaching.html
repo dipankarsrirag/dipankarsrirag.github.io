@@ -5,7 +5,7 @@
 {{/* ── Tutorials ── */}}
 {{ with .Params.tutorials }}
 <section class="teaching-section">
-  <p class="section-label">Tutorials</p>
+  <p class="section-label has-icon">{{ partial "section-icon.html" "tutorials" }}Tutorials</p>
   <div class="teaching-entries">
     {{ range sort . "date" "desc" }}
     <div class="teaching-entry">
@@ -31,7 +31,7 @@
 {{/* ── Courses: one entry per course; terms newest first, feedback averaged ── */}}
 {{ with .Params.courses }}
 <section class="teaching-section">
-  <p class="section-label">Courses</p>
+  <p class="section-label has-icon">{{ partial "section-icon.html" "courses" }}Courses</p>
   <div class="teaching-entries">
     {{ range . }}
     {{- $fb := slice }}

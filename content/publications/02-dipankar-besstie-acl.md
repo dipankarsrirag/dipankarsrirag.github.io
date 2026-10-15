@@ -1,5 +1,6 @@
 ---
 title: "BESSTIE: A Benchmark for Sentiment and Sarcasm Classification for Varieties of English"
+themes: [dialects, figurative]   # ids from content/log-it/01-my-papers/_index.md
 date: 2025-07-28
 preprint: false           # <- set to `true` only for preprints
 authors:

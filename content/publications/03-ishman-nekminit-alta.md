@@ -1,5 +1,6 @@
 ---
 title: "Nek Minit: Harnessing Pragmatic Metacognitive Prompting for Explainable Sarcasm Detection of Australian and Indian English"
+themes: [figurative, dialects]   # ids from content/log-it/01-my-papers/_index.md
 date: 2025-11-27
 preprint: false           # <- set to `true` only for preprints
 authors:

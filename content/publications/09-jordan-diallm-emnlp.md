@@ -1,5 +1,6 @@
 ---
 title: "DiaLLM: An Investigation into the Robustness-Generation Gap in English Dialect Adaptation"
+themes: [dialects, generation]   # ids from content/log-it/01-my-papers/_index.md
 date: 2026-10-24
 preprint: false
 authors:

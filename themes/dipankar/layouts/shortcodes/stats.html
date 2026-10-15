@@ -1,0 +1,16 @@
+{{- /*
+  Big-number tiles. One per line:  number | what it means
+  {{< stats >}}
+  52,605 | web pages analysed
+  70% | of pages focus on harassment
+  {{< /stats >}}
+*/ -}}
+<div class="ig-stats">
+  {{- range split (trim .Inner "\n ") "\n" }}{{ with trim . " " }}
+  {{- $p := split . "|" }}
+  <div class="ig-stat">
+    <span class="ig-stat-value">{{ trim (index $p 0) " " | $.Page.RenderString }}</span>
+    {{ if gt (len $p) 1 }}<span class="ig-stat-label">{{ trim (index $p 1) " " | $.Page.RenderString }}</span>{{ end }}
+  </div>
+  {{- end }}{{ end }}
+</div>

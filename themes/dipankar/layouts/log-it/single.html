@@ -25,6 +25,8 @@
     </p>
   </header>
 
+  {{ with .Params.paper }}{{ partial "log-it/paper-card.html" $ }}{{ end }}
+
   {{ if $toc }}
   <details class="post-toc-inline">
     <summary>On this page</summary>

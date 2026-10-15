@@ -1,5 +1,6 @@
 ---
 title: 'Far Out: Evaluating Language Models on Slang in Australian and Indian English'
+themes: [dialects, figurative]   # ids from content/log-it/01-my-papers/_index.md
 date: 2026-03-29
 preprint: false           # <- set to `true` only for preprints
 authors:

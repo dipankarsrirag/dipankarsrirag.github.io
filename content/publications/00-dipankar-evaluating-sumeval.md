@@ -1,5 +1,7 @@
 ---
 title: 'Evaluating Dialect Robustness of Language Models via Conversation Understanding'
+themes: [dialects, conversation]   # ids from content/log-it/01-my-papers/_index.md
+short: "Dialect Robustness via Conversation"   # name used in the theme graph
 date: 2025-01-19
 preprint: false           # <- set to `true` only for preprints
 authors:

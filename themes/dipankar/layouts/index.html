@@ -26,15 +26,16 @@
 {{- $news := sort $allNews "Date" "desc" }}
 {{ if $news }}
 <section class="home-section">
-  <p class="section-label">News</p>
+  <p class="section-label has-icon">{{ partial "section-icon.html" "news" }}News</p>
   <ul class="news-list">
     {{ range first 5 $news }}
     <li class="news-item">
-      <span class="news-date">{{ .Date.Format "Jan 2006" }}</span>
+      <span class="news-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time></span>
       <span class="news-text">{{ .Content | safeHTML }}</span>
     </li>
     {{ end }}
   </ul>
+  {{ if gt (len $news) 5 }}<a href="{{ "news/" | relURL }}" class="see-all"><span>More news</span>{{ partial "link-icon.html" "forward" }}</a>{{ end }}
 </section>
 {{ end }}
 
@@ -44,7 +45,7 @@
 {{- $pubs = sort $pubs "Date" "desc" }}
 {{ if $pubs }}
 <section class="home-section">
-  <p class="section-label">Selected Publications</p>
+  <p class="section-label has-icon">{{ partial "section-icon.html" "publications" }}Selected Publications</p>
   <div class="pub-list">
     {{ range $pubs }}
     {{- $page := . }}
@@ -84,7 +85,7 @@
     </div>
     {{ end }}
   </div>
-  <a href="/publications/" class="see-all">All publications →</a>
+  <a href="/publications/" class="see-all"><span>All publications</span>{{ partial "link-icon.html" "forward" }}</a>
 
 </section>
 {{ end }}
@@ -94,7 +95,7 @@
 {{- $blogs := where $journal.RegularPagesRecursive "Params.selected" true }}
 {{ with $blogs.ByDate.Reverse }}
 <section class="home-section">
-  <p class="section-label">Blogs</p>
+  <p class="section-label has-icon">{{ partial "section-icon.html" "blogs" }}Blogs</p>
   <ol class="journal-list">
     {{ range . }}
     <li class="journal-item">
@@ -109,7 +110,7 @@
     </li>
     {{ end }}
   </ol>
-  <a href="{{ $journal.RelPermalink }}" class="see-all">All posts →</a>
+  <a href="{{ $journal.RelPermalink }}" class="see-all"><span>All posts</span>{{ partial "link-icon.html" "forward" }}</a>
 </section>
 {{ end }}
 
