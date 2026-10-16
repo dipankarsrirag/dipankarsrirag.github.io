@@ -10,10 +10,8 @@
 </div>
 {{ end }}
 
-<div class="page-header">
-  <h1 class="page-title">{{ .Title }}</h1>
-  {{ with .Description }}<p class="page-description">{{ . }}</p>{{ end }}
-</div>
+{{/* No visible title or description: the breadcrumb says where you are. The title stays for screen readers and search. */}}
+<h1 class="visually-hidden">{{ .Title }}</h1>
 
 {{ with .Content }}
 <div class="gallery-intro">{{ . }}</div>
@@ -33,7 +31,7 @@
   <a href="{{ .RelPermalink }}" class="album-card">
     {{ with $cover }}
     {{- /* 1x and 2x covers, so cards stay sharp on high-density screens */}}
-    {{- $c := .Fill "480x600 webp q82 Smart" }}{{ $c2 := .Fill "960x1200 webp q80 Smart" }}
+    {{- $c := .Fill "480x600 webp q92 photo Lanczos Smart" }}{{ $c2 := .Fill "960x1200 webp q90 photo Lanczos Smart" }}
     <img src="{{ $c.RelPermalink }}" srcset="{{ $c.RelPermalink }} 480w, {{ $c2.RelPermalink }} 960w" sizes="(max-width: 620px) 50vw, 300px" width="{{ $c.Width }}" height="{{ $c.Height }}" alt="" loading="lazy" decoding="async">
     {{ end }}
     <span class="album-meta">
@@ -54,9 +52,11 @@
 {{ with sort (.Resources.ByType "image") "Name" }}
 <div class="gallery-grid">
   {{ range $i, $p := . }}
-  {{- $thumb := $p.Fill "480x600 webp q82 Smart" }}
-  {{- $thumb2 := $p.Fill "960x1200 webp q80 Smart" }}
-  {{- $full := $p.Fit "1600x1600 webp q85" }}
+  {{- $thumb := $p.Fill "480x600 webp q92 photo Lanczos Smart" }}
+  {{- $thumb2 := $p.Fill "960x1200 webp q90 photo Lanczos Smart" }}
+  {{- /* Lightbox: the original file itself, untouched; only photos over 2560px get resized */}}
+  {{- $full := $p }}
+  {{- if or (gt $p.Width 2560) (gt $p.Height 2560) }}{{ $full = $p.Fit "2560x2560 webp q92 photo Lanczos" }}{{ end }}
   {{- $alt := $p.Params.caption | default (printf "%s, photo %d" $album (add $i 1)) }}
   <a href="{{ $full.RelPermalink }}" class="gallery-item" data-index="{{ $i }}" data-caption="{{ $p.Params.caption | default "" }}" data-alt="{{ $alt }}">
     <img src="{{ $thumb.RelPermalink }}" srcset="{{ $thumb.RelPermalink }} 480w, {{ $thumb2.RelPermalink }} 960w" sizes="(max-width: 620px) 50vw, 280px" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
