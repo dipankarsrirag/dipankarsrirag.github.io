@@ -44,50 +44,37 @@
 </section>
 {{ end }}
 
-{{/* ── Publications: preprints first, then by year; within a year by venue rank ── */}}
+{{/* ── Publications: CORE A* and A conferences only, plus preprints; the full
+     list lives on Google Scholar. Preprints first, then by year, ranked within a year. ── */}}
 {{- $allPubs := where .Site.RegularPages "Section" "publications" }}
 {{- $preprints := where $allPubs "Params.preprint" true }}
-{{- $published := where $allPubs "Params.preprint" "ne" true }}
+{{- $published := slice }}
+{{- range where $allPubs "Params.preprint" "ne" true }}
+  {{- $r := partial "publications/rank.html" . }}
+  {{- if and (eq $r.group 1) (le $r.score 2) }}{{ $published = $published | append . }}{{ end }}
+{{- end }}
+{{- $scholar := "" }}{{ range .Site.Params.socialIcons }}{{ if eq .name "Scholar" }}{{ $scholar = .url }}{{ end }}{{ end }}
 {{ if $allPubs }}
-<section class="home-section" id="publications">
-  <p class="section-label has-icon">{{ partial "section-icon.html" "publications" }}Publications<span class="crumb" aria-hidden="true"></span></p>
+<section class="home-section" id="research">
+  <p class="section-label has-icon">{{ partial "section-icon.html" "publications" }}Research
+    {{- with $scholar }}
+    <a class="scholar-note" href="{{ . }}" target="_blank" rel="noopener" title="Every paper, including workshops and other venues">
+      {{- partial "social-icon.html" "Scholar" -}}
+      <span>Full list on Google Scholar</span>
+      <svg class="scholar-note-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+    {{- end }}
+  </p>
   <div class="pub-section--published">
-    {{ with $preprints }}
-    <div class="pub-year-group">
-      <p class="pub-year-heading">Preprints</p>
-      <div class="pub-list">{{ range .ByDate.Reverse }}{{ partial "publications/entry.html" . }}{{ end }}</div>
+    <div class="pub-list">
+      {{- /* one list: preprints first, then papers newest first */}}
+      {{ range sort $preprints "Date" "desc" }}{{ partial "publications/entry.html" . }}{{ end }}
+      {{ range sort $published "Date" "desc" }}{{ partial "publications/entry.html" . }}{{ end }}
     </div>
-    {{ end }}
-    {{ range $published.ByDate.Reverse.GroupByDate "2006" }}
-    <div class="pub-year-group">
-      <p class="pub-year-heading">{{ .Key }}</p>
-      <div class="pub-list">{{ range partial "publications/order.html" .Pages }}{{ partial "publications/entry.html" . }}{{ end }}</div>
-    </div>
-    {{ end }}
   </div>
 </section>
 {{ end }}
 
-{{/* Sticky label reads as a breadcrumb: "Publications › 2026" for the year group in view */}}
-<script>
-(function () {
-  var sec = document.getElementById('publications');
-  if (!sec) return;
-  var label = sec.querySelector('.section-label'), crumb = label.querySelector('.crumb');
-  var groups = sec.querySelectorAll('.pub-year-group');
-  function update() {
-    var edge = label.getBoundingClientRect().bottom + 8, cur = '';
-    groups.forEach(function (g) {
-      if (g.getBoundingClientRect().top <= edge) cur = g.querySelector('.pub-year-heading').textContent.trim();
-    });
-    var stickTop = parseFloat(getComputedStyle(label).top) || 0;
-    var stuck = Math.abs(label.getBoundingClientRect().top - stickTop) < 2 && label.offsetTop > 0;
-    crumb.textContent = stuck && cur ? cur : '';
-  }
-  addEventListener('scroll', update, { passive: true });
-  update();
-})();
-</script>
 
 {{/* ── Courses, tutorials, shared tasks ── */}}
 {{ with site.GetPage "/activities" }}{{ partial "activities.html" . }}{{ end }}

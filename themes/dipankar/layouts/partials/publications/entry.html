@@ -1,6 +1,17 @@
-{{- /* One paper: title, authors, venue, links, BibTeX. Used on the homepage. */ -}}
+{{- /* One paper: venue and year as a small line above the title, then authors, links, BibTeX. Used on the homepage. */ -}}
 {{- $page := . }}
-<div class="pub-entry">
+{{- $v := .Params.venue | default "" }}
+{{- $year := .Date.Year }}{{ with findRE `\d{4}\s*$` $v }}{{ $year = index . 0 | strings.TrimSpace }}{{ end }}
+{{- $name := replaceRE `\s*\d{4}\s*$` "" $v | strings.TrimSpace }}
+{{- with findRESubmatch `^Findings of (?:the )?([^:\s,]+)` $name 1 }}{{ $name = printf "Findings: %s" (index (index . 0) 1) }}{{ end }}
+{{- if and (not $name) .Params.preprint }}{{ $name = "Preprint" }}{{ end }}
+<div class="pub-entry pub-entry--kicker">
+  <div class="pub-kicker">
+    <span class="pub-kicker-venue">{{ $name }}</span>
+    <span class="pub-kicker-year">{{ $year }}</span>
+  </div>
+
+
   <div class="pub-title">
     {{ if .Params.links.paper -}}
       <a href="{{ .Params.links.paper }}" target="_blank" rel="noopener">{{ .Title }}</a>
@@ -13,7 +24,6 @@
     {{ if in $page.Params.underlineAuthors $a }}<span class="self">{{ $a }}</span>{{ else }}{{ $a }}{{ end }}
     {{- end }}
   </div>
-  {{ with .Params.venue }}<div class="pub-venue"><span class="venue-name">{{ . }}</span></div>{{ end }}
   {{ with .Params.note }}<div class="pub-note">{{ . }}</div>{{ end }}
   <div class="pub-links">
     {{ with .Params.links.paper }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="PDF: {{ $page.Title }}">PDF</a>{{ end }}

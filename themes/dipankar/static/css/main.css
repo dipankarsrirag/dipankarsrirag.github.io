@@ -2791,25 +2791,7 @@ td:has(> .cell) {
   }
 }
 
-/* Homepage publications: the section label is the only sticky line and shows
-   the year in view as a breadcrumb; year headings scroll normally. */
-#publications .pub-year-heading {
-  position: static;
-}
 
-.crumb:not(:empty)::before {
-  content: '\203A';
-  margin: 0 0.5rem 0 0.2rem;
-  color: var(--text-muted);
-  font-size: 1.35em;
-  font-weight: 400;
-  line-height: 1;
-  vertical-align: -0.06em;
-}
-
-.crumb {
-  color: var(--text);
-}
 
 /* ─── Homepage: sidebar (photo, name, links, contents) + one content column ─── */
 
@@ -2989,4 +2971,189 @@ footer {
   main, footer, .home-main { animation: none; }
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; }
+}
+
+/* ─── Justified body text ─── */
+/* Paragraphs and list text are justified; hyphenation keeps the word gaps
+   even (it needs the page's lang="en"). Short labels, the nav, the sidebar,
+   headings and buttons keep their natural alignment. */
+.profile-bio p,
+.news-text,
+.journal-summary,
+.page-content p,
+.page-content li,
+.gallery-intro,
+.teaching-name {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Paper titles and author lists stay left-aligned: they can't hyphenate, so
+   justifying them pulls words far apart. Names and links never hyphenate. */
+.teaching-name,
+.profile-bio a,
+.news-text a,
+.page-content a {
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}
+
+/* ─── "Full list on Google Scholar" beside the Publications heading ─── */
+/* Quiet, sentence-case, sits at the right end of the sticky label row */
+.scholar-note {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: 0.85rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.scholar-note .social-icon {
+  width: 1.05em;
+  height: 1.05em;
+  color: var(--accent);
+}
+
+.scholar-note span {
+  border-bottom: 1px dotted rgba(85, 72, 130, 0.5);
+  padding-bottom: 1px;
+}
+
+.scholar-note-arrow {
+  width: 0.9em;
+  height: 0.9em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.scholar-note:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.scholar-note:hover span {
+  border-bottom-style: solid;
+  border-bottom-color: var(--accent);
+}
+
+.scholar-note:hover .scholar-note-arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 620px) {
+  .scholar-note span { display: none; }   /* phones: just the Scholar mark and arrow */
+}
+
+/* ─── Publications: venue and year as a small kicker above each title ─── */
+.pub-section--published .pub-entry--kicker {
+  padding-left: 0;
+  border-left: none;
+}
+
+.pub-kicker {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+/* A soft highlighter stroke behind the venue: no box, no pill */
+.pub-kicker-venue {
+  font-size: 0.84rem;
+  letter-spacing: 0.09em;
+  color: var(--accent);
+  padding: 0 0.2em;
+  margin-left: -0.2em;
+  background: linear-gradient(to bottom, transparent 55%, rgba(85, 72, 130, 0.1) 55%, rgba(85, 72, 130, 0.1) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.pub-kicker-qual { color: var(--accent); opacity: 0.75; font-weight: 500; }
+.pub-kicker-year { color: var(--text-muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+.pub-kicker > * + *::before {
+  content: '\00B7';
+  margin-right: 0.5rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* The Scholar note, a little more present */
+.scholar-note {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.scholar-note .social-icon {
+  width: 1.2em;
+  height: 1.2em;
+}
+.scholar-note span {
+  border-bottom: 1px solid rgba(85, 72, 130, 0.45);
+}
+.scholar-note-arrow {
+  color: var(--accent);
+}
+
+/* ─── One link style: dotted underline at rest, solid on hover ─── */
+/* Text links only. Paper titles stay plain (no underline). The nav, the
+   contents list, the PDF/BibTeX buttons and photo cards are controls and keep
+   their own look. */
+.profile-bio a,
+.news-text a,
+.page-content a,
+.social-link,
+.teaching-name a,
+.teaching-link,
+.breadcrumb a,
+.see-all,
+.footer-links a,
+.journal-title {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(85, 72, 130, 0.6);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.footer-links a {
+  text-decoration-color: rgba(82, 82, 91, 0.5); /* grey links, grey dots */
+}
+
+.profile-bio a:hover,
+.news-text a:hover,
+.page-content a:hover,
+.social-link:hover,
+.teaching-name a:hover,
+.teaching-link:hover,
+.breadcrumb a:hover,
+.see-all:hover,
+.footer-links a:hover,
+.journal-link:hover .journal-title {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-color: var(--accent);
+}
+
+.scholar-note span {
+  border-bottom: 1.5px dotted rgba(85, 72, 130, 0.6);
+}
+.scholar-note:hover span {
+  border-bottom-style: solid;
+  border-bottom-color: var(--accent);
 }
