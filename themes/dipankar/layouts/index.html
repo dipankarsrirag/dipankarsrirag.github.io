@@ -44,8 +44,8 @@
 </section>
 {{ end }}
 
-{{/* ── Publications: CORE A* and A conferences only, plus preprints; the full
-     list lives on Google Scholar. Preprints first, then by year, ranked within a year. ── */}}
+{{/* ── Research: preprints you choose to list, then published CORE A* and A
+     conference papers; the full list lives on Google Scholar. Newest first. ── */}}
 {{- $allPubs := where .Site.RegularPages "Section" "publications" }}
 {{- $preprints := where $allPubs "Params.preprint" true }}
 {{- $published := slice }}
@@ -67,7 +67,7 @@
   </p>
   <div class="pub-section--published">
     <div class="pub-list">
-      {{- /* one list: preprints first, then papers newest first */}}
+      {{- /* preprints first, then published papers newest first */}}
       {{ range sort $preprints "Date" "desc" }}{{ partial "publications/entry.html" . }}{{ end }}
       {{ range sort $published "Date" "desc" }}{{ partial "publications/entry.html" . }}{{ end }}
     </div>
