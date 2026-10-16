@@ -156,10 +156,36 @@ nav {
 }
 
 .nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text);
   letter-spacing: -0.015em;
+}
+
+/* the little wave: waves on hover */
+.nav-brand .nav-icon {
+  width: 1.15em;
+  height: 1.15em;
+  transform-origin: 65% 85%;
+}
+
+.nav-brand:hover .nav-icon {
+  animation: wave 0.9s ease-in-out;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(14deg); }
+  40% { transform: rotate(-8deg); }
+  60% { transform: rotate(12deg); }
+  80% { transform: rotate(-4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-brand:hover .nav-icon { animation: none; }
 }
 
 .nav-brand:hover {
