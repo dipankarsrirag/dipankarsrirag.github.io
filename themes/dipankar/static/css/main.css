@@ -165,27 +165,31 @@ nav {
   letter-spacing: -0.015em;
 }
 
-/* the little wave: waves on hover */
 .nav-brand .nav-icon {
   width: 1.15em;
   height: 1.15em;
-  transform-origin: 65% 85%;
+  transform-origin: 72% 88%; /* the wrist, so it waves like a real hand */
 }
 
-.nav-brand:hover .nav-icon {
-  animation: wave 0.9s ease-in-out;
+/* Waves on hover, and once when someone first arrives (class added by nav.html) */
+.nav-brand:hover .nav-icon,
+.nav-brand.is-greeting .nav-icon {
+  animation: hand-wave 1.6s cubic-bezier(0.45, 0, 0.35, 1);
 }
 
-@keyframes wave {
-  0%, 100% { transform: rotate(0); }
-  20% { transform: rotate(14deg); }
-  40% { transform: rotate(-8deg); }
-  60% { transform: rotate(12deg); }
-  80% { transform: rotate(-4deg); }
+@keyframes hand-wave {
+  0%   { transform: rotate(0deg); }
+  12%  { transform: rotate(16deg); }
+  24%  { transform: rotate(-8deg); }
+  36%  { transform: rotate(14deg); }
+  48%  { transform: rotate(-4deg); }
+  60%  { transform: rotate(10deg); }
+  72%, 100% { transform: rotate(0deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-brand:hover .nav-icon { animation: none; }
+  .nav-brand:hover .nav-icon,
+  .nav-brand.is-greeting .nav-icon { animation: none; }
 }
 
 .nav-brand:hover {
@@ -255,6 +259,8 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
   font-size: 0.9rem;
   color: var(--text-muted);
   padding: 0 0.25rem;
@@ -262,7 +268,8 @@ footer {
 
 .footer-links {
   display: flex;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
 }
 
 .footer-links a {
@@ -2811,13 +2818,18 @@ td:has(> .cell) {
   grid-template-columns: clamp(160px, 14vw, 230px) minmax(0, 1fr);
   gap: clamp(3rem, 5vw, 6rem);
   align-items: start;
-  padding-top: 3rem;
+}
+
+/* Homepage content starts just under the nav; the sidebar begins exactly
+   where it later sticks, so nothing shifts when you start scrolling. */
+main:has(.home-layout) {
+  padding-top: 1.5rem;
 }
 
 .home-sidebar {
   position: sticky;
-  top: 4.5rem;
-  max-height: calc(100vh - 5rem);
+  top: 4.75rem; /* nav height (3.25rem) + the 1.5rem gap above */
+  max-height: calc(100vh - 5.25rem);
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -2836,15 +2848,22 @@ td:has(> .cell) {
 }
 
 .home-sidebar .name-native {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+  color: var(--text);
+  opacity: 0.8;
+  margin: 0.1rem 0 0.6rem;
 }
 
 .home-sidebar .profile-role {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  margin-bottom: 0.7rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.home-sidebar .profile-title {
+  color: var(--text);
+  font-weight: 500;
 }
 
 .home-sidebar .social-links {
@@ -2863,6 +2882,13 @@ td:has(> .cell) {
 
 .home-main .profile-bio {
   padding-bottom: 2.5rem;
+}
+
+/* Shorter screens: a smaller photo so the whole sidebar stays in view */
+@media (max-height: 880px) and (min-width: 821px) {
+  .home-sidebar .profile-photo img {
+    width: min(100%, 140px);
+  }
 }
 
 /* Contents: plain lowercase words under a hairline; current section in purple */
@@ -2927,4 +2953,40 @@ td:has(> .cell) {
   .gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* ─── Page load: a calm fade ─── */
+/* Opacity only: blur on large blocks makes browsers drop the first frames, so
+   content flashes sharp before blurring. The font finishes loading while the
+   text is still faint. `backwards` leaves no style behind afterwards. */
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+main,
+footer {
+  animation: page-fade-in 0.7s ease-out backwards;
+}
+
+.home-main {
+  animation: page-fade-in 0.8s ease-out 0.12s backwards; /* bio and sections follow the sidebar */
+}
+
+/* Moving between pages: the old page dissolves into the new one instead of
+   blanking (supported in current Chrome, Edge and Safari; others just load). */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main, footer, .home-main { animation: none; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
 }

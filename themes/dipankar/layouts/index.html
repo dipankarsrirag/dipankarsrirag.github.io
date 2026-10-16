@@ -9,7 +9,7 @@
   </div>
   <h1>{{ .Site.Params.author }}</h1>
   {{ with .Site.Params.authorNative }}<p class="name-native" lang="{{ $.Site.Params.authorNativeLang }}">{{ . }}</p>{{ end }}
-  <p class="profile-role">{{ .Site.Params.role }}<br>{{ .Site.Params.affiliation }}</p>
+  <p class="profile-role"><span class="profile-title">{{ .Site.Params.role }}</span><br>{{ .Site.Params.affiliation }}</p>
   <ul class="social-links">
       {{- range .Site.Params.socialIcons }}
       <li><a href="{{ .url }}" class="social-link"

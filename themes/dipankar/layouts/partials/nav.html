@@ -10,3 +10,18 @@
     </div>
   </div>
 </nav>
+<script>
+/* Wave hello once per visit; storage can be unavailable, so it simply skips then */
+(function () {
+  try {
+    if (sessionStorage.getItem('waved')) return;
+    sessionStorage.setItem('waved', '1');
+  } catch (e) { return; }
+  var b = document.querySelector('.nav-brand');
+  if (!b) return;
+  setTimeout(function () {
+    b.classList.add('is-greeting');
+    setTimeout(function () { b.classList.remove('is-greeting'); }, 1700);
+  }, 500);
+})();
+</script>

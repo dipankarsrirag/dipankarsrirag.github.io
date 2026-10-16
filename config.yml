@@ -47,11 +47,11 @@ menu:
       weight: 3
 
 params:
-  description: "Ph.D. candidate at UNSW Sydney working on NLP for linguistically diverse nurse-patient communication and clinical decision support in the emergency department, with a background in dialect robustness."
+  description: "PhD candidate at UNSW Sydney working on NLP for linguistically diverse nurse-patient communication and clinical decision support in the emergency department, with a background in dialect robustness."
   author: Dipankar Srirag
   authorNative: "దిపాంకర్ శ్రీరాగ్"
   authorNativeLang: te
-  role: "Ph.D. Candidate"
+  role: "PhD Candidate"
   affiliation: "UNSW Sydney"
   photo: "profile.jpg"
   # Used for search engines and AI assistants (meta keywords, JSON-LD knowsAbout).
