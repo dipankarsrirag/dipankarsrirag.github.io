@@ -1,31 +1,36 @@
 {{ define "main" }}
 
-{{/* ── Profile ── */}}
-<div class="profile">
+<div class="home-layout">
+
+{{/* ── Sidebar: photo, name, role, links and the table of contents; stays in view ── */}}
+<aside class="home-sidebar">
   <div class="profile-photo">
     <img src="/profile-330.jpg" alt="{{ .Site.Params.author }}" width="165" height="220" fetchpriority="high" decoding="async">
   </div>
-  <div class="profile-info">
-    <h1>{{ .Site.Params.author }}{{ with .Site.Params.authorNative }} <span class="name-sep" aria-hidden="true">·</span> <span class="name-native" lang="{{ $.Site.Params.authorNativeLang }}">{{ . }}</span>{{ end }}</h1>
-    <p class="profile-role">{{ .Site.Params.role }} · {{ .Site.Params.affiliation }}</p>
-    <div class="profile-bio">
-      {{ .Content }}
-    </div>
-    <div class="social-links">
-      {{- range $i, $icon := .Site.Params.socialIcons }}
-      {{- if $i }}<span class="social-sep">·</span>{{ end }}
-      <a href="{{ $icon.url }}" class="social-link"
-        {{- if not (hasPrefix $icon.url "mailto") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ partial "social-icon.html" $icon.name }}<span>{{ $icon.name }}</span></a>
+  <h1>{{ .Site.Params.author }}</h1>
+  {{ with .Site.Params.authorNative }}<p class="name-native" lang="{{ $.Site.Params.authorNativeLang }}">{{ . }}</p>{{ end }}
+  <p class="profile-role">{{ .Site.Params.role }}<br>{{ .Site.Params.affiliation }}</p>
+  <ul class="social-links">
+      {{- range .Site.Params.socialIcons }}
+      <li><a href="{{ .url }}" class="social-link"
+        {{- if not (hasPrefix .url "mailto") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ partial "social-icon.html" .name }}<span>{{ .name }}</span></a></li>
       {{- end }}
-    </div>
-  </div>
+    </ul>
+  <div class="page-toc" role="navigation" aria-label="On this page"><ol></ol></div>
+</aside>
+
+<div class="home-main">
+
+{{/* ── Bio ── */}}
+<div class="profile-bio">
+  {{ .Content }}
 </div>
 
 {{/* ── Recent News ── */}}
 {{- $allNews := where .Site.RegularPages "Section" "news" }}
 {{- $news := sort $allNews "Date" "desc" }}
 {{ if $news }}
-<section class="home-section">
+<section class="home-section" id="news">
   <p class="section-label has-icon">{{ partial "section-icon.html" "news" }}News</p>
   <ul class="news-list">
     {{ range first 5 $news }}
@@ -39,63 +44,60 @@
 </section>
 {{ end }}
 
-{{/* ── Selected Publications ── */}}
+{{/* ── Publications: preprints first, then by year; within a year by venue rank ── */}}
 {{- $allPubs := where .Site.RegularPages "Section" "publications" }}
-{{- $pubs := where $allPubs "Params.selected" true }}
-{{- $pubs = sort $pubs "Date" "desc" }}
-{{ if $pubs }}
-<section class="home-section">
-  <p class="section-label has-icon">{{ partial "section-icon.html" "publications" }}Selected Publications</p>
-  <div class="pub-list">
-    {{ range $pubs }}
-    {{- $page := . }}
-    <div class="pub-entry">
-      <div class="pub-title">
-        {{ if .Params.links.paper -}}
-          <a href="{{ .Params.links.paper }}" target="_blank" rel="noopener">{{ .Title }}</a>
-        {{- else -}}
-          {{ .Title }}
-        {{- end }}
-        {{ if .Params.preprint }}<span class="pub-flag">Preprint</span>{{ end }}
-      </div>
-      <div class="pub-authors">
-        {{ range $i, $a := .Params.authors }}{{ if $i }}, {{ end -}}
-        {{ if in $page.Params.underlineAuthors $a }}<span class="self">{{ $a }}</span>{{ else }}{{ $a }}{{ end }}
-        {{- end }}
-      </div>
-      {{ with .Params.venue }}<div class="pub-venue"><span class="venue-name">{{ . }}</span></div>{{ end }}
-      {{ with .Params.note }}<div class="pub-note">{{ . }}</div>{{ end }}
-      <div class="pub-links">
-        {{ with .Params.links.paper }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="PDF: {{ $page.Title }}">PDF</a>{{ end }}
-        {{ with .Params.links.code }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Code: {{ $page.Title }}">Code</a>{{ end }}
-        {{ with .Params.links.pip }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="PyPI: {{ $page.Title }}">PyPI</a>{{ end }}
-        {{ with .Params.links.dataset }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Dataset: {{ $page.Title }}">Dataset</a>{{ end }}
-        {{ with .Params.links.project }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Project: {{ $page.Title }}">Project</a>{{ end }}
-        {{ with .Params.links.poster }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Poster: {{ $page.Title }}">Poster</a>{{ end }}
-        {{ with .Params.bibtex }}
-        <details class="pub-cite">
-          <summary class="pub-link" aria-label="BibTeX: {{ $page.Title }}">BibTeX</summary>
-          <div class="pub-cite-box" title="Click to copy" onclick="navigator.clipboard.writeText(this.querySelector('pre').textContent).then(()=>{var t=this.querySelector('.pub-cite-toast');t.classList.add('pub-cite-toast--show');setTimeout(()=>t.classList.remove('pub-cite-toast--show'),1500)})">
-            <pre class="pub-cite-pre">{{ . }}</pre>
-            <span class="pub-cite-toast">Copied!</span>
-          </div>
-        </details>
-        {{ end }}
-      </div>
+{{- $preprints := where $allPubs "Params.preprint" true }}
+{{- $published := where $allPubs "Params.preprint" "ne" true }}
+{{ if $allPubs }}
+<section class="home-section" id="publications">
+  <p class="section-label has-icon">{{ partial "section-icon.html" "publications" }}Publications<span class="crumb" aria-hidden="true"></span></p>
+  <div class="pub-section--published">
+    {{ with $preprints }}
+    <div class="pub-year-group">
+      <p class="pub-year-heading">Preprints</p>
+      <div class="pub-list">{{ range .ByDate.Reverse }}{{ partial "publications/entry.html" . }}{{ end }}</div>
+    </div>
+    {{ end }}
+    {{ range $published.ByDate.Reverse.GroupByDate "2006" }}
+    <div class="pub-year-group">
+      <p class="pub-year-heading">{{ .Key }}</p>
+      <div class="pub-list">{{ range partial "publications/order.html" .Pages }}{{ partial "publications/entry.html" . }}{{ end }}</div>
     </div>
     {{ end }}
   </div>
-  <a href="/publications/" class="see-all"><span>All publications</span>{{ partial "link-icon.html" "forward" }}</a>
-
 </section>
 {{ end }}
 
-{{/* ── Selected blogs: log-it posts with `selected: true` ── */}}
+{{/* Sticky label reads as a breadcrumb: "Publications › 2026" for the year group in view */}}
+<script>
+(function () {
+  var sec = document.getElementById('publications');
+  if (!sec) return;
+  var label = sec.querySelector('.section-label'), crumb = label.querySelector('.crumb');
+  var groups = sec.querySelectorAll('.pub-year-group');
+  function update() {
+    var edge = label.getBoundingClientRect().bottom + 8, cur = '';
+    groups.forEach(function (g) {
+      if (g.getBoundingClientRect().top <= edge) cur = g.querySelector('.pub-year-heading').textContent.trim();
+    });
+    var stickTop = parseFloat(getComputedStyle(label).top) || 0;
+    var stuck = Math.abs(label.getBoundingClientRect().top - stickTop) < 2 && label.offsetTop > 0;
+    crumb.textContent = stuck && cur ? cur : '';
+  }
+  addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
+
+{{/* ── Courses, tutorials, shared tasks ── */}}
+{{ with site.GetPage "/activities" }}{{ partial "activities.html" . }}{{ end }}
+
+{{/* ── Selected log-its: log-it posts with `selected: true` ── */}}
 {{- $journal := site.GetPage "/log-it" }}
 {{- $blogs := where $journal.RegularPagesRecursive "Params.selected" true }}
 {{ with $blogs.ByDate.Reverse }}
-<section class="home-section">
-  <p class="section-label has-icon">{{ partial "section-icon.html" "blogs" }}Blogs</p>
+<section class="home-section" id="log-its">
+  <p class="section-label has-icon">{{ partial "section-icon.html" "blogs" }}log-its</p>
   <ol class="journal-list">
     {{ range . }}
     <li class="journal-item">
@@ -114,4 +116,31 @@
 </section>
 {{ end }}
 
+
+</div>
+</div>
+
+<script>
+(function () {
+  var toc = document.querySelector('.page-toc ol');
+  var secs = [].slice.call(document.querySelectorAll('main section.home-section[id]'));
+  if (!toc || !secs.length) return;
+  var links = secs.map(function (sec) {
+    var li = document.createElement('li'), a = document.createElement('a');
+    a.href = '#' + sec.id;
+    var label = sec.querySelector('.section-label');
+    a.textContent = [].filter.call(label.childNodes, function (n) { return n.nodeType === 3; })
+      .map(function (n) { return n.textContent; }).join('').trim();
+    li.appendChild(a); toc.appendChild(li);
+    return a;
+  });
+  function update() {
+    var cur = -1;
+    secs.forEach(function (sec, i) { if (sec.getBoundingClientRect().top <= 120) cur = i; });
+    links.forEach(function (a, i) { a.classList.toggle('is-current', i === cur); });
+  }
+  addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
 {{ end }}

@@ -1,0 +1,83 @@
+{{- /* Courses, tutorials and shared tasks, from content/activities.md. Context: that page. */ -}}
+{{/* ── Courses: one entry per course; terms newest first, feedback averaged ── */}}
+{{ with .Params.courses }}
+<section class="home-section" id="courses">
+  <p class="section-label has-icon">{{ partial "section-icon.html" "courses" }}Courses</p>
+  <div class="teaching-entries">
+    {{ range . }}
+    {{- $fb := slice }}
+    {{- range .terms }}{{ with .feedback }}{{ $fb = $fb | append (float (strings.TrimSuffix "%" (string .))) }}{{ end }}{{ end }}
+    {{- $terms := .terms | default slice }}
+    <div class="teaching-entry">
+      <div class="teaching-code">{{ .code }}</div>
+      <div class="teaching-details">
+        <span class="teaching-line">
+          <span class="teaching-name">{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}</span>
+          {{ with .role }}<span class="teaching-sep" aria-hidden="true">·</span><span class="teaching-role">{{ . }}</span>{{ end }}
+        </span>
+        <span class="teaching-line teaching-sub">
+          {{ with .institution }}<span class="teaching-inst">{{ . }}</span>{{ end }}
+          {{- with $fb }}
+          {{- $avg := div (math.Sum .) (len .) }}
+          <span class="teaching-sep" aria-hidden="true">·</span>
+          <span class="teaching-feedback" title="Average over {{ len . }} {{ if eq (len .) 1 }}term{{ else }}terms{{ end }}"><span class="teaching-feedback-label">Student feedback</span> {{ if eq $avg (math.Round $avg) }}{{ printf "%.0f" $avg }}{{ else }}{{ printf "%.1f" $avg }}{{ end }}%</span>
+          {{- end }}
+        </span>
+        {{ with $terms }}
+        <span class="teaching-terms">{{ range $i, $t := . }}{{ if $i }}, {{ end }}{{ $t.term }}{{ end }}</span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{/* ── Tutorials ── */}}
+{{ with .Params.tutorials }}
+<section class="home-section" id="tutorials">
+  <p class="section-label has-icon">{{ partial "section-icon.html" "tutorials" }}Tutorials</p>
+  <div class="teaching-entries">
+    {{ range sort . "date" "desc" }}
+    <div class="teaching-entry">
+      <div class="teaching-code">{{ .venue }}</div>
+      <div class="teaching-details">
+        <span class="teaching-name">
+          {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
+        </span>
+        <span class="teaching-links">
+          {{- /* A plain file name (e.g. ajcai-2026-slides.pdf) means a file in static/tutorials/; `soon` links to the under-construction page */}}
+          {{- $links := .links | default dict }}
+          {{- $order := slice "slides" "materials" "code" "recording" }}
+          {{- range $label, $_ := $links }}{{ if not (in $order $label) }}{{ $order = $order | append $label }}{{ end }}{{ end }}
+          {{- range $label := $order }}{{ with index $links $label }}{{ $soon := eq (lower .) "soon" }}{{ $u := cond $soon "/404.html" (cond (or (hasPrefix . "http") (hasPrefix . "/")) . (printf "/tutorials/%s" .)) }}<a class="teaching-link{{ if $soon }} is-soon{{ end }}" href="{{ $u }}"{{ if not $soon }} target="_blank" rel="noopener"{{ else }} title="Coming soon"{{ end }}>{{ partial "link-icon.html" $label }}<span>{{ $label }}</span></a>{{ end }}{{ end }}
+        </span>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{/* ── Shared tasks ── */}}
+{{ with .Params.shared_tasks }}
+<section class="home-section" id="shared-tasks">
+  <p class="section-label has-icon">{{ partial "section-icon.html" "shared-tasks" }}Shared Tasks</p>
+  <div class="teaching-entries">
+    {{ range sort . "year" "desc" }}
+    <div class="teaching-entry">
+      <div class="teaching-code">{{ .year }}</div>
+      <div class="teaching-details">
+        <span class="teaching-name">{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .event }}</a>{{ else }}{{ .event }}{{ end }}</span>
+        {{ with .role }}<span class="teaching-role">{{ . }}</span>{{ end }}
+        {{ with .links }}
+        <span class="teaching-links">
+          {{- range $label, $u := . }}<a class="teaching-link" href="{{ $u }}" target="_blank" rel="noopener">{{ partial "link-icon.html" $label }}<span>{{ $label }}</span></a>{{ end }}
+        </span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

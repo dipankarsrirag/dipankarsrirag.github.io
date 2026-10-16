@@ -34,27 +34,15 @@ menu:
   main:
     # params.icon: a name from themes/dipankar/layouts/partials/nav-icon.html
     # params.iconOnly: show just the icon (the name is still read out by screen readers)
-    - name: me
-      url: /
+    - name: photos
+      url: /photography/
       weight: 1
-      params: { icon: hand }
-    - name: research
-      url: /publications/
+    - name: log-its
+      url: /log-it/
       weight: 2
-    - name: activities
-      url: /activities/
-      weight: 3
     - name: resume
       url: /cv.pdf
-      weight: 4
-    - name: log-it
-      url: /log-it/
-      weight: 5
-      params: { icon: notebook-pen, iconOnly: true }
-    - name: photography
-      url: /photography/
-      weight: 6
-      params: { icon: images, iconOnly: true }
+      weight: 3
 
 params:
   description: "Ph.D. candidate at UNSW Sydney working on NLP for linguistically diverse nurse-patient communication and clinical decision support in the emergency department, with a background in dialect robustness."

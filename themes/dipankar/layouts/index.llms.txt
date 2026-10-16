@@ -38,8 +38,7 @@
 {{- end }}
 
 {{ end }}## Pages
-- [Research]({{ "publications/" | absURL }}): full publication list with BibTeX
-- [Activities]({{ "activities/" | absURL }}): courses, tutorials and shared tasks
+- [Home]({{ "/" | absURL }}): bio, news, all publications (with BibTeX), courses, tutorials and shared tasks
 - [News]({{ "news/" | absURL }})
 - [log-it]({{ "log-it/" | absURL }}): my blog, on what I learn, my projects and life
 - [Photography]({{ "photography/" | absURL }})

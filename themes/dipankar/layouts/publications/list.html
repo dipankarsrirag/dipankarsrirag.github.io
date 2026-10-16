@@ -1,104 +1,12 @@
-{{- define "pub-entry" }}
-{{- $page := . }}
-<div class="pub-entry">
-  <div class="pub-title">
-    {{ if .Params.links.paper -}}
-      <a href="{{ .Params.links.paper }}" target="_blank" rel="noopener">{{ .Title }}</a>
-    {{- else -}}
-      {{ .Title }}
-    {{- end }}
-  </div>
-  <div class="pub-authors">
-    {{ range $i, $a := .Params.authors }}{{ if $i }}, {{ end -}}
-    {{ if in $page.Params.underlineAuthors $a }}<span class="self">{{ $a }}</span>{{ else }}{{ $a }}{{ end }}
-    {{- end }}
-  </div>
-  {{ with .Params.venue }}<div class="pub-venue"><span class="venue-name">{{ . }}</span></div>{{ end }}
-  {{ with .Params.note }}<div class="pub-note">{{ . }}</div>{{ end }}
-  <div class="pub-links">
-    {{ with .Params.links.paper }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="PDF: {{ $page.Title }}">PDF</a>{{ end }}
-    {{ with .Params.links.code }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Code: {{ $page.Title }}">Code</a>{{ end }}
-    {{ with .Params.links.pip }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="PyPI: {{ $page.Title }}">PyPI</a>{{ end }}
-    {{ with .Params.links.dataset }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Dataset: {{ $page.Title }}">Dataset</a>{{ end }}
-    {{ with .Params.links.project }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Project: {{ $page.Title }}">Project</a>{{ end }}
-    {{ with .Params.links.poster }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Poster: {{ $page.Title }}">Poster</a>{{ end }}
-    {{ with .Params.bibtex }}
-    <details class="pub-cite">
-      <summary class="pub-link" aria-label="BibTeX: {{ $page.Title }}">BibTeX</summary>
-      <div class="pub-cite-box" title="Click to copy" onclick="navigator.clipboard.writeText(this.querySelector('pre').textContent).then(()=>{var t=this.querySelector('.pub-cite-toast');t.classList.add('pub-cite-toast--show');setTimeout(()=>t.classList.remove('pub-cite-toast--show'),1500)})">
-        <pre class="pub-cite-pre">{{ . }}</pre>
-        <span class="pub-cite-toast">Copied!</span>
-      </div>
-    </details>
-    {{ end }}
-  </div>
-</div>
-{{- end }}
-
-{{ define "main" }}
-
-{{/* No visible page heading; the title stays for screen readers */}}
-<h1 class="visually-hidden">{{ .Title }}</h1>
-
-{{- $preprints    := where .Pages "Params.preprint" true }}
-{{- $publications := where .Pages "Params.preprint" "ne" true }}
-
-{{/* ── Preprints ── */}}
-{{ if $preprints }}
-<div class="pub-section pub-section--two-col">
-  <div class="pub-col-label">
-    <button class="pub-toggle-btn" aria-expanded="false" data-target="preprints-body">
-      <span class="pub-section-heading">{{ partial "section-icon.html" "preprints" }}Preprints</span>
-      <span class="pub-toggle-chevron">&#9656;</span>
-    </button>
-    <span class="pub-expand-hint">click to expand</span>
-  </div>
-  <div class="pub-col-content" id="preprints-body">
-    <div class="pub-section--preprint pub-collapsible">
-      {{ range $preprints.ByDate.Reverse.GroupByDate "2006" }}
-      <div class="pub-year-group">
-        <p class="pub-year-heading">{{ .Key }}</p>
-        <div class="pub-list">
-          {{ range .Pages.ByDate.Reverse }}{{ template "pub-entry" . }}{{ end }}
-        </div>
-      </div>
-      {{ end }}
-    </div>
-  </div>
-</div>
-{{ end }}
-
-{{/* ── Published Work ── */}}
-{{ if $publications }}
-<div class="pub-section pub-section--two-col{{ if $preprints }} pub-section--spaced{{ end }}">
-  <div class="pub-col-label">
-    <span class="pub-section-heading">{{ partial "section-icon.html" "published" }}Published</span>
-  </div>
-  <div class="pub-col-content">
-    <div class="pub-section--published">
-      {{ range $publications.ByDate.Reverse.GroupByDate "2006" }}
-      <div class="pub-year-group">
-        <p class="pub-year-heading">{{ .Key }}</p>
-        <div class="pub-list">
-          {{- /* Within a year: journals, then conferences by CORE rank, then workshops / unranked */}}
-          {{ range partial "publications/order.html" .Pages }}{{ template "pub-entry" . }}{{ end }}
-        </div>
-      </div>
-      {{ end }}
-    </div>
-  </div>
-</div>
-{{ end }}
-
-<script>
-document.querySelectorAll('.pub-toggle-btn').forEach(function (btn) {
-  var body = document.getElementById(btn.dataset.target);
-  btn.addEventListener('click', function () {
-    var expanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!expanded));
-    body.classList.toggle('is-open', !expanded);
-  });
-});
-</script>
-
-{{ end }}
+{{- /* This page now lives on the homepage; old links land on the right part of it. */ -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Publications · {{ site.Title }}</title>
+<link rel="canonical" href="{{ "/" | absURL }}#publications">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=/#publications">
+</head>
+<body><a href="/#publications">Publications has moved to the homepage.</a></body>
+</html>

@@ -1,4 +1,6 @@
 ---
+sitemap:
+  disable: true
 title: "Activities"
 description: "Courses I have taught at UNSW Sydney and UTS, tutorials I have given, and shared tasks I have organised."
 aliases: ["/courses/"]

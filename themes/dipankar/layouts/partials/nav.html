@@ -2,7 +2,7 @@
   <div class="nav-inner">
     <a href="/" class="nav-brand">{{ .Site.Title }}</a>
     <div class="nav-links">
-      {{- range .Site.Menus.main }}
+      {{- range $i, $_ := .Site.Menus.main }}{{ if $i }}<span class="nav-sep" aria-hidden="true">|</span>{{ end }}
       <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}{{ if .Params.iconOnly }} title="{{ .Name }}"{{ end }}>{{ with .Params.icon }}{{ partial "nav-icon.html" . }}{{ end }}{{ if .Params.iconOnly }}<span class="visually-hidden">{{ .Name }}</span>{{ else }}<span>{{ .Name }}</span>{{ end }}</a>
       {{- end }}
     </div>
