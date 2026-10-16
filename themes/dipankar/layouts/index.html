@@ -93,7 +93,9 @@
 {{ with site.GetPage "/activities" }}{{ partial "activities.html" . }}{{ end }}
 
 {{/* ── Selected log-its: log-it posts with `selected: true` ── */}}
-{{- $journal := site.GetPage "/log-it" }}
+{{- /* log-it is left out of the live build for now (config/production/module.yaml), so this section skips itself there */}}
+{{- with site.GetPage "/log-it" }}
+{{- $journal := . }}
 {{- $blogs := where $journal.RegularPagesRecursive "Params.selected" true }}
 {{ with $blogs.ByDate.Reverse }}
 <section class="home-section" id="log-its">
@@ -114,6 +116,7 @@
   </ol>
   <a href="{{ $journal.RelPermalink }}" class="see-all"><span>All posts</span>{{ partial "link-icon.html" "forward" }}</a>
 </section>
+{{ end }}
 {{ end }}
 
 

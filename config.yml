@@ -34,12 +34,14 @@ menu:
   main:
     # params.icon: a name from themes/dipankar/layouts/partials/nav-icon.html
     # params.iconOnly: show just the icon (the name is still read out by screen readers)
+    # params.hideInProduction: leave the link out of the deployed site
     - name: photos
       url: /photography/
       weight: 1
     - name: log-its
       url: /log-it/
       weight: 2
+      params: { hideInProduction: true }   # hidden on the live site for now
     - name: resume
       url: /cv.pdf
       weight: 3

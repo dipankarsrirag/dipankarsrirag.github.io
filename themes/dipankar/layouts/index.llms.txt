@@ -40,5 +40,5 @@
 {{ end }}## Pages
 - [Home]({{ "/" | absURL }}): bio, news, all publications (with BibTeX), courses, tutorials and shared tasks
 - [News]({{ "news/" | absURL }})
-- [log-it]({{ "log-it/" | absURL }}): my blog, on what I learn, my projects and life
-- [Photography]({{ "photography/" | absURL }})
+{{ with site.GetPage "/log-it" }}- [log-it]({{ .Permalink }}): my blog, on what I learn, my projects and life
+{{ end }}- [Photography]({{ "photography/" | absURL }})

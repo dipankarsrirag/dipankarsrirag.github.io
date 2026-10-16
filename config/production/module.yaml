@@ -1,0 +1,8 @@
+# Live site only: log-it (the blog) is hidden for now. It still builds in
+# `hugo server`, so posts can be written and previewed locally.
+# Delete this file (and the hideInProduction flag in config.yml) to publish it.
+mounts:
+  - source: content
+    target: content
+    excludeFiles:
+      - log-it/**
