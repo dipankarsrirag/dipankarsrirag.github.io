@@ -56,7 +56,7 @@
         {{- else -}}
           {{ .Title }}
         {{- end }}
-        {{ if .Params.preprint }}<span class="badge badge-preprint">Preprint</span>{{ end }}
+        {{ if .Params.preprint }}<span class="pub-flag">Preprint</span>{{ end }}
       </div>
       <div class="pub-authors">
         {{ range $i, $a := .Params.authors }}{{ if $i }}, {{ end -}}

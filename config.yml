@@ -41,8 +41,8 @@ menu:
     - name: research
       url: /publications/
       weight: 2
-    - name: teaching
-      url: /courses/
+    - name: activities
+      url: /activities/
       weight: 3
     - name: resume
       url: /cv.pdf

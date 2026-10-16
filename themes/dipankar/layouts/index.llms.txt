@@ -18,11 +18,13 @@
 - [{{ .Title }}]({{ .Params.links.paper }}): {{ delimit .Params.authors ", " | replaceRE `\*` "" }}. {{ with .Params.venue }}{{ . }}{{ else }}{{ if .Params.preprint }}Preprint{{ end }}, {{ .Date.Year }}{{ end }}{{ if and .Params.venue .Params.preprint }} (preprint){{ end }}.
 {{- end }}
 
-## Teaching
-{{ with .Site.GetPage "/courses" }}{{ range .Params.courses }}
+## Activities
+{{ with .Site.GetPage "/activities" }}{{ range .Params.courses }}
 - {{ .code }} {{ .name }} ({{ .institution }}), {{ .role }}: {{ range $i, $t := .terms }}{{ if $i }}; {{ end }}{{ $t.term }}{{ with $t.feedback }} (student feedback {{ . }}){{ end }}{{ end }}
 {{- end }}{{ range .Params.tutorials }}
 - Tutorial: {{ .title }}, {{ .venue }} ({{ (time .date).Format "2 Jan 2006" }})
+{{- end }}{{ range .Params.shared_tasks }}
+- Shared task ({{ .role }}, {{ .year }}): {{ .event }}
 {{- end }}{{ end }}
 
 ## News
@@ -37,7 +39,7 @@
 
 {{ end }}## Pages
 - [Research]({{ "publications/" | absURL }}): full publication list with BibTeX
-- [Teaching]({{ "courses/" | absURL }})
+- [Activities]({{ "activities/" | absURL }}): courses, tutorials and shared tasks
 - [News]({{ "news/" | absURL }})
 - [log-it]({{ "log-it/" | absURL }}): my blog, on what I learn, my projects and life
 - [Photography]({{ "photography/" | absURL }})

@@ -1,6 +1,7 @@
 ---
-title: "Teaching"
-description: "Courses I have taught at UNSW Sydney and UTS, and tutorials I have given."
+title: "Activities"
+description: "Courses I have taught at UNSW Sydney and UTS, tutorials I have given, and shared tasks I have organised."
+aliases: ["/courses/"]
 layout: teaching
 hidemeta: true
 
@@ -16,6 +17,14 @@ tutorials:
       materials: soon
       code: soon
       recording: soon
+
+# Shared tasks I have organised (newest first).
+# `url` links the event name; add more under `links:` (e.g. data, results).
+shared_tasks:
+  - year: 2026
+    role: "Organiser"
+    event: "ALTA 2026 Shared Task: Sentiment and Sarcasm Classification for Australian and British English"
+    url: "https://www.alta.asn.au/events/sharedtask2026/"
 
 # Courses are shown in this order. Terms: newest first; feedback is averaged for the course.
 courses:
