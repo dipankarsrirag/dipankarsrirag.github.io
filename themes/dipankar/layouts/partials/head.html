@@ -87,8 +87,8 @@
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
 
 <link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-{{- $cssVer := readFile "themes/dipankar/static/css/main.css" | md5 | truncate 8 "" }}
-<link rel="stylesheet" href="/css/main.css?v={{ $cssVer }}">
+{{- $css := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{- if and (eq .Section "log-it") .IsPage }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
 {{- end }}

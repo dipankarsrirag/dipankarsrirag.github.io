@@ -71,7 +71,9 @@
   const pawL = cat.querySelector('.nt-paw-l'), pawR = cat.querySelector('.nt-paw-r');
   const lerp = (a, b, k) => a + (b - a) * k;
 
-  const W0 = box.clientWidth || innerWidth;
+  let W = box.clientWidth || innerWidth, H = box.clientHeight || 52;   // measured once, not every frame
+  addEventListener('resize', () => { W = box.clientWidth || W; H = box.clientHeight || H; });
+  const W0 = W;
   const st = { cx: W0 * 0.3, mx: W0 * 0.3 + 50, mdir: 1, face: 1, step: 0, leapAt: 2, leaping: false };
   box.classList.add('is-running');
   let last = performance.now(), t = 0, mode = 'chase';
@@ -89,7 +91,6 @@
   }
 
   function chase(dt) {
-    const W = box.clientWidth, H = box.clientHeight;
     // The moth flutters along and turns back at the edges, swooping over her head
     st.mx += st.mdir * 135 * dt;
     if ((st.mdir > 0 && st.mx > W - 20) || (st.mdir < 0 && st.mx < 20)) st.mdir = -st.mdir;

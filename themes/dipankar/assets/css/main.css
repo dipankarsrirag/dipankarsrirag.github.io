@@ -3027,11 +3027,11 @@ main:has(.home-layout) {
 
 main,
 footer {
-  animation: page-fade-in 0.7s ease-out backwards;
+  animation: page-fade-in 0.3s ease-out backwards;
 }
 
 .home-main {
-  animation: page-fade-in 0.8s ease-out 0.12s backwards; /* bio and sections follow the sidebar */
+  animation: page-fade-in 0.3s ease-out 0.05s backwards; /* bio and sections follow the sidebar */
 }
 
 /* Moving between pages: the old page dissolves into the new one instead of
