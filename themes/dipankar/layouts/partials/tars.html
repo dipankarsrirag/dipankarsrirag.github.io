@@ -142,7 +142,7 @@
   const catEl = $('.tars-cat'), sitEl = $('.tars-sit'), legEl = $('.tars-leg');
   const birdEl = $('.tars-bird'), stringEl = $('.tars-string'), heartsEl = $('.tars-hearts');
   const sBody = $('.tars-sit .tars-body'), head = $('.tars-head'), paw = $('.tars-paw');
-  const [beansL, beansR] = $$('.tars-beans');
+  const beans = $$('.tars-beans'), beansL = beans[0], beansR = beans[1];   // no destructuring: Hugo's minifier reorders it
   const mouth = $('.tars-mouth'), yawnEl = $('.tars-yawn');
   const earL = $('.tars-ear-l'), earR = $('.tars-ear-r'), happy = $$('.tars-happy'), blush = $('.tars-blush');
   const sTail = $$('.tars-sit .tars-tail path');
