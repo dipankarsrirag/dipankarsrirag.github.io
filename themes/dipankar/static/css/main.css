@@ -2399,6 +2399,10 @@ td:has(> .cell) {
   margin: -1rem 0 1.75rem;
 }
 
+/* On her own page the hint sits right under her name */
+.tars-page .notfound-hint { margin-top: 0; }
+.tars-page .notfound-hint p { margin: 0; }
+
 @media (prefers-reduced-motion: reduce) {
   .notfound-hint { display: none; }   /* TARS sits still, so there is nothing to play with */
 }
@@ -3081,11 +3085,6 @@ footer {
   color: var(--accent);
 }
 
-.scholar-note span {
-  border-bottom: 1px dotted color-mix(in srgb, var(--accent) 50%, transparent);
-  padding-bottom: 1px;
-}
-
 .scholar-note-arrow {
   width: 0.9em;
   height: 0.9em;
@@ -3100,11 +3099,6 @@ footer {
 .scholar-note:hover {
   color: var(--accent);
   text-decoration: none;
-}
-
-.scholar-note:hover span {
-  border-bottom-style: solid;
-  border-bottom-color: var(--accent);
 }
 
 .scholar-note:hover .scholar-note-arrow {
@@ -3157,14 +3151,11 @@ footer {
 .scholar-note {
   font-size: 0.92rem;
   font-weight: 550;
-  color: var(--text);
+  color: var(--accent);
 }
 .scholar-note .social-icon {
   width: 1.2em;
   height: 1.2em;
-}
-.scholar-note span {
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
 }
 .scholar-note-arrow {
   color: var(--accent);
@@ -3183,7 +3174,8 @@ footer {
 .breadcrumb a,
 .see-all,
 .footer-links a,
-.journal-title {
+.journal-title,
+.scholar-note span {
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent);
@@ -3204,16 +3196,11 @@ footer {
 .breadcrumb a:hover,
 .see-all:hover,
 .footer-links a:hover,
-.journal-link:hover .journal-title {
+.journal-link:hover .journal-title,
+.scholar-note:hover span {
   text-decoration-line: underline;
   text-decoration-style: solid;
   text-decoration-color: var(--accent);
 }
 
-.scholar-note span {
-  border-bottom: 1.5px dotted color-mix(in srgb, var(--accent) 60%, transparent);
-}
-.scholar-note:hover span {
-  border-bottom-style: solid;
-  border-bottom-color: var(--accent);
-}
+

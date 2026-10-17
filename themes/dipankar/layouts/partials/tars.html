@@ -1,6 +1,7 @@
 {{- /* TARS, the calico from the photography albums, loose on the 404 page.
-       Drawn to match the photos: long white coat, black patch and ear on one
-       side, orange on the other, striped tail, amber eyes.
+       Drawn to match the photos: long white coat, a black patch over one eye,
+       black over the other eye with orange on that cheek, striped tail,
+       amber eyes.
 
        She starts sitting in the page (in .tars-spot) and then has the run of
        the whole screen:
@@ -65,7 +66,9 @@
         <path d="M100 46 C121 46 136 58 137 78 L142 86 L136 88 L140 95 L132 96 C126 107 114 113 100 113 C86 113 74 107 68 96 L60 95 L64 88 L58 86 L63 78 C64 58 79 46 100 46 Z" fill="#fffdfa"/>
         <g clip-path="url(#tars-face)">
           <ellipse cx="78" cy="64" rx="26" ry="30" fill="#2b2622"/>
-          <ellipse cx="124" cy="66" rx="24" ry="26" fill="#d98a3d"/>
+          {{/* Other side: orange on the outer cheek, black over the eye and up to the forehead */}}
+          <ellipse cx="129" cy="76" rx="15" ry="24" fill="#d98a3d"/>
+          <ellipse cx="114" cy="66" rx="11.5" ry="21" transform="rotate(12 114 66)" fill="#2b2622"/>
           <path d="M95 46 Q100 40 105 46 L113 114 L87 114 Z" fill="#fffdfa"/>
         </g>
         <path d="M100 46 C121 46 136 58 137 78 L142 86 L136 88 L140 95 L132 96 C126 107 114 113 100 113 C86 113 74 107 68 96 L60 95 L64 88 L58 86 L63 78 C64 58 79 46 100 46 Z" fill="none" stroke="#3d342c" stroke-width="1.5" stroke-linejoin="round"/>
@@ -84,9 +87,9 @@
           <circle cx="116.3" cy="79.2" r="1.7" fill="#fff"/>
           <circle cx="112" cy="84.6" r="0.8" fill="#fff" opacity="0.8"/>
         </g>
-        {{/* Happy closed eyes while she is petted (light on the black patch) */}}
+        {{/* Happy closed eyes while she is petted (light, as both eyes sit on black) */}}
         <path class="tars-happy" d="M79 84 Q86 77 93 84" fill="none" stroke="#f3ece4" stroke-width="1.8" stroke-linecap="round" opacity="0"/>
-        <path class="tars-happy" d="M107 84 Q114 77 121 84" fill="none" stroke="#3d342c" stroke-width="1.8" stroke-linecap="round" opacity="0"/>
+        <path class="tars-happy" d="M107 84 Q114 77 121 84" fill="none" stroke="#f3ece4" stroke-width="1.8" stroke-linecap="round" opacity="0"/>
 
         <path d="M96.5 92 Q100 90.5 103.5 92 L100 96 Z" fill="#e48c9a"/>
         <path class="tars-mouth" d="M100 96 V98.5 M100 98.5 Q97.5 101.5 94.5 99.5 M100 98.5 Q102.5 101.5 105.5 99.5" fill="none" stroke="#3d342c" stroke-width="1.1" stroke-linecap="round"/>

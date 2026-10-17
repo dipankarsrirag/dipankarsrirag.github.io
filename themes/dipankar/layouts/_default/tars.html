@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{- /* TARS's playground: the same cat as the 404 page, with nothing else to do */ -}}
+<div class="notfound tars-page">
+  {{ partial "tars.html" . }}
+  <h1 class="notfound-title">{{ .Title }}</h1>
+  <div class="notfound-hint">{{ .Content }}</div>
+  {{- with site.GetPage "/photography/tars" }}
+  <p class="notfound-actions"><a href="{{ .RelPermalink }}" class="see-all"><span>See her photos</span>{{ partial "link-icon.html" "forward" }}</a></p>
+  {{- end }}
+</div>
+{{ end }}
