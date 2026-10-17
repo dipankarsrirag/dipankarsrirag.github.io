@@ -24,7 +24,7 @@ tutorials:
 # `url` links the event name; add more under `links:` (e.g. data, results).
 shared_tasks:
   - year: 2026
-    role: "Organiser"
+    role: "Co-organiser"
     event: "ALTA 2026 Shared Task: Sentiment and Sarcasm Classification for Australian and British English"
     url: "https://www.alta.asn.au/events/sharedtask2026/"
 

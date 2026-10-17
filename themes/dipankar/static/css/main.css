@@ -160,6 +160,37 @@ nav {
   justify-content: space-between;
 }
 
+/* TARS chasing a bogong moth along the nav line (partials/nav-tars.html) */
+.nav-inner { position: relative; z-index: 1; }   /* links stay in front of her */
+.nav-tars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+}
+.nav-tars.is-running { visibility: visible; }
+.nav-tars-cat, .nav-tars-moth {
+  position: absolute;
+  left: 0;
+  will-change: transform;
+}
+.nav-tars-cat { bottom: -1px; }
+.nav-tars-moth { top: 0; }
+.nav-tars-leap {                       /* she leaves the nav on her way to the TARS page */
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.nav-tars-leap .nav-tars-cat { position: absolute; left: 0; top: 0; bottom: auto; }
+html.tars-leaving main,
+html.tars-leaving footer {
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.45s ease, filter 0.45s ease;
+}
+
 .nav-brand {
   display: inline-flex;
   align-items: center;
@@ -2865,7 +2896,7 @@ main:has(.home-layout) {
 }
 
 .home-sidebar .profile-photo img {
-  width: min(100%, 200px);
+  width: min(100%, 9.63rem);   /* as wide as the name below it; both scale with the text */
   border-radius: 8px;
 }
 
@@ -2917,7 +2948,7 @@ main:has(.home-layout) {
 /* Shorter screens: a smaller photo so the whole sidebar stays in view */
 @media (max-height: 880px) and (min-width: 821px) {
   .home-sidebar .profile-photo img {
-    width: min(100%, 140px);
+    width: min(100%, 9.63rem);
   }
 }
 

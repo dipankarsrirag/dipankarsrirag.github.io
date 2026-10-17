@@ -163,7 +163,7 @@
   const beans = $$('.tars-beans'), beansL = beans[0], beansR = beans[1];   // no destructuring: Hugo's minifier reorders it
   const mouth = $('.tars-mouth'), yawnEl = $('.tars-yawn');
   const earL = $('.tars-ear-l'), earR = $('.tars-ear-r'), happy = $$('.tars-happy'), blush = $('.tars-blush');
-  const sTail = $$('.tars-sit .tars-tail path:not(.tars-tail-tip)'), tailTip = $('.tars-tail-tip');
+  const sTail = $$('.tars-sit .tars-tail path:not(.tars-tail-tip)'), tailTip = $('.tars-tail-tip'), tailG = $('.tars-sit .tars-tail');
   const eyes = $$('.tars-eye').map(g => ({ g, pupil: g.querySelector('.tars-pupil'), cx: +g.dataset.cx, cy: +g.dataset.cy }));
 
   const ease = t => 1 - Math.pow(1 - Math.min(Math.max(t, 0), 1), 3);
@@ -188,6 +188,14 @@
     const r = spot.getBoundingClientRect();
     S = r.width / 200;
     cat.x = r.left + r.width / 2; cat.y = r.top + 182 * S;
+    // Arriving from the nav bar: start where the little TARS landed
+    try {
+      const a = JSON.parse(sessionStorage.getItem('tarsArrive') || 'null');
+      sessionStorage.removeItem('tarsArrive');
+      if (a && Date.now() - a.t < 8000) {               // sit still a moment: no rush for the toy
+        cat.x = a.x; cat.y = a.y; interest = 0; wanderAt = performance.now() + 5000;
+      }
+    } catch (e) {}
     bird.x = bird.px = cat.x + 66 * S; bird.y = bird.py = cat.y - 6 * S;
   }
   const bounds = () => ({ x0: 75 * S, x1: W - 75 * S, y0: 185 * S + 10, y1: H - 8 });
@@ -493,6 +501,8 @@
       .map((c, i) => [lerp(c[0], [44, 24, 4][i], pa), lerp(c[1], [182, 182, 178 + fl][i], pa)]);
     const d2 = `M66 ${lerp(170, 173, pa).toFixed(1)} C${T.map(c => c[0].toFixed(1) + ' ' + c[1].toFixed(1)).join(' ')}`;
     sTail.forEach(p => p.setAttribute('d', d2));
+    // She always faces you; when she changes direction only her tail swings across, trailing behind her
+    tailG.setAttribute('transform', `translate(100 0) scale(${cat.face.toFixed(3)} 1) translate(-100 0)`);
     // White tip: the last stretch of the same curve, drawn on its own so it never shifts along the tail
     const P = [[66, lerp(170, 173, pa)], ...T];
     const at = t => [0, 1].map(i => (1 - t) ** 3 * P[0][i] + 3 * (1 - t) ** 2 * t * P[1][i] + 3 * (1 - t) * t * t * P[2][i] + t ** 3 * P[3][i]);
