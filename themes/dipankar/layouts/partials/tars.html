@@ -194,10 +194,15 @@
   // Her paw reaches up for a dangling bird, or out along the floor for one lying down
   const reach = () => bird.held ? { x: 40, y: 70, a: 128 } : { x: 55, y: 8, a: 58 };
   const reachPt = () => { const r = reach(); return { x: cat.x + r.x * S * cat.dir, y: cat.y - r.y * S }; };
-  const spotFor = b => {                              // where to sit so the bird is at her paw
-    const dir = (b.x - cat.x) * cat.dir < -24 * S ? -cat.dir : cat.dir;   // only switch sides when it clearly crosses
-    const k = bounds(), r = reach();
-    return { x: clamp(b.x - r.x * S * dir, k.x0, k.x1), y: clamp(b.y + r.y * S, k.y0, k.y1), dir };
+  // Where to sit so the bird is at her paw. She keeps to one side of it (side: -1 left, 1 right)
+  // rather than deciding from the way she faces: walking round to a spot turns her, and
+  // re-deciding from that made her pace back and forth when the bird lay at her feet.
+  let side = -1;
+  const spotFor = b => {
+    const k = bounds(), r = reach(), off = r.x * S;
+    if ((cat.x - b.x) * side < -40 * S) side = -side;                 // she has clearly crossed over
+    if (b.x + side * off < k.x0 || b.x + side * off > k.x1) side = -side;   // no room on this side
+    return { x: clamp(b.x + side * off, k.x0, k.x1), y: clamp(b.y + r.y * S, k.y0, k.y1), dir: -side };
   };
 
   // ── Input ──
