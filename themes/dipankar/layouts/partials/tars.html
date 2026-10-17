@@ -1,7 +1,10 @@
 {{- /* TARS, the calico from the photography albums, loose on the 404 page.
        Drawn to match the photos: long white coat, a black patch over one eye,
-       black over the other eye with orange on that cheek, striped tail,
-       amber eyes.
+       black over the other eye with orange on that cheek and a thin orange
+       streak on the forehead, pale pink ears, black patches on her back, a
+       striped tail with a white tip, amber eyes. Her toy is the real one: a
+       fluffy turquoise bird with a yellow beak, a white patterned wing and a
+       flat blue felt tail, on a black string.
 
        She starts sitting in the page (in .tars-spot) and then has the run of
        the whole screen:
@@ -20,6 +23,7 @@
     <clipPath id="tars-face">
       <path d="M100 46 C121 46 136 58 137 78 L142 86 L136 88 L140 95 L132 96 C126 107 114 113 100 113 C86 113 74 107 68 96 L60 95 L64 88 L58 86 L63 78 C64 58 79 46 100 46 Z"/>
     </clipPath>
+    <clipPath id="tars-coat"><ellipse cx="100" cy="146" rx="40" ry="36"/></clipPath>
   </defs>
 
   {{/* TARS, in local units: 200 x 190 box, feet at (100, 182) */}}
@@ -32,11 +36,18 @@
         <path stroke="#3d342c" stroke-width="19" d="M66 170 C40 180 22 152 34 126"/>
         <path stroke="#2b2622" stroke-width="16" d="M66 170 C40 180 22 152 34 126"/>
         <path stroke="#d98a3d" stroke-width="16" stroke-dasharray="9 11" stroke-dashoffset="4" stroke-linecap="butt" d="M66 170 C40 180 22 152 34 126"/>
+        <path stroke="#fffdfa" stroke-width="16" pathLength="100" stroke-dasharray="14 86" stroke-dashoffset="-86" d="M66 170 C40 180 22 152 34 126"/>
       </g>
 
       <g class="tars-body">
-        <ellipse cx="100" cy="146" rx="40" ry="36" fill="#fffdfa" stroke="#3d342c" stroke-width="1.5"/>
-        <path d="M117 158 Q129 148 136 159 Q132 173 120 173 Z" fill="#d98a3d"/>
+        <ellipse cx="100" cy="146" rx="40" ry="36" fill="#fffdfa"/>
+        <g clip-path="url(#tars-coat)">
+          <ellipse cx="66" cy="128" rx="15" ry="19" transform="rotate(-20 66 128)" fill="#2b2622"/>
+          <ellipse cx="70" cy="166" rx="13" ry="8" transform="rotate(-15 70 166)" fill="#2b2622"/>
+          <ellipse cx="78" cy="118" rx="6" ry="4" fill="#d98a3d"/>
+          <path d="M117 158 Q129 148 136 159 Q132 173 120 173 Z" fill="#d98a3d"/>
+        </g>
+        <ellipse cx="100" cy="146" rx="40" ry="36" fill="none" stroke="#3d342c" stroke-width="1.5"/>
         <path d="M90 120 l2.5 4 l2.5 -4 M97.5 123 l2.5 4 l2.5 -4 M105 120 l2.5 4 l2.5 -4" fill="none" stroke="#e6ddd3" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
       </g>
       <g class="tars-leg">
@@ -53,14 +64,14 @@
 
       <g class="tars-head">
         <g class="tars-ear-l">
-          <path d="M64 74 L70 26 L95 50 Z" fill="#2b2622" stroke="#3d342c" stroke-width="1.5" stroke-linejoin="round"/>
-          <path d="M71 37 L73 60 L88 52 Z" fill="#e8a8a8" opacity="0.45"/>
-          <path d="M74 54 L76 42 M79 55 L82 45" stroke="#e9e2da" stroke-width="0.8" stroke-linecap="round" opacity="0.8"/>
+          <path d="M64 74 L70 26 L95 50 Z" fill="#f8efe7" stroke="#3d342c" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M70.5 35 L72.5 62 L89 52 Z" fill="#efaeb0"/>
+          <path d="M74 56 L76 42 M79 56 L82 45" stroke="#fffaf5" stroke-width="0.8" stroke-linecap="round"/>
         </g>
         <g class="tars-ear-r">
-          <path d="M136 74 L130 26 L105 50 Z" fill="#d98a3d" stroke="#3d342c" stroke-width="1.5" stroke-linejoin="round"/>
-          <path d="M129 37 L127 60 L112 52 Z" fill="#eaa5a5" opacity="0.85"/>
-          <path d="M126 54 L124 42 M121 55 L118 45" stroke="#fff6ee" stroke-width="0.8" stroke-linecap="round"/>
+          <path d="M136 74 L130 26 L105 50 Z" fill="#f8efe7" stroke="#3d342c" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M129.5 35 L127.5 62 L111 52 Z" fill="#efaeb0"/>
+          <path d="M126 56 L124 42 M121 56 L118 45" stroke="#fffaf5" stroke-width="0.8" stroke-linecap="round"/>
         </g>
 
         <path d="M100 46 C121 46 136 58 137 78 L142 86 L136 88 L140 95 L132 96 C126 107 114 113 100 113 C86 113 74 107 68 96 L60 95 L64 88 L58 86 L63 78 C64 58 79 46 100 46 Z" fill="#fffdfa"/>
@@ -70,6 +81,7 @@
           <ellipse cx="129" cy="76" rx="15" ry="24" fill="#d98a3d"/>
           <ellipse cx="114" cy="66" rx="11.5" ry="21" transform="rotate(12 114 66)" fill="#2b2622"/>
           <path d="M95 46 Q100 40 105 46 L113 114 L87 114 Z" fill="#fffdfa"/>
+          <ellipse cx="106.5" cy="55" rx="2.6" ry="9" transform="rotate(10 106.5 55)" fill="#d98a3d"/>
         </g>
         <path d="M100 46 C121 46 136 58 137 78 L142 86 L136 88 L140 95 L132 96 C126 107 114 113 100 113 C86 113 74 107 68 96 L60 95 L64 88 L58 86 L63 78 C64 58 79 46 100 46 Z" fill="none" stroke="#3d342c" stroke-width="1.5" stroke-linejoin="round"/>
 
@@ -120,15 +132,18 @@
   </g>
 
   {{/* The toy: a bird on a string. Drawn around (0, 0); string only while held */}}
-  <path class="tars-string" fill="none" stroke="#a39a90" stroke-width="1" stroke-linecap="round" display="none"/>
+  <path class="tars-string" fill="none" stroke="#2b2622" stroke-width="1.1" stroke-linecap="round" display="none"/>
   <g class="tars-bird">
     <circle r="22" fill="transparent"/>
-    <ellipse cx="-12" cy="-3" rx="7" ry="2.3" transform="rotate(-22 -12 -3)" fill="#3f8fb5"/>
-    <ellipse cx="-13" cy="2" rx="6.5" ry="2.1" transform="rotate(12 -13 2)" fill="#7cc3e0"/>
-    <circle r="8.5" fill="#5fb0d3"/>
-    <path d="M-5 0 Q0 7 5 0" fill="#4a9cc2"/>
-    <path d="M8 -1.5 L12.5 0 L8 1.5 Z" fill="#e0913f"/>
-    <circle cx="4" cy="-3" r="1.2" fill="#1f1b18"/>
+    <path d="M-7.5 0 C-11 -7 -17.5 -7.5 -17 -3 C-21 -2 -21.5 2.5 -17.5 3.5 C-18 8 -12 8.5 -7.5 2.5 Z" fill="#3d93d4"/>
+    <path d="M-9 -0.5 L-15.5 -2.5 M-9 1 L-15.5 2.5" stroke="#2f7fbf" stroke-width="0.6" stroke-linecap="round"/>
+    <ellipse rx="10" ry="8.2" fill="#46c3db"/>
+    <ellipse rx="10" ry="8.2" fill="none" stroke="#46c3db" stroke-width="2.4" stroke-dasharray="0.1 1.7" stroke-linecap="round"/>
+    <ellipse rx="10.6" ry="8.8" fill="none" stroke="#5fd0e4" stroke-width="1.2" stroke-dasharray="0.1 2.9" stroke-dashoffset="1.3" stroke-linecap="round"/>
+    <ellipse cx="1" cy="3" rx="7" ry="4" fill="#2fb0cb" opacity="0.35"/>
+    <path d="M-6.5 1.5 Q-2 -2 2.5 1.5 Q-2 5.5 -6.5 1.5 Z" fill="#fbfdff"/>
+    <path d="M-4.5 1.5 Q-2 0 0.5 1.6 M-3.5 3 Q-1.8 2.2 0 3.1" fill="none" stroke="#3d93d4" stroke-width="0.6" stroke-linecap="round"/>
+    <path d="M9.5 -2 L13.5 -0.3 L9.5 1.6 Z" fill="#f2c230"/>
   </g>
 
   <g class="tars-hearts"></g>
