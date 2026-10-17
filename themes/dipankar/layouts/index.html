@@ -5,7 +5,7 @@
 {{/* ── Sidebar: photo, name, role, links and the table of contents; stays in view ── */}}
 <aside class="home-sidebar">
   <div class="profile-photo">
-    <img src="/profile-330.jpg" alt="{{ .Site.Params.author }}" width="165" height="220" fetchpriority="high" decoding="async">
+    {{- with resources.Get "profile-330.jpg" }}<img src="{{ .RelPermalink }}" alt="{{ site.Params.author }}" width="165" height="220" fetchpriority="high" decoding="async">{{ end }}
   </div>
   <h1>{{ .Site.Params.author }}</h1>
   {{ with .Site.Params.authorNative }}<p class="name-native" lang="{{ $.Site.Params.authorNativeLang }}">{{ . }}</p>{{ end }}

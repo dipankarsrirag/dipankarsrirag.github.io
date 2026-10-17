@@ -89,6 +89,20 @@
 <link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 {{- $cssVer := readFile "themes/dipankar/static/css/main.css" | md5 | truncate 8 "" }}
 <link rel="stylesheet" href="/css/main.css?v={{ $cssVer }}">
+{{- /* Site colours follow the profile photo: the most saturated of its dominant
+       colours seeds the accent and the page tints (see --seed in main.css). */}}
+{{- with resources.Get "profile-330.jpg" }}
+{{- $seed := "" }}{{ $best := -1 }}
+{{- range .Colors }}
+{{- $h := strings.TrimPrefix "#" .ColorHex }}
+{{- $r := int (printf "0x%s" (substr $h 0 2)) }}{{ $g := int (printf "0x%s" (substr $h 2 2)) }}{{ $b := int (printf "0x%s" (substr $h 4 2)) }}
+{{- $chroma := sub (math.Max $r $g $b) (math.Min $r $g $b) }}
+{{- if gt $chroma $best }}{{ $best = $chroma }}{{ $seed = .ColorHex }}{{ end }}
+{{- end }}
+{{- with $seed }}
+<style>:root { --seed: {{ . | safeCSS }}; }</style>
+{{- end }}
+{{- end }}
 {{- if and (eq .Section "log-it") .IsPage }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
 {{- end }}
