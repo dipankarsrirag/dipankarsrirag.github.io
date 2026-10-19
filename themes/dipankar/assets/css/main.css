@@ -2394,6 +2394,7 @@ td:has(> .cell) {
 .tars-bird { cursor: grab; }
 .tars-stage.is-holding .tars-bird { cursor: grabbing; }
 .tars-hearts { pointer-events: none; }
+.tars-tent-back, .tars-tent-front { pointer-events: auto; cursor: pointer; }   /* click it to coax her out */
 
 .notfound-title {
   font-size: 1.6rem;

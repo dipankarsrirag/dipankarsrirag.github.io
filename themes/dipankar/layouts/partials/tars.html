@@ -14,6 +14,11 @@
            bored. From a little way off she backs up, wiggles and pounces.
          - pet: stroke her with the pointer (or a finger). She stops, closes
            her eyes, purrs, and little hearts float up. A tap gets a slow blink.
+           But touch her while she is busy with the bird and she grabs your
+           hand with both paws, gives it a bite, and bolts for the far side,
+           and dives into her blanket tent, eyes glowing in the doorway, until
+           she feels brave again (click the tent or dangle the bird to coax her
+           out). Now and then she naps in it on her own.
        Left alone she wanders, sits, blinks, yawns and watches your cursor. She gets
        about in her front-facing pose with a bouncy little trot.
        Sits still in the page for reduced motion. */ -}}
@@ -23,10 +28,29 @@
     <clipPath id="tars-face">
       <path d="M100 46 C121 46 136 58 137 78 L142 86 L136 88 L140 95 L132 96 C126 107 114 113 100 113 C86 113 74 107 68 96 L60 95 L64 88 L58 86 L63 78 C64 58 79 46 100 46 Z"/>
     </clipPath>
+    <clipPath id="tars-door" clipPathUnits="userSpaceOnUse"><path class="tars-door-path" d="M-22 4 Q-14 -34 0 -60 Q14 -34 22 4 Z"/></clipPath>
     <clipPath id="tars-coat"><ellipse cx="100" cy="146" rx="40" ry="36"/></clipPath>
   </defs>
 
+  {{/* Her blanket tent: a purple throw with red lace over a pole, door at (0, 0).
+       The back (cloth, dark doorway, her eyes) is drawn behind her and the front
+       (door flaps, lace) in front, so she slips in between the flaps. */}}
+  <g class="tars-tent-back">
+    <ellipse cx="0" cy="2" rx="64" ry="5" fill="#000" opacity="0.08"/>
+    <g class="tars-tent-cloth">
+      <path d="M0 -105 L3 -94 L-3 -94 Z" fill="#a07a52"/>
+      <path d="M-62 0 Q-40 -44 0 -96 Q40 -44 62 0 Z" fill="#7e5b9a" stroke="#3d342c" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M-46 -10 Q-30 -40 -6 -78 M-32 -6 Q-18 -36 -2 -62 M46 -10 Q30 -40 6 -78 M32 -6 Q18 -36 2 -62" fill="none" stroke="#9878b3" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-22 0 Q-14 -34 0 -60 Q14 -34 22 0 Z" fill="#2b2430"/>
+    </g>
+    <g class="tars-tent-eyes" opacity="0">
+      <g class="tars-tent-eye"><ellipse cx="-6" cy="-24" rx="3" ry="3.2" fill="#d1ab35"/><ellipse class="tars-tent-pupil" cx="-6" cy="-24" rx="1.4" ry="2.6" fill="#1f1b18"/></g>
+      <g class="tars-tent-eye"><ellipse cx="6" cy="-24" rx="3" ry="3.2" fill="#d1ab35"/><ellipse class="tars-tent-pupil" cx="6" cy="-24" rx="1.4" ry="2.6" fill="#1f1b18"/></g>
+    </g>
+  </g>
+
   {{/* TARS, in local units: 200 x 190 box, feet at (100, 182) */}}
+  <g class="tars-cat-clip">
   <g class="tars-cat">
     <ellipse class="tars-shadow" cx="100" cy="183" rx="54" ry="5" fill="#000" opacity="0.07"/>
 
@@ -49,17 +73,6 @@
         </g>
         <ellipse cx="100" cy="146" rx="40" ry="36" fill="none" stroke="#3d342c" stroke-width="1.5"/>
         <path d="M90 120 l2.5 4 l2.5 -4 M97.5 123 l2.5 4 l2.5 -4 M105 120 l2.5 4 l2.5 -4" fill="none" stroke="#e6ddd3" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      <g class="tars-leg">
-        <rect x="80.5" y="132.5" width="19" height="51" rx="9.5" fill="#3d342c"/>
-        <rect x="82" y="134" width="16" height="48" rx="8" fill="#fffdfa"/>
-        <path d="M87 179 v-4 M93 179 v-4" stroke="#c9bfb4" stroke-width="1" stroke-linecap="round"/>
-        <g class="tars-beans" fill="#eb9aa6" opacity="0">
-          <ellipse cx="90" cy="176" rx="4.2" ry="3"/>
-          <circle cx="85.5" cy="170.5" r="1.6"/>
-          <circle cx="90" cy="169" r="1.6"/>
-          <circle cx="94.5" cy="170.5" r="1.6"/>
-        </g>
       </g>
 
       <g class="tars-head">
@@ -117,6 +130,18 @@
         </g>
       </g>
 
+      <g class="tars-leg">
+        <rect x="80.5" y="132.5" width="19" height="51" rx="9.5" fill="#3d342c"/>
+        <rect x="82" y="134" width="16" height="48" rx="8" fill="#fffdfa"/>
+        <path d="M87 179 v-4 M93 179 v-4" stroke="#c9bfb4" stroke-width="1" stroke-linecap="round"/>
+        <g class="tars-beans" fill="#eb9aa6" opacity="0">
+          <ellipse cx="90" cy="176" rx="4.2" ry="3"/>
+          <circle cx="85.5" cy="170.5" r="1.6"/>
+          <circle cx="90" cy="169" r="1.6"/>
+          <circle cx="94.5" cy="170.5" r="1.6"/>
+        </g>
+      </g>
+
       <g class="tars-paw">
         <rect x="100.5" y="132.5" width="19" height="51" rx="9.5" fill="#3d342c"/>
         <rect x="102" y="134" width="16" height="48" rx="8" fill="#fffdfa"/>
@@ -127,6 +152,20 @@
           <circle cx="110" cy="169" r="1.6"/>
           <circle cx="114.5" cy="170.5" r="1.6"/>
         </g>
+      </g>
+    </g>
+  </g>
+  </g>
+
+  <g class="tars-tent-front">
+    <g class="tars-tent-flaps">
+      <path d="M-22 0 Q-14 -34 0 -60 Q-6 -30 -9 0 Z M22 0 Q14 -34 0 -60 Q6 -30 9 0 Z" fill="#6a4a86"/>
+      <path d="M-22 0 Q-14 -34 0 -60 Q14 -34 22 0" fill="none" stroke="#b8323a" stroke-width="2.2" stroke-dasharray="0.1 3.2" stroke-linecap="round"/>
+      <path d="M-62 0 A3.88 3.88 0 0 0 -54.2 0 A3.88 3.88 0 0 0 -46.5 0 A3.88 3.88 0 0 0 -38.8 0 A3.88 3.88 0 0 0 -31 0 A3.88 3.88 0 0 0 -23.2 0 A3.88 3.88 0 0 0 -15.5 0 A3.88 3.88 0 0 0 -7.75 0 A3.88 3.88 0 0 0 0 0 A3.88 3.88 0 0 0 7.75 0 A3.88 3.88 0 0 0 15.5 0 A3.88 3.88 0 0 0 23.2 0 A3.88 3.88 0 0 0 31 0 A3.88 3.88 0 0 0 38.8 0 A3.88 3.88 0 0 0 46.5 0 A3.88 3.88 0 0 0 54.2 0 A3.88 3.88 0 0 0 62 0" fill="#c7404a" stroke="#9e2a33" stroke-width="0.6"/>
+      <path d="M-62 0 L62 0" stroke="#b8323a" stroke-width="2.4" stroke-linecap="round"/>
+      <g fill="#fbe9ea">
+        <circle cx="-54" cy="1.8" r="0.9"/><circle cx="-38" cy="1.8" r="0.9"/><circle cx="-22" cy="1.8" r="0.9"/><circle cx="-6" cy="1.8" r="0.9"/>
+        <circle cx="10" cy="1.8" r="0.9"/><circle cx="26" cy="1.8" r="0.9"/><circle cx="42" cy="1.8" r="0.9"/><circle cx="58" cy="1.8" r="0.9"/>
       </g>
     </g>
   </g>
@@ -180,9 +219,59 @@
   let swipe = null, lastSwipe = 0, stroke = 0, petUntil = 0, heartAt = 0;
   let pounce = null, lastPounce = 0, pounceRoll = 0;
   let yawn = null, nextYawn = performance.now() + 5000, busyAt = 0;
+  let bite = null, lookBackUntil = 0;   // touched mid-play: she grabs, bites, and bolts
+  let inTent = null, exiting = null, tentShake = -1e9, serious = 0;
+  const tent = { x: 0, y: 0 };
   const pv = { crouch: 0, wiggle: 0, lift: 0, stretch: 0, paws: 0, squash: 0 };   // pounce pose
   let trot = 0, pa = 0, headRot = 3, look = { x: 0, y: 0 }, dilate = 0, blink = null, nextBlink = 0, twitch = null, nextTwitch = 0;
   const hearts = [];
+
+  const tentBack = $('.tars-tent-back'), tentFront = $('.tars-tent-front');
+  const tentCloth = $('.tars-tent-cloth'), tentFlaps = $('.tars-tent-flaps'), tentEyes = $('.tars-tent-eyes');
+  const tentEyeEls = $$('.tars-tent-eye'), tentPupils = $$('.tars-tent-pupil');
+  const catClip = $('.tars-cat-clip'), doorPath = $('.tars-door-path');
+  const TS = () => Math.min(S * 1.9, 0.34 * W / 124);   // tent scale: her doorway fits her, capped on small screens
+  const ENTER = 520;                                  // ms to slip in through the flaps
+  // The way into the tent: along the ground to a spot beside the doorway, then in through it,
+  // so she never runs across the tent itself
+  function tentRun(flee) {
+    const door = { x: tent.x, y: tent.y, tent: true, flee, wander: !flee };
+    const side = cat.x < tent.x - 40 * TS() ? -1 : 1;
+    return { x: tent.x + side * 78 * TS(), y: tent.y, flee, wander: !flee, next: door };
+  }
+  function placeTent() {                              // bottom-left, sitting just above the footer
+    tent.x = 62 * TS() + 16; tent.y = H - 64;
+  }
+  function enterTent(now, nap) {
+    inTent = { t0: now, until: now + ENTER + (nap ? rand(6000, 9000) : rand(3500, 6000)) };
+    tentShake = now; goal = null; cat.walking = false; lookBackUntil = 0;
+    cat.x = tent.x; cat.y = tent.y;
+  }
+  // How she comes out: pouncing if the bird is dangled by the door, relaxed if
+  // nothing is moving, a little wary otherwise (looking back at you)
+  function exitTent(now, mode) {
+    inTent = null; tentShake = now;
+    cat.x = tent.x; cat.y = tent.y;
+    exiting = { t0: now, mode, dur: mode === 'pounce' ? 260 : mode === 'relaxed' ? 1100 : 520 };
+  }
+  function finishExit(now) {
+    const mode = exiting.mode, k = bounds();
+    exiting = null;
+    if (mode === 'pounce') {                          // straight out and onto the bird
+      interest = 1;
+      const to = landFor();
+      cat.dir = to.x >= cat.x ? 1 : -1;
+      pounce = { t0: now - 380, from: { x: cat.x, y: cat.y }, back: { x: cat.x, y: cat.y }, to, wig: 240, hit: false, pinned: false };
+      lastPounce = now;
+      return;
+    }
+    goal = { x: clamp(tent.x + 120 * S, k.x0, k.x1), y: clamp(tent.y - 24 * S, k.y0, k.y1), wander: true };
+    wanderAt = now + rand(6000, 10000);
+    if (mode === 'relaxed') { busyAt = now - 6000; nextYawn = now + 1600; }   // a lazy stroll out, then a yawn
+    else lookBackUntil = now + 2500;
+  }
+  tentBack.addEventListener('click', () => { if (inTent) exitTent(performance.now(), 'wary'); });
+  tentFront.addEventListener('click', () => { if (inTent) exitTent(performance.now(), 'wary'); });
 
   function place() {
     const r = spot.getBoundingClientRect();
@@ -236,23 +325,46 @@
   addEventListener('pointercancel', letGo);
   addEventListener('touchmove', e => { if (bird.held || isPet()) e.preventDefault(); }, { passive: false });
 
+  // Touch her while she is busy with the bird and she grabs your hand, bites, and runs off
+  const playing = () => !bird.held && (interest > 0 || pounce);
+  function startBite(e) {
+    if (bite) return;
+    bite = { t0: performance.now(), x: e.clientX, y: e.clientY, fled: false };
+    pounce = null; swipe = null; goal = null; cat.walking = false; stroke = 0; petUntil = 0;
+    cat.dir = e.clientX >= cat.x ? 1 : -1;
+  }
+
+  // Purring you can feel: on phones that allow it (Android browsers; iPhones and desktops
+  // cannot vibrate from a web page) a soft rumble while a finger strokes her
+  let petByTouch = false, purring = false;
+  const canBuzz = 'vibrate' in navigator;
+  const PURR = Array.from({ length: 29 }, (_, i) => i % 2 ? 24 : 9);   // ~0.47 s of soft pulses, then a breath
+  function purrBuzz() { if (canBuzz && petByTouch) { navigator.vibrate(PURR); purring = true; } }
+  function purrStop() { if (purring) { navigator.vibrate(0); purring = false; } }
+
   let lastPet = null;
   catEl.addEventListener('pointermove', e => {         // stroking her
-    if (bird.held) return;
+    petByTouch = e.pointerType === 'touch';
+    if (bird.held || bite || (goal && goal.flee)) return;
     if (lastPet) stroke += Math.hypot(e.clientX - lastPet.x, e.clientY - lastPet.y);
     lastPet = { x: e.clientX, y: e.clientY };
+    if (playing()) { if (stroke > 25) startBite(e); return; }
     if (stroke > 70) {                                // content: forget the toy and stay a while
       const now = performance.now();
       petUntil = now + 1400; interest = 0; goal = null; wanderAt = Math.max(wanderAt, now + 7000);
     }
   });
   catEl.addEventListener('pointerleave', () => { lastPet = null; });
-  catEl.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') e.preventDefault(); });
+  catEl.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse') e.preventDefault();
+    if (playing()) startBite(e);
+  });
   catEl.addEventListener('click', () => {
-    if (isPet()) return;
+    if (isPet() || bite || (goal && goal.flee)) return;
     blink = { t0: performance.now(), slow: true }; addHeart();
   });
   addEventListener('resize', () => {
+    setTimeout(placeTent, 0);
     W = innerWidth; H = innerHeight; S = spot.getBoundingClientRect().width / 200 || S;
   });
 
@@ -297,6 +409,16 @@
     interest -= bird.held ? 0 : rand(0.12, 0.3);
   }
 
+  function updateBite(now) {
+    const t = now - bite.t0;
+    if (t > 950 && !bite.fled) {                      // let go and bolt for the far side
+      bite.fled = true;
+      goal = tentRun(true);                           // straight for her tent
+      interest = 0; wanderAt = now + 7000;
+    }
+    if (t > 1050) bite = null;
+  }
+
   function think(now, dt) {
     stroke *= Math.exp(-1.5 * dt);
     interest = Math.max(0, interest - dt * 0.02);
@@ -305,17 +427,18 @@
     if (bird.held || interest > 0) {
       goal = spotFor(bird);
     } else if (now > wanderAt) {
-      goal = { x: rand(k.x0, k.x1), y: rand(k.y0, k.y1), wander: true };
+      goal = Math.random() < 0.25 ? tentRun(false)    // off for a nap
+           : { x: rand(k.x0, k.x1), y: rand(k.y0, k.y1), wander: true };
       wanderAt = now + rand(8000, 15000);
-    } else if (goal && !goal.wander) goal = null;
+    } else if (goal && !goal.wander && !goal.flee) goal = null;
   }
 
   function move(now, dt) {
     if (!goal || yawn) { cat.walking = false; return; }   // she stops to yawn, then carries on
     const dx = goal.x - cat.x, dy = goal.y - cat.y, d = Math.hypot(dx, dy);
-    const start = cat.walking ? 3 : (goal.wander ? 4 : 30 * S);
+    const start = cat.walking ? 3 : (goal.wander || goal.flee ? 4 : 30 * S);
     if (d > start && !swipe) {
-      const v = (bird.held ? 260 : goal.wander ? 85 : 200) * S;
+      const v = (bird.held ? 260 : goal.flee ? 520 : goal.wander ? 85 : 200) * S;
       const s = Math.min(d, v * dt);
       cat.x += dx / d * s; cat.y += dy / d * s;
       if (Math.abs(dx) > 3) cat.dir = dx > 0 ? 1 : -1;
@@ -323,7 +446,10 @@
     } else {
       cat.walking = false;
       if (goal.dir) cat.dir = goal.dir;
-      if (goal.wander) goal = null;
+      if (goal.next) { goal = goal.next; return; }   // on to the doorway without stopping
+      if (goal.tent) { enterTent(performance.now(), !goal.flee); return; }
+      if (goal.flee) lookBackUntil = performance.now() + 2500;   // safe now: a look back at you
+      if (goal.wander || goal.flee) goal = null;
     }
   }
 
@@ -410,22 +536,28 @@
       if (t > w + 520) swipe = null;
     }
     const purr = pet ? Math.sin(now / 18) * 0.35 : 0;
+    serious = lerp(serious, goal && goal.flee ? 1 : 0, 0.2);   // bolting for the tent: low, fast, focused
     // Trot: little hops with a squash on landing, a lean into the step, paws taking turns
     trot = lerp(trot, cat.walking ? 1 : 0, 0.2);
     const ph = cat.step * 0.55, hop = Math.abs(Math.sin(ph)) * trot;
     const squash = 1 - 0.06 * (1 - Math.abs(Math.sin(ph))) * trot;
     const sx = (2 - squash) * (1 + 0.07 * pv.crouch - 0.06 * pv.stretch + 0.08 * pv.squash);
-    const sy = squash * (1 - 0.1 * pv.crouch + 0.1 * pv.stretch - 0.1 * pv.squash);
+    const sy = squash * (1 - 0.1 * pv.crouch + 0.1 * pv.stretch - 0.1 * pv.squash) * (1 - 0.07 * serious);
     sitEl.setAttribute('transform',
-      `translate(${(wiggle + purr + pv.wiggle).toFixed(2)} ${(crouch * 2.5 - hop * 9 - pv.lift).toFixed(2)}) ` +
-      `rotate(${((7 * trot + 14 * pv.stretch + 4 * pv.crouch) * cat.face).toFixed(2)} 100 182) ` +
+      `translate(${(wiggle + purr + pv.wiggle).toFixed(2)} ${(crouch * 2.5 - hop * (9 - 5 * serious) - pv.lift).toFixed(2)}) ` +
+      `rotate(${((7 * trot + 14 * pv.stretch + 4 * pv.crouch + 9 * serious) * cat.face).toFixed(2)} 100 182) ` +
       `translate(100 182) scale(${sx.toFixed(3)} ${sy.toFixed(3)}) translate(-100 -182)`);
     const sh = 1 - Math.min(0.5, pv.lift / 120);
     shadow.setAttribute('transform', `translate(100 183) scale(${sh.toFixed(3)}) translate(-100 -183)`);
     const stepL = Math.max(0, Math.sin(ph)) * trot, stepR = Math.max(0, -Math.sin(ph)) * trot;
     // Swipe with the paw on the bird's side: right paw to the right, left paw to the left
     const ang = (swipe?.angle ?? 128) * pawA, right = (swipe?.dir ?? cat.dir) > 0;
-    const up = 70 * pv.paws;                          // mid-pounce both front paws reach out
+    let bw = 0;                                        // how far into the bite she is
+    if (bite) {
+      const t = now - bite.t0;
+      bw = t < 180 ? ease(t / 180) : t < 850 ? 1 : 1 - ease((t - 850) / 150);
+    }
+    const up = 70 * pv.paws - 145 * bw;               // pounce: paws reach out; bite: paws fold in round your hand
     legEl.setAttribute('transform', `translate(0 ${(-6 * stepL).toFixed(2)}) rotate(${((right ? 0 : ang) + up).toFixed(1)} 90 140)`);
     paw.setAttribute('transform', `translate(0 ${(-6 * stepR).toFixed(2)}) rotate(${((right ? -ang : 0) - up).toFixed(1)} 110 140)`);
     const bo = Math.max(0, pawA * 1.6 - 0.6), bp = Math.max(0, pv.paws * 1.6 - 0.6);
@@ -436,14 +568,16 @@
 
     // Watch the toy while playing, otherwise the cursor if it moved lately
     const focus = bird.held || interest > 0;
-    const tgt = focus ? bird : cat.walking && goal ? { x: goal.x, y: goal.y - 120 * S }
+    const tgt = bite ? { x: bite.x, y: bite.y } : now < lookBackUntil ? ptr
+              : focus ? bird : cat.walking && goal ? { x: goal.x, y: goal.y - 120 * S }
               : (now - ptr.at < 2500 ? ptr : { x: cat.x + 40 * cat.dir, y: cat.y - 40 });
     const lp = toLocal(tgt);
     headRot = lerp(headRot, pet ? 8 : clamp((lp.x - 100) / 6, -9, 11), 0.06);
     const dx = lp.x - 100, dy = lp.y - 82, d = Math.hypot(dx, dy) || 1;
     look.x = lerp(look.x, (dx / d) * Math.min(2.4, d / 20), 0.15);
     look.y = lerp(look.y, (dy / d) * Math.min(1.8, d / 20), 0.15);
-    pa = lerp(pa, pounce ? 1 : 0, pounce ? 0.18 : 0.06);   // hunting face: wide eyes, ears flat, tail low
+    const fleeing = goal && goal.flee;
+    pa = lerp(pa, pounce || bite || fleeing ? 1 : 0, pounce || bite || fleeing ? 0.25 : 0.06);   // ears flat, tail low
     dilate = lerp(dilate, (focus || pounce) && !pet ? (pounce ? 1.4 : 1) : 0, focus || pounce ? 0.1 : 0.03);
 
     // Yawn when nobody has played with her for a while
@@ -456,13 +590,15 @@
       yw = t < 0.35 ? ease(t / 0.35) : t < 0.7 ? 1 : 1 - ease((t - 0.7) / 0.3);
       if (t >= 1) { yawn = null; nextYawn = now + rand(9000, 17000); }
     }
-    yawnEl.setAttribute('opacity', yw > 0.05 ? 1 : 0);
-    yawnEl.setAttribute('transform', `translate(100 97) scale(${(0.6 + 0.4 * yw).toFixed(3)} ${yw.toFixed(3)}) translate(-100 -97)`);
-    mouth.setAttribute('opacity', yw > 0.05 ? 0 : 1);
-    head.setAttribute('transform', `rotate(${(headRot - 4 * yw).toFixed(2)} 100 110) translate(0 ${(-2.5 * yw).toFixed(2)})`);
+    // The same open mouth serves a big yawn or a small bite (with a little nom-nom shake)
+    const open = Math.max(yw, 0.55 * bw), nom = bw > 0.9 ? Math.sin(now / 45) * 2.5 : 0;
+    yawnEl.setAttribute('opacity', open > 0.05 ? 1 : 0);
+    yawnEl.setAttribute('transform', `translate(100 97) scale(${(0.6 + 0.4 * open).toFixed(3)} ${open.toFixed(3)}) translate(-100 -97)`);
+    mouth.setAttribute('opacity', open > 0.05 ? 0 : 1);
+    head.setAttribute('transform', `rotate(${(headRot - 4 * yw + nom).toFixed(2)} 100 110) translate(0 ${(-2.5 * yw + 4 * bw).toFixed(2)})`);
 
     let lid = 1;
-    if (swipe || pet || pounce || yw > 0.3) blink = null;
+    if (swipe || pet || pounce || bite || serious > 0.3 || yw > 0.3) blink = null;
     else if (!blink && now > nextBlink) blink = { t0: now, slow: false };
     if (blink) {
       const dur = blink.slow ? 1500 : 170, t = (now - blink.t0) / dur;
@@ -472,11 +608,11 @@
     }
     for (const e of eyes) {
       e.g.setAttribute('opacity', pet || yw > 0.3 ? 0 : 1);
-      const wide = 1 + 0.16 * pa;
-      e.g.setAttribute('transform', `translate(${e.cx} ${e.cy}) scale(${wide.toFixed(3)} ${(lid * wide).toFixed(3)}) translate(${-e.cx} ${-e.cy})`);
+      const wide = 1 + 0.16 * pa * (1 - serious), squint = 1 - 0.42 * serious;
+      e.g.setAttribute('transform', `translate(${e.cx} ${e.cy}) scale(${wide.toFixed(3)} ${(lid * wide * squint).toFixed(3)}) translate(${-e.cx} ${-e.cy})`);
       e.pupil.setAttribute('cx', (e.cx + look.x).toFixed(2));
       e.pupil.setAttribute('cy', (e.cy + look.y).toFixed(2));
-      e.pupil.setAttribute('rx', (2.4 + 2.8 * dilate).toFixed(2));
+      e.pupil.setAttribute('rx', (2.4 + 2.8 * dilate - 1 * serious).toFixed(2));
       e.pupil.setAttribute('ry', (5.6 + 0.8 * dilate).toFixed(2));
     }
     happy.forEach(h => h.setAttribute('opacity', pet || yw > 0.3 ? 1 : 0));
@@ -509,9 +645,49 @@
     tailTip.setAttribute('d', 'M' + [0.86, 0.93, 1].map(t => at(t).map(v => v.toFixed(1)).join(' ')).join(' L'));
   }
 
+  function drawTent(now) {
+    const ts = TS(), age = now - tentShake;
+    const w = age < 650 ? Math.sin(age / 40) * (1 - age / 650) * 3.5 : 0;   // the blanket sways as she brushes past
+    const at = `translate(${tent.x.toFixed(1)} ${tent.y.toFixed(1)}) scale(${ts.toFixed(3)})`;
+    tentBack.setAttribute('transform', at); tentFront.setAttribute('transform', at);
+    doorPath.setAttribute('transform', at);
+    tentCloth.setAttribute('transform', `translate(0 0) skewX(${(w * 0.6).toFixed(2)})`);
+    tentFlaps.setAttribute('transform', `skewX(${w.toFixed(2)})`);
+    let show = 0;
+    if (inTent) {
+      const t = now - inTent.t0;
+      show = Math.min(1, Math.max(0, (t - ENTER - 250) / 350));
+      const lid = (t % 3200) < 140 ? 0.15 : 1;          // the odd blink in the dark
+      const lx = clamp((ptr.x - tent.x) / 120, -1.2, 1.2), ly = clamp((ptr.y - tent.y) / 200, -0.6, 0.6);
+      tentEyeEls.forEach(e => e.setAttribute('transform', `translate(0 -24) scale(1 ${lid}) translate(0 24)`));
+      tentPupils.forEach((p, i) => { p.setAttribute('cx', ((i ? 6 : -6) + lx).toFixed(2)); p.setAttribute('cy', (-24 + ly).toFixed(2)); });
+    }
+    tentEyes.setAttribute('opacity', show.toFixed(2));
+  }
+
+  // 0 = out in the room, 1 = deep in the tent; she is clipped to the doorway in between
+  function depth(now) {
+    if (inTent) return ease(Math.min(1, (now - inTent.t0) / ENTER));
+    if (exiting) return 1 - ease(Math.min(1, (now - exiting.t0) / exiting.dur));
+    return 0;
+  }
+
   function draw(now) {
+    drawTent(now);
     cat.face = lerp(cat.face, cat.dir, 0.12);
-    catEl.setAttribute('transform', `translate(${cat.x.toFixed(1)} ${cat.y.toFixed(1)}) scale(${S.toFixed(3)}) translate(-100 -182)`);
+    // Slipping into (or out of) the tent: smaller and higher as she goes deeper, fading into the dark
+    const dp = depth(now), f = 1 - 0.32 * dp, dy = -16 * TS() * dp;
+    const duck = 1 - 0.14 * Math.sin(Math.PI * Math.min(1, dp * 1.6));   // she ducks under the flaps
+    catEl.setAttribute('transform', `translate(${cat.x.toFixed(1)} ${(cat.y + dy).toFixed(1)}) scale(${(S * f).toFixed(3)} ${(S * f * duck).toFixed(3)}) translate(-100 -182)`);
+    // The flaps only come in front of her while she is going in or out; otherwise she is in front of the tent
+    const flapsOver = dp > 0.001;
+    if (flapsOver !== (tentFront.previousElementSibling === catClip)) {
+      if (flapsOver) catClip.after(tentFront); else catClip.before(tentFront);
+    }
+    catEl.setAttribute('opacity', (1 - Math.max(0, Math.min(1, (dp - 0.2) / 0.45))).toFixed(3));
+    catEl.style.filter = dp > 0.001 ? `brightness(${(1 - 0.85 * Math.min(1, dp * 2.2)).toFixed(3)})` : '';   // into the shadow
+    catEl.setAttribute('display', dp >= 0.999 ? 'none' : 'inline');
+    if (dp > 0.001) catClip.setAttribute('clip-path', 'url(#tars-door)'); else catClip.removeAttribute('clip-path');
     drawSit(now);
 
     const near = Math.hypot(bird.x - hand.x, bird.y - hand.y) < 14 * S;   // too close to tell which way it hangs
@@ -537,7 +713,7 @@
     }
   }
 
-  place();
+  place(); placeTent();
   if (reduce) { draw(performance.now()); return; }
 
   let last = performance.now(), acc = 0;
@@ -548,15 +724,29 @@
     for (let i = 1; i <= n; i++) stepBird(1 / 120, i / n);
     acc -= n / 120;
     if (bird.held) { hand.fx = hand.x = ptr.x; hand.fy = hand.y = ptr.y; }
+    if (inTent && now - inTent.t0 > ENTER + 300) {
+      const lure = bird.held && Math.hypot(bird.x - tent.x, bird.y - (tent.y - 30 * TS())) < 75 * TS();
+      if (lure) exitTent(now, 'pounce');
+      else if (now > inTent.until) exitTent(now, now - ptr.at > 1500 ? 'relaxed' : 'wary');
+    }
+    if (exiting && now - exiting.t0 >= exiting.dur) finishExit(now);
+    if (inTent || exiting) { draw(now); requestAnimationFrame(frame); return; }
     think(now, dt);
     if (isPet()) pounce = null;                       // a stroke calms her mid-hunt
-    maybePounce(now);
-    if (pounce) updatePounce(now);
-    else {
+    if (bite) {                                       // the bite takes over from everything else
+      updateBite(now);
+      if (bite && !bite.fled) goal = null;
       for (const k in pv) pv[k] = lerp(pv[k], 0, 0.3);
-      move(now, dt); maybeSwipe(now);
+    } else {
+      maybePounce(now);
+      if (pounce) updatePounce(now);
+      else {
+        for (const k in pv) pv[k] = lerp(pv[k], 0, 0.3);
+        move(now, dt); maybeSwipe(now);
+      }
     }
-    if (isPet() && now - heartAt > 650) { addHeart(); heartAt = now; }
+    if (isPet() && now - heartAt > 650) { addHeart(); heartAt = now; purrBuzz(); }
+    if (!isPet()) purrStop();
     draw(now);
     requestAnimationFrame(frame);
   }
