@@ -14,6 +14,7 @@ underlineAuthors:
 links:
     paper: "https://aclanthology.org/2025.findings-acl.441.pdf"
     dataset: "https://huggingface.co/datasets/unswnlporg/besstie"
+    poster: /ACL-2025-BESSTIE-Poster.pdf
     # code: "https://github.com/cruiseresearchgroup/spectraformer"
 # project:   "https://yourlab.org/project"
 # journal: "ACL 2024"      # optional, whatever metadata you like

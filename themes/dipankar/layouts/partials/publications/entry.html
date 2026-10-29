@@ -34,6 +34,7 @@
     {{ with .Params.links.dataset }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Dataset: {{ $page.Title }}">Dataset</a>{{ end }}
     {{ with .Params.links.project }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Project: {{ $page.Title }}">Project</a>{{ end }}
     {{ with .Params.links.poster }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Poster: {{ $page.Title }}">Poster</a>{{ end }}
+    {{ with .Params.links.slides }}<a href="{{ . }}" class="pub-link" target="_blank" rel="noopener" aria-label="Slides: {{ $page.Title }}">Slides</a>{{ end }}
     {{ with .Params.bibtex }}
     <details class="pub-cite">
       <summary class="pub-link" aria-label="BibTeX: {{ $page.Title }}">BibTeX</summary>

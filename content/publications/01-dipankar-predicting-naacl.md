@@ -15,6 +15,7 @@ underlineAuthors:
 links:
     paper: https://aclanthology.org/2025.naacl-short.2.pdf
     code: https://github.com/dipankarsrirag/lordd
+    slides: /NAACL-2025-LoRDD-Slides.pdf
 # project:   "https://yourlab.org/project"
 venue: "NAACL 2025"
 bibtex: |
