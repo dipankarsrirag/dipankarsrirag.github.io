@@ -439,6 +439,23 @@ footer {
   flex-shrink: 0;
 }
 
+/* Social icons at play, on hover or keyboard focus: the envelope opens, the cap is
+   tossed, the Octocat waves, the bird chirps, the butterfly flaps */
+.social-icon, .social-icon * { transform-box: fill-box; }
+.si-flap { transform-origin: 50% 0%; transition: transform 0.25s ease; }
+:is(.social-link, .scholar-note):is(:hover, :focus-visible) .si-flap { transform: scaleY(-1); }
+:is(.social-link, .scholar-note):is(:hover, :focus-visible) .si-cap { animation: si-toss 0.9s ease-out; transform-origin: 50% 100%; }
+:is(.social-link, .scholar-note):is(:hover, :focus-visible) .si-arm { animation: si-wave 0.9s ease-in-out; transform-origin: 100% 60%; }
+:is(.social-link, .scholar-note):is(:hover, :focus-visible) .si-twitter { animation: si-chirp 0.7s ease-out; transform-origin: 50% 100%; }
+:is(.social-link, .scholar-note):is(:hover, :focus-visible) .si-wings { animation: si-flap 0.6s ease-in-out 2; transform-origin: 50% 50%; }
+@keyframes si-toss  { 0%, 100% { transform: none; } 35% { transform: translateY(-38%) rotate(-24deg); } 65% { transform: translateY(-6%) rotate(8deg); } 82% { transform: translateY(-10%) rotate(-3deg); } }
+@keyframes si-wave  { 0%, 100% { transform: none; } 25% { transform: rotate(48deg); } 50% { transform: rotate(-14deg); } 75% { transform: rotate(40deg); } }
+@keyframes si-chirp { 0%, 100% { transform: none; } 30% { transform: translateY(-2px) rotate(-14deg); } 55% { transform: rotate(4deg); } 75% { transform: translateY(-1px) rotate(-8deg); } }
+@keyframes si-flap  { 0%, 100% { transform: none; } 50% { transform: scaleX(0.45); } }
+@media (prefers-reduced-motion: reduce) {
+  .social-icon * , .social-icon { animation: none !important; transition: none !important; }
+}
+
 .social-link:hover {
   color: var(--accent-hover);
   text-decoration-color: var(--accent-hover);
