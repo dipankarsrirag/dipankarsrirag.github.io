@@ -3,7 +3,9 @@
 {{- $v := .Params.venue | default "" }}
 {{- $year := .Date.Year }}{{ with findRE `\d{4}\s*$` $v }}{{ $year = index . 0 | strings.TrimSpace }}{{ end }}
 {{- $name := replaceRE `\s*\d{4}\s*$` "" $v | strings.TrimSpace }}
-{{- with findRESubmatch `^Findings of (?:the )?([^:\s,]+)` $name 1 }}{{ $name = printf "Findings: %s" (index (index . 0) 1) }}{{ end }}
+{{- /* "Findings of ACL: EMNLP 2026" is Findings at EMNLP: name the conference after the colon */}}
+{{- with findRESubmatch `^Findings of [^:]*:\s*([^\s,]+)` $name 1 }}{{ $name = printf "Findings: %s" (index (index . 0) 1) }}
+{{- else }}{{ with findRESubmatch `^Findings of (?:the )?([^:\s,]+)` $name 1 }}{{ $name = printf "Findings: %s" (index (index . 0) 1) }}{{ end }}{{ end }}
 {{- if and (not $name) .Params.preprint }}{{ $name = "Preprint" }}{{ end }}
 <div class="pub-entry pub-entry--kicker">
   <div class="pub-kicker">

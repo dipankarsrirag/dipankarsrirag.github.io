@@ -21,9 +21,10 @@
   {{- with index $journals $key -}}
     {{- with index $quart .quartile }}{{ $group = 0 }}{{ $score = . }}{{ end }}{{ $label = .quartile -}}
   {{- else -}}
-    {{- /* "Findings of ACL: ACL 2025" takes ACL's rank */ -}}
+    {{- /* "Findings of ACL: EMNLP 2026" takes the rank of the conference after the colon (EMNLP) */ -}}
     {{- $lookup := $key -}}
-    {{- with findRESubmatch `^findings of (?:the )?([^:\s,]+)` $key 1 }}{{ $lookup = index (index . 0) 1 }}{{ end -}}
+    {{- with findRESubmatch `^findings of [^:]*:\s*([^\s,]+)` $key 1 }}{{ $lookup = index (index . 0) 1 }}
+    {{- else }}{{ with findRESubmatch `^findings of (?:the )?([^:\s,]+)` $key 1 }}{{ $lookup = index (index . 0) 1 }}{{ end }}{{ end -}}
     {{- if not (strings.Contains $venue "@") -}}
       {{- with index $core $lookup -}}
         {{- with index $conf .rank }}{{ $group = 1 }}{{ $score = . }}{{ end }}{{ $label = .rank -}}
