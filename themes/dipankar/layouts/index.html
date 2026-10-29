@@ -5,7 +5,11 @@
 {{/* ── Sidebar: photo, name, role, links and the table of contents; stays in view ── */}}
 <aside class="home-sidebar">
   <div class="profile-photo">
-    {{- with (resources.Get "profile-330.jpg").Resize "344x webp q82" }}<img src="{{ .RelPermalink }}" alt="{{ site.Params.author }}" width="165" height="220" fetchpriority="high" decoding="async">{{ end }}
+    {{- with resources.Get "profile-330.jpg" }}
+    {{- /* Sharp on every screen: 2x and 3x versions, high quality; the browser picks */}}
+    {{- $s := .Resize "344x webp q90" }}{{ $m := .Resize "516x webp q90" }}{{ $l := .Resize "688x webp q90" }}
+    <img src="{{ $s.RelPermalink }}" srcset="{{ $s.RelPermalink }} 344w, {{ $m.RelPermalink }} 516w, {{ $l.RelPermalink }} 688w" sizes="11rem" alt="{{ site.Params.author }}" width="165" height="220" fetchpriority="high" decoding="async">
+    {{- end }}
   </div>
   <h1>{{ .Site.Params.author }}</h1>
   {{ with .Site.Params.authorNative }}<p class="name-native" lang="{{ $.Site.Params.authorNativeLang }}">{{ . }}</p>{{ end }}
