@@ -5,9 +5,9 @@
 {{/* ── Sidebar: photo, name, role, links and the table of contents; stays in view ── */}}
 <aside class="home-sidebar">
   <div class="profile-photo">
-    {{- with resources.Get "profile-330.jpg" }}
-    {{- /* Sharp on every screen: 2x and 3x versions, high quality; the browser picks */}}
-    {{- $s := .Resize "344x webp q90" }}{{ $m := .Resize "516x webp q90" }}{{ $l := .Resize "688x webp q90" }}
+    {{- with resources.Get "profile.png" }}
+    {{- /* Lossless and sharp on every screen: 2x and 3x versions; the browser picks */}}
+    {{- $s := .Resize "344x webp lossless" }}{{ $m := .Resize "516x webp lossless" }}{{ $l := .Resize "688x webp lossless" }}
     <img src="{{ $s.RelPermalink }}" srcset="{{ $s.RelPermalink }} 344w, {{ $m.RelPermalink }} 516w, {{ $l.RelPermalink }} 688w" sizes="11rem" alt="{{ site.Params.author }}" width="165" height="220" fetchpriority="high" decoding="async">
     {{- end }}
   </div>
