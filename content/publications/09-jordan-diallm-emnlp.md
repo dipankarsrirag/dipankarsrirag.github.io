@@ -37,5 +37,6 @@ bibtex: |
   }
 links:
     paper: "https://aclanthology.org/2026.emnlp-main.2321.pdf"
+    poster: /EMNLP-2026-DiaLLM-Poster.pdf
 venue: "EMNLP 2026"
 ---

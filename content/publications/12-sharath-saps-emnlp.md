@@ -33,5 +33,6 @@ bibtex: |
   }
 links:
     paper: "https://aclanthology.org/2026.findings-emnlp.1594.pdf"
+    poster: /EMNLP-2026-SAPS-Poster.pdf
 venue: "Findings of ACL: EMNLP 2026"
 ---
