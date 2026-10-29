@@ -15,22 +15,32 @@ links:
     paper: "https://aclanthology.org/2025.findings-acl.441.pdf"
     dataset: "https://huggingface.co/datasets/unswnlporg/besstie"
     poster: /ACL-2025-BESSTIE-Poster.pdf
+    slides: /ALTA-2025-BESSTIE-Slides.pdf
     # code: "https://github.com/cruiseresearchgroup/spectraformer"
 # project:   "https://yourlab.org/project"
 # journal: "ACL 2024"      # optional, whatever metadata you like
 venue: "Findings of ACL: ACL 2025"
+slidesLabel: "Slides (ALTA 2025)"   # the talk was given at ALTA 2025
 selected: true
 bibtex: |
   @inproceedings{srirag-etal-2025-besstie,
       title = "{BESSTIE}: A Benchmark for Sentiment and Sarcasm Classification for Varieties of {E}nglish",
-      author = "Srirag, Dipankar and Joshi, Aditya and Painter, Jordan and Kanojia, Diptesh",
-      booktitle = "Findings of the Association for Computational Linguistics: ACL 2025",
+      author = "Srirag, Dipankar  and
+        Joshi, Aditya  and
+        Painter, Jordan  and
+        Kanojia, Diptesh",
+      editor = "Che, Wanxiang  and
+        Nabende, Joyce  and
+        Shutova, Ekaterina  and
+        Pilehvar, Mohammad Taher",
+      booktitle = "Findings of the {A}ssociation for {C}omputational {L}inguistics: {ACL} 2025",
       month = jul,
       year = "2025",
       address = "Vienna, Austria",
       publisher = "Association for Computational Linguistics",
       url = "https://aclanthology.org/2025.findings-acl.441/",
       doi = "10.18653/v1/2025.findings-acl.441",
-      pages = "8413--8429"
+      pages = "8413--8429",
+      ISBN = "979-8-89176-256-5"
   }
 ---

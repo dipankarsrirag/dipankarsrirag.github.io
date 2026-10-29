@@ -33,6 +33,7 @@ bibtex: |
   }
 links:
     paper: "https://aclanthology.org/2026.findings-emnlp.1594.pdf"
+    code: "https://github.com/SharathHN/saps-steering"
     poster: /EMNLP-2026-SAPS-Poster.pdf
 venue: "Findings of ACL: EMNLP 2026"
 ---

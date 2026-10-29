@@ -646,32 +646,29 @@ footer {
   margin-bottom: 0.4rem;
 }
 
+/* Paper links (PDF, Code, Poster, Slides, BibTeX…): icon + word, like the tutorial links */
 .pub-links {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.35rem 1.1rem;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
+  margin-top: 0.45rem;
   align-items: center;
   position: relative;
 }
 
 .pub-link {
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.92rem;
   font-weight: 550;
-  color: var(--text-muted);
-  padding: 0.2rem 0.6rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  transition: color 0.12s, border-color 0.12s, background 0.12s;
-  letter-spacing: 0.01em;
-}
-
-.pub-link:hover {
   color: var(--accent);
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 4%, transparent);
-  text-decoration: none;
+  cursor: pointer;
+  list-style: none;                 /* the BibTeX toggle is a <summary> */
 }
+summary.pub-link::-webkit-details-marker { display: none; }
+
+.pub-link:hover { color: var(--accent-hover); }
 
 /* Publications page: two-column layout */
 
@@ -3235,6 +3232,7 @@ footer {
 .social-link,
 .teaching-name a,
 .teaching-link,
+.pub-link span,
 .breadcrumb a,
 .see-all,
 .footer-links a,
@@ -3257,6 +3255,7 @@ footer {
 .social-link:hover,
 .teaching-name a:hover,
 .teaching-link:hover,
+.pub-link:hover span,
 .breadcrumb a:hover,
 .see-all:hover,
 .footer-links a:hover,

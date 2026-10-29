@@ -18,7 +18,17 @@ venue: "VarDial @ EACL 2026"
 bibtex: |
   @inproceedings{dilsiz-etal-2026-far,
       title = "Far Out: Evaluating Language Models on Slang in {A}ustralian and {I}ndian {E}nglish",
-      author = "Dilsiz, Deniz Kaya and Srirag, Dipankar and Joshi, Aditya",
+      author = "Dilsiz, Deniz Kaya  and
+        Srirag, Dipankar  and
+        Joshi, Aditya",
+      editor = {Scherrer, Yves  and
+        Aepli, No{\"e}mi  and
+        Blaschke, Verena  and
+        Jauhiainen, Tommi  and
+        Ljube{\v{s}}i{\'c}, Nikola  and
+        Nakov, Preslav  and
+        Tiedemann, J{\"o}rg  and
+        Zampieri, Marcos},
       booktitle = "Proceedings of the 13th Workshop on {NLP} for Similar Languages, Varieties and Dialects",
       month = mar,
       year = "2026",
@@ -28,5 +38,4 @@ bibtex: |
       doi = "10.18653/v1/2026.vardial-1.2",
       pages = "18--31"
   }
-
 ---
