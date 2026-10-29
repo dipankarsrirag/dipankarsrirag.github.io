@@ -30,4 +30,5 @@ bibtex: |
   }
 links:
     paper: https://arxiv.org/pdf/2609.22904
+    code: https://anonymous.4open.science/r/seq-triage-eval/README.md
 ---
