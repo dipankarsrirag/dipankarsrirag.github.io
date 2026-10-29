@@ -71,15 +71,15 @@
   </p>
   <div class="pub-section--published">
     <div class="pub-list">
-      {{- /* Order: my first-author papers first, then newest, then better CORE rank,
-             then my place in the author list, then alphabetical by title */}}
+      {{- /* The preprint first. Then published papers by conference date (newest first);
+             ties by CORE rank, then my place in the author list, then title */}}
+      {{ range sort $preprints "Date" "desc" }}{{ partial "publications/entry.html" . }}{{ end }}
       {{- $rows := slice }}
-      {{- range $preprints | append $published }}
-        {{- $pos := 99 }}{{ range $i, $a := .Params.authors }}{{ if and (eq $pos 99) (in $.Site.Params.author $a) }}{{ $pos = $i }}{{ end }}{{ end }}
-        {{- $first := cond (eq $pos 0) 0 1 }}
+      {{- range $published }}
+        {{- $pos := 99 }}{{ range $i, $a := .Params.authors }}{{ if and (eq $pos 99) (in $a $.Site.Params.author) }}{{ $pos = $i }}{{ end }}{{ end }}
         {{- $newest := sub 99999999 (int (.Date.Format "20060102")) }}
         {{- $rank := (partial "publications/rank.html" .).score }}
-        {{- $rows = $rows | append (dict "page" . "key" (printf "%d|%08d|%d|%02d|%s" $first $newest $rank $pos (lower .Title))) }}
+        {{- $rows = $rows | append (dict "page" . "key" (printf "%08d|%d|%02d|%s" $newest $rank $pos (lower .Title))) }}
       {{- end }}
       {{ range sort $rows "key" }}{{ partial "publications/entry.html" .page }}{{ end }}
     </div>

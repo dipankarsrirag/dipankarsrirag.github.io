@@ -12,19 +12,27 @@ underlineAuthors:
     - "Dipankar Srirag*"
 # arxivID: "2505.15095"
 links:
-    paper: "https://arxiv.org/pdf/2505.15095"
+    paper: "https://aclanthology.org/2025.alta-main.2.pdf"
     # code: "https://github.com/cruiseresearchgroup/spectraformer"
 # project:   "https://yourlab.org/project"
 venue: "ALTA 2025"      # optional, whatever metadata you like
 note: "🏆 Best Paper Honorable Mention"
 bibtex: |
-  @misc{singh-etal-2025-nekminit,
-      title = "Nek Minit: Harnessing Pragmatic Metacognitive Prompting for Explainable Sarcasm Detection of {A}ustralian and {I}ndian {E}nglish",
-      author = "Singh, Ishmanbir and Srirag, Dipankar and Joshi, Aditya",
+  @inproceedings{singh-etal-2025-nek,
+      title = "{N}ek Minit: Harnessing Pragmatic Metacognitive Prompting for Explainable Sarcasm Detection of {A}ustralian and {I}ndian {E}nglish",
+      author = "Singh, Ishmanbir  and
+        Srirag, Dipankar  and
+        Joshi, Aditya",
+      editor = "Kummerfeld, Jonathan K.  and
+        Joshi, Aditya  and
+        Dras, Mark",
+      booktitle = "Proceedings of the 23rd Annual Workshop of the Australasian Language Technology Association",
+      month = nov,
       year = "2025",
-      eprint = "2505.15095",
-      archivePrefix = "arXiv",
-      primaryClass = "cs.CL",
-      url = "https://arxiv.org/abs/2505.15095"
+      address = "Sydney, Australia",
+      publisher = "Association for Computational Linguistics",
+      url = "https://aclanthology.org/2025.alta-main.2/",
+      pages = "13--27",
+      ISBN = "1834-7037"
   }
 ---
