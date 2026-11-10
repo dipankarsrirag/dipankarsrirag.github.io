@@ -1,8 +1,9 @@
 {{ define "main" }}
 {{- $root := site.GetPage "/log-it" }}
 {{- $toc := and (ne .Params.toc false) (gt (len (findRE `<li>` .TableOfContents)) 1) }}
+{{- $notes := in .Content "doc-endnotes" }}
 
-<div class="post-layout{{ if $toc }} has-toc{{ end }}">
+<div class="post-layout{{ if $toc }} has-toc{{ end }}{{ if $notes }} has-notes{{ end }}">
 <article class="post">
   <div class="breadcrumb">
     {{- range .Ancestors.Reverse }}{{ if and (not .IsHome) (hasPrefix .RelPermalink $root.RelPermalink) }}
@@ -35,7 +36,7 @@
   {{ end }}
 
   <div class="prose{{ if .Params.justify }} prose-justify{{ end }}">
-    {{ partial "log-it/natbib.html" (dict "html" .Content "page" .) | safeHTML }}
+    {{ partial "log-it/natbib.html" (dict "html" .Content "page" .) | partial "log-it/sidenotes.html" | safeHTML }}
   </div>
 
   {{- /* References: everything cited (or \nocite'd), alphabetical, author–year */}}

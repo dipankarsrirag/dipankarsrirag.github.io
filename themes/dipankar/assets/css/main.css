@@ -2387,6 +2387,107 @@ td:has(> .cell) {
   margin-left: 0.2em;
 }
 
+/* Sidenotes: on wide screens each footnote sits in the right margin,
+   level with its reference; narrow screens keep the list at the end. */
+.sidenote {
+  display: none;
+}
+
+@media (min-width: 1120px) {
+  .post-layout.has-notes {
+    --note-w: 230px;
+    --note-gap: 2.75rem;
+    max-width: none;
+    width: calc(var(--post-w) + var(--note-gap) + var(--note-w));
+    margin-left: calc(50% - (var(--post-w) + var(--note-gap) + var(--note-w)) / 2);
+  }
+
+  .post-layout.has-notes .post {
+    width: var(--post-w);
+  }
+
+  .post-layout.has-notes .prose .footnotes {
+    display: none;
+  }
+
+  .post-layout.has-notes .sidenote {
+    display: block;
+    float: right;
+    clear: right;
+    position: relative;
+    width: var(--note-w);
+    margin: 0.1rem calc(-1 * (var(--note-w) + var(--note-gap))) 1rem 0;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border);
+    font-size: 0.86rem;
+    font-weight: 450;
+    line-height: 1.55;
+    color: var(--text-muted);
+    text-align: left;
+    text-indent: 0;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+
+  .sidenote-num {
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+    color: var(--accent);
+    font-weight: 550;
+  }
+
+  .sidenote-break {
+    display: block;
+    height: 0.5em;
+  }
+
+  /* Contents and notes both: contents move to the left margin when
+     there is room, and into the inline box when there is not. */
+  .post-layout.has-toc.has-notes {
+    display: block;
+  }
+
+  .post-layout.has-toc.has-notes .post-toc {
+    display: none;
+  }
+
+  .post-layout.has-toc.has-notes .post-toc-inline {
+    display: block;
+  }
+}
+
+@media (min-width: 1360px) {
+  .post-layout.has-toc.has-notes {
+    --toc-gap: 3.5rem;
+    display: grid;
+    grid-template-columns: var(--toc-w) calc(var(--post-w) + var(--note-gap) + var(--note-w));
+    column-gap: var(--toc-gap);
+    align-items: start;
+    width: calc(var(--toc-w) + var(--toc-gap) + var(--post-w) + var(--note-gap) + var(--note-w));
+    margin-left: calc(50% - (var(--toc-w) + var(--toc-gap) + var(--post-w) + var(--note-gap) + var(--note-w)) / 2);
+  }
+
+  .post-layout.has-toc.has-notes .post {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .post-layout.has-toc.has-notes .post-toc {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    padding-left: 0;
+    padding-right: 1rem;
+    border-left: 0;
+    border-right: 1px solid var(--border);
+  }
+
+  .post-layout.has-toc.has-notes .post-toc-inline {
+    display: none;
+  }
+}
+
 /* Justified text: `justify: true` at the top of a post */
 .prose-justify p,
 .prose-justify li,

@@ -1,0 +1,23 @@
+{{- /*
+  Copies each footnote ([^1] in the text) next to its reference as a
+  sidenote, so wide screens can show it in the right margin. The endnote
+  list stays in the HTML for narrow screens.
+  Input: the post's HTML.
+*/ -}}
+{{- $html := . -}}
+{{- $notes := dict -}}
+{{- range findRESubmatch `<li id="fn:([^"]+)">\s*([\s\S]*?)</li>` $html -}}
+  {{- $body := index . 2 -}}
+  {{- $body = replaceRE `(&#160;)?<a href="#fnref[^"]*" class="footnote-backref"[^>]*>[^<]*</a>` "" $body -}}
+  {{- $body = replaceRE `</p>\s*<p>` `<span class="sidenote-break"></span>` $body -}}
+  {{- $body = replaceRE `</?p>` "" $body -}}
+  {{- $notes = merge $notes (dict (index . 1) (trim $body " \n")) -}}
+{{- end -}}
+{{- range findRESubmatch `<sup id="fnref\d*:([^"]+)"><a href="#fn:[^"]+" class="footnote-ref" role="doc-noteref">([^<]+)</a></sup>` $html -}}
+  {{- $ref := index . 0 -}}
+  {{- $num := index . 2 -}}
+  {{- with index $notes (index . 1) -}}
+    {{- $html = replace $html $ref (printf `%s<span class="sidenote" role="note"><span class="sidenote-num">%s</span> %s</span>` $ref $num .) -}}
+  {{- end -}}
+{{- end -}}
+{{- $html | safeHTML -}}
