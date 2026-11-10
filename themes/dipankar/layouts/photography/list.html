@@ -22,11 +22,7 @@
 <div class="album-grid">
   {{ range .ByWeight }}
   {{- $photos := sort (.Resources.ByType "image") "Name" }}
-  {{- $cover := index $photos 0 }}
-  {{- /* Album with only sub-albums: borrow the first photo found in them */}}
-  {{- range .Sections.ByWeight }}{{ if not $cover }}{{ $cover = index (sort (.Resources.ByType "image") "Name") 0 }}{{ end }}
-    {{- range .Sections.ByWeight }}{{ if not $cover }}{{ $cover = index (sort (.Resources.ByType "image") "Name") 0 }}{{ end }}{{ end }}
-  {{- end }}
+  {{- $cover := partial "photography/cover.html" . }}
   {{- $nAlbums := len .Sections }}
   <a href="{{ .RelPermalink }}" class="album-card">
     {{ with $cover }}

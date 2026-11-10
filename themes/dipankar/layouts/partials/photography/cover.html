@@ -1,0 +1,10 @@
+{{- /*
+  Cover photo for an album card: `cover: 05.jpg` in the album's _index.md,
+  else its first photo by name, else the cover of its first sub-album.
+*/ -}}
+{{- $s := . -}}
+{{- $c := false -}}
+{{- with $s.Params.cover }}{{ $c = $s.Resources.GetMatch . }}{{ end -}}
+{{- if not $c }}{{ $c = index (sort ($s.Resources.ByType "image") "Name") 0 }}{{ end -}}
+{{- if not $c }}{{ range $s.Sections.ByWeight }}{{ if not $c }}{{ $c = partial "photography/cover.html" . }}{{ end }}{{ end }}{{ end -}}
+{{- return $c -}}
