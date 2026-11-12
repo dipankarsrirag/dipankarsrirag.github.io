@@ -10,7 +10,7 @@
 - Website: {{ .Site.BaseURL }}
 - CV: {{ "cv.pdf" | absURL }}
 {{- range $p.socialIcons }}
-- {{ .name }}: {{ strings.TrimPrefix "mailto:" .url }}
+- {{ .name }}: {{ if hasPrefix .url "/" }}{{ .url | absURL }}{{ else }}{{ strings.TrimPrefix "mailto:" .url }}{{ end }}
 {{- end }}
 
 ## Publications

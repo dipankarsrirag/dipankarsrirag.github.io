@@ -72,6 +72,8 @@ params:
     - Varieties of English
     - Speech and Dialogue Systems
   socialIcons:
+    - name: Statement
+      url: /research-statement.pdf
     - name: Email
       url: mailto:d.srirag@unsw.edu.au
     - name: Scholar

@@ -42,7 +42,7 @@
 
 {{/* Structured data (JSON-LD) for search engines and AI assistants */}}
 {{- $sameAs := slice }}
-{{- range $p.socialIcons }}{{ if not (hasPrefix .url "mailto") }}{{ $sameAs = $sameAs | append .url }}{{ end }}{{ end }}
+{{- range $p.socialIcons }}{{ if not (or (hasPrefix .url "mailto") (strings.HasSuffix .url ".pdf")) }}{{ $sameAs = $sameAs | append .url }}{{ end }}{{ end }}
 {{- $email := "" }}
 {{- range $p.socialIcons }}{{ if hasPrefix .url "mailto" }}{{ $email = strings.TrimPrefix "mailto:" .url }}{{ end }}{{ end }}
 {{- $unsw := dict "@type" "CollegeOrUniversity" "name" "UNSW Sydney" "alternateName" "University of New South Wales" "url" "https://www.unsw.edu.au/" }}
