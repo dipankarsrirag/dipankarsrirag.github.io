@@ -11,14 +11,11 @@ tutorials:
   - venue: AJCAI 2026
     title: "Emergency Department: A Real-World Edge Case for Clinical NLP"
     date: 2026-11-27
-    url: "https://ajcai26.org/workshopandtutorial.html"   # the title links here
+    url: "https://ajcai26.org/program.html#tutorial-2"   # the title links here
     # Put files in static/tutorials/ and give just the file name, paste a full link
     # (Google Drive, GitHub, YouTube, …), or write `soon` for an "under construction" page.
     links:
-      slides: soon
-      materials: soon
-      code: soon
-      recording: soon
+      slides: ajcai-2026-slides.pdf
 
 # Shared tasks I have organised (newest first).
 # `url` links the event name; add more under `links:` (e.g. data, results).
