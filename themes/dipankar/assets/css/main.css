@@ -1187,6 +1187,22 @@ summary.pub-link::-webkit-details-marker { display: none; }
   display: none;
 }
 
+.teaching-details.has-one-link {
+  flex-direction: row;
+  align-items: baseline;
+  column-gap: 1.1rem;
+}
+
+.teaching-details.has-one-link .teaching-name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.teaching-details.has-one-link .teaching-links {
+  flex: none;
+  margin-top: 0;
+}
+
 .teaching-link {
   display: inline-flex;
   align-items: center;

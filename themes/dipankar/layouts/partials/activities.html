@@ -41,7 +41,8 @@
     {{ range sort . "date" "desc" }}
     <div class="teaching-entry">
       <div class="teaching-code">{{ .venue }}</div>
-      <div class="teaching-details">
+      {{- /* A single link sits beside the title instead of on its own line */}}
+      <div class="teaching-details{{ if eq (len (.links | default dict)) 1 }} has-one-link{{ end }}">
         <span class="teaching-name">
           {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
         </span>
